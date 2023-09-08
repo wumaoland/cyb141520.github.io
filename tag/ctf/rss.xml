@@ -5,19 +5,19 @@
         <link>http://example.com</link>
         <description></description>
         <language>zh-CN</language>
-        <pubDate>Mon, 04 Sep 2023 19:33:55 +0800</pubDate>
-        <lastBuildDate>Mon, 04 Sep 2023 19:33:55 +0800</lastBuildDate>
+        <pubDate>Thu, 04 May 2023 19:33:55 +0800</pubDate>
+        <lastBuildDate>Thu, 04 May 2023 19:33:55 +0800</lastBuildDate>
         <category>pwn</category>
         <category>二进制</category>
         <category>ctf</category>
         <item>
-            <guid isPermalink="true">http://example.com/2023/09/04/buuctf-pwn/</guid>
+            <guid isPermalink="true">http://example.com/2023/05/04/buuctf-pwn/</guid>
             <title>buuctf.pwn</title>
-            <link>http://example.com/2023/09/04/buuctf-pwn/</link>
+            <link>http://example.com/2023/05/04/buuctf-pwn/</link>
             <category>pwn</category>
             <category>二进制</category>
             <category>ctf</category>
-            <pubDate>Mon, 04 Sep 2023 19:33:55 +0800</pubDate>
+            <pubDate>Thu, 04 May 2023 19:33:55 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;#buuctf&lt;br /&gt;
 ##[HarekazeCTF2019]baby_rop2&lt;/p&gt;
 &lt;p&gt;##pwn2_sctf_2016&lt;br /&gt;
