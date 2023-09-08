@@ -8,9 +8,9 @@
     <category term="二进制" />
     <category term="ctf" />
     <entry>
-        <id>http://example.com/2023/05/04/buuctf-pwn/</id>
+        <id>http://example.com/2023/05/04/pwn/buuctf-pwn/</id>
         <title>buuctf.pwn</title>
-        <link rel="alternate" href="http://example.com/2023/05/04/buuctf-pwn/"/>
+        <link rel="alternate" href="http://example.com/2023/05/04/pwn/buuctf-pwn/"/>
         <content type="html">&lt;p&gt;#buuctf&lt;br /&gt;
 ##[HarekazeCTF2019]baby_rop2&lt;/p&gt;
 &lt;p&gt;##pwn2_sctf_2016&lt;br /&gt;

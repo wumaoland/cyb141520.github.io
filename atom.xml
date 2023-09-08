@@ -8,9 +8,9 @@
     <category term="二进制" />
     <category term="ctf" />
     <entry>
-        <id>http://example.com/2023/08/24/PWN%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86/</id>
+        <id>http://example.com/2023/08/24/pwn/PWN%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86/</id>
         <title>buuctf.pwn</title>
-        <link rel="alternate" href="http://example.com/2023/08/24/PWN%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86/"/>
+        <link rel="alternate" href="http://example.com/2023/08/24/pwn/PWN%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86/"/>
         <content type="html">&lt;p&gt;#&amp;lt;center&amp;gt;PWN 零碎知识 &amp;lt;/center&amp;gt;&lt;br /&gt;
 ###1.64 位程序与 32 位程序 payload​&lt;br /&gt;
 64 位程序 payload 要先用 pop_rdi 覆盖 ret 然后依次是 调用函数的参数，调用函数本身，最后是返回地址（32 位程序传参不需要用寄存器）&lt;br /&gt;
@@ -121,9 +121,9 @@ str=&amp;quot;abc&amp;quot; ,      val=0
         <updated>2023-08-24T11:23:15.000Z</updated>
     </entry>
     <entry>
-        <id>http://example.com/2023/05/04/buuctf-pwn/</id>
+        <id>http://example.com/2023/05/04/pwn/buuctf-pwn/</id>
         <title>buuctf.pwn</title>
-        <link rel="alternate" href="http://example.com/2023/05/04/buuctf-pwn/"/>
+        <link rel="alternate" href="http://example.com/2023/05/04/pwn/buuctf-pwn/"/>
         <content type="html">&lt;p&gt;#buuctf&lt;br /&gt;
 ##[HarekazeCTF2019]baby_rop2&lt;/p&gt;
 &lt;p&gt;##pwn2_sctf_2016&lt;br /&gt;
