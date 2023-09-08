@@ -10,6 +10,7 @@
         <category>pwn</category>
         <category>二进制</category>
         <category>ctf</category>
+        <category>Linux</category>
         <item>
             <guid isPermalink="true">http://example.com/2023/05/04/pwn/buuctf-pwn/</guid>
             <title>buuctf.pwn</title>
