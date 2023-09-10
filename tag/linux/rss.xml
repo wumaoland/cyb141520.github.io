@@ -13,6 +13,7 @@
         <category>ret2csu</category>
         <category>ctf</category>
         <category>系统调用</category>
+        <category>Java</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
             <title>Linux之系统调用</title>

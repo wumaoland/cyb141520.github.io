@@ -10,6 +10,7 @@
     <category term="ret2csu" />
     <category term="ctf" />
     <category term="系统调用" />
+    <category term="Java" />
     <entry>
         <id>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</id>
         <title>64位构造通用ROP，ret2csu</title>
