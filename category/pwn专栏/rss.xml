@@ -2,7 +2,7 @@
 <rss version="2.0">
     <channel>
         <title>Blog • Posts by &#34;pwn专栏&#34; category</title>
-        <link>http://example.com</link>
+        <link>https://vvwwvv.cn</link>
         <description></description>
         <language>zh-CN</language>
         <pubDate>Tue, 29 Aug 2023 20:15:56 +0800</pubDate>
@@ -14,9 +14,9 @@
         <category>ret2csu</category>
         <category>系统调用</category>
         <item>
-            <guid isPermalink="true">http://example.com/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
             <title>Linux之系统调用</title>
-            <link>http://example.com/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</link>
+            <link>https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</link>
             <category>pwn</category>
             <category>二进制</category>
             <category>Linux</category>
@@ -87,9 +87,9 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://example.com/2023/08/24/pwn/ROP/ret2csu/</guid>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</guid>
             <title>64位构造通用ROP，ret2csu</title>
-            <link>http://example.com/2023/08/24/pwn/ROP/ret2csu/</link>
+            <link>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</link>
             <category>pwn</category>
             <category>ret2csu</category>
             <pubDate>Thu, 24 Aug 2023 19:23:15 +0800</pubDate>
