@@ -13,7 +13,7 @@
     <category term="Java" />
     <entry>
         <id>https://vvwwvv.cn/2023/09/10/Java/Java%E4%BD%9C%E4%B8%9A2/</id>
-        <title>Java作业2023.9.10 (作业7)</title>
+        <title>Java作业2023/9/10(作业7)</title>
         <link rel="alternate" href="https://vvwwvv.cn/2023/09/10/Java/Java%E4%BD%9C%E4%B8%9A2/"/>
         <content type="html">&lt;h1 id=&#34;7编写程序测试1~50的阶乘所消耗的毫米级时间&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#7编写程序测试1~50的阶乘所消耗的毫米级时间&#34;&gt;#&lt;/a&gt; 7. 编写程序，测试 1~50 的阶乘所消耗的毫米级时间&lt;/h1&gt;
 &lt;h2 id=&#34;1计算阶乘用while循环即可&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1计算阶乘用while循环即可&#34;&gt;#&lt;/a&gt; 1. 计算阶乘：用 while 循环即可&lt;/h2&gt;
