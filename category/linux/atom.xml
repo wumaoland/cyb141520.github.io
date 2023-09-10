@@ -6,9 +6,9 @@
     <updated>2023-08-29T12:15:56.000Z</updated>
     <category term="pwn" />
     <category term="二进制" />
-    <category term="ctf" />
     <category term="Linux" />
     <category term="ret2csu" />
+    <category term="ctf" />
     <category term="系统调用" />
     <entry>
         <id>https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</id>
