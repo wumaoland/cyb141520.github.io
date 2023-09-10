@@ -47,17 +47,11 @@
         </item>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/10/Java/Java%E4%BD%9C%E4%B8%9A1/</guid>
-            <title></title>
+            <title>Java作业2023/9/10(作业5)</title>
             <link>https://vvwwvv.cn/2023/09/10/Java/Java%E4%BD%9C%E4%B8%9A1/</link>
-            <pubDate>Sun, 10 Sep 2023 16:35:44 +0800</pubDate>
-            <description><![CDATA[ &lt;hr /&gt;
-&lt;h2 id=&#34;title-java作业2023910作业5date-2023-9-10-152045categories-javatags-java&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#title-java作业2023910作业5date-2023-9-10-152045categories-javatags-java&#34;&gt;#&lt;/a&gt; title: Java 作业 2023/9/10 (作业 5)&lt;br /&gt;
-date: 2023-9-10 15:20:45&lt;br /&gt;
-categories:&lt;br /&gt;
-- Java&lt;br /&gt;
-tags:&lt;br /&gt;
-- Java&lt;/h2&gt;
-&lt;p&gt;这里用来记录 java 课程从 0 开始学习&lt;/p&gt;
+            <category>Java</category>
+            <pubDate>Sun, 10 Sep 2023 15:20:45 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;这里用来记录 java 课程从 0 开始学习&lt;/p&gt;
 &lt;h1 id=&#34;1题目编写程序测试字符串你好欢送来到ava世界的长度将字符串的长度转换成字符串进行输出并对其中的java-四个字母进行截取输出截取字母以及它在字符串中的位置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1题目编写程序测试字符串你好欢送来到ava世界的长度将字符串的长度转换成字符串进行输出并对其中的java-四个字母进行截取输出截取字母以及它在字符串中的位置&#34;&gt;#&lt;/a&gt; 1. 题目：编写程序，测试字符串 “你好，欢送来到 ava 世界” 的长度，将字符串的长度转换成字符串进行输出，并对其中的 “Java &amp;quot; 四个字母进行截取，输出截取字母以及它在字符串中的位置。&lt;/h1&gt;
 &lt;h2 id=&#34;首先要定义一个string类型的字符串&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#首先要定义一个string类型的字符串&#34;&gt;#&lt;/a&gt; 首先要定义一个 string 类型的字符串：&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;String str=&amp;quot;你好，欢迎来到java世界 &amp;quot;&lt;/code&gt;&lt;/p&gt;
