@@ -15,6 +15,18 @@
                 "二进制",
                 "Linux"
             ]
+        },
+        {
+            "id": "https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/",
+            "url": "https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/",
+            "title": "堆",
+            "date_published": "2023-08-24T12:15:56.000Z",
+            "content_html": "<p>chunk 的 p 位设为 1 即上一个 chunk 被使用并且上一个 chunk 可以使用 pre_size 的空间  （用来储存前一个物理相邻的 chunk 的数据 ，（两个都空闲才合并）</p>\n",
+            "tags": [
+                "pwn",
+                "二进制",
+                "Linux"
+            ]
         }
     ]
 }

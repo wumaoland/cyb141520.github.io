@@ -14,6 +14,8 @@
         <category>ctf</category>
         <category>系统调用</category>
         <category>Java</category>
+        <category>C语言</category>
+        <category>fastbin.attack</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
             <title>Linux之系统调用</title>
@@ -85,6 +87,17 @@
 &lt;p&gt;32 位系统通过 ** int 0x80 ** 中断进入系统调用&lt;/p&gt;
 &lt;p&gt;64 位系统通过 ** syscall ** 命令进入系统调用&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3QuY3Nkbi5jbi9KejZIbQ==&#34;&gt;http://t.csdn.cn/Jz6Hm&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/</guid>
+            <title>堆</title>
+            <link>https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/</link>
+            <category>pwn</category>
+            <category>二进制</category>
+            <category>Linux</category>
+            <pubDate>Thu, 24 Aug 2023 20:15:56 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;chunk 的 p 位设为 1 即上一个 chunk 被使用并且上一个 chunk 可以使用 pre_size 的空间  （用来储存前一个物理相邻的 chunk 的数据 ，（两个都空闲才合并）&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

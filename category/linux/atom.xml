@@ -11,6 +11,8 @@
     <category term="ctf" />
     <category term="系统调用" />
     <category term="Java" />
+    <category term="C语言" />
+    <category term="fastbin.attack" />
     <entry>
         <id>https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</id>
         <title>Linux之系统调用</title>
@@ -83,5 +85,16 @@
         <category term="二进制" />
         <category term="Linux" />
         <updated>2023-08-29T12:15:56.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/</id>
+        <title>堆</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/"/>
+        <content type="html">&lt;p&gt;chunk 的 p 位设为 1 即上一个 chunk 被使用并且上一个 chunk 可以使用 pre_size 的空间  （用来储存前一个物理相邻的 chunk 的数据 ，（两个都空闲才合并）&lt;/p&gt;
+</content>
+        <category term="pwn" />
+        <category term="二进制" />
+        <category term="Linux" />
+        <updated>2023-08-24T12:15:56.000Z</updated>
     </entry>
 </feed>

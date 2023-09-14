@@ -11,6 +11,8 @@
     <category term="ctf" />
     <category term="系统调用" />
     <category term="Java" />
+    <category term="C语言" />
+    <category term="fastbin.attack" />
     <entry>
         <id>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</id>
         <title>64位构造通用ROP，ret2csu</title>
