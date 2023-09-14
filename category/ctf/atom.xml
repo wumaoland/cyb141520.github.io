@@ -18,11 +18,11 @@
         <title>babyheap_0ctf_2017，fastbin.attack之double.free</title>
         <link rel="alternate" href="https://vvwwvv.cn/2023/09/12/pwn/%E5%88%B7%E9%A2%98/BUUCTF/babyheap_0ctf_2017/"/>
         <content type="html">&lt;p&gt;由于断断续续写了好久加上自身水平不足导致可能存在逻辑上的错误等等，如有错误，还望指出&lt;/p&gt;
-&lt;p&gt;&amp;lt;del&amp;gt; 先前的理解&lt;br /&gt;
-改变 index4 的大小后被认为是释放了，然后分配 fastbin (小于 0x80 的在这里) 根据后进先出，分配被认为是释放的 index4 为 index2，在将 index 的大小改回去，此时便让两个 index2 和 index4 都指向了同一个 chunk&lt;/p&gt;
-&lt;p&gt;&amp;lt;del&amp;gt; 通过堆溢出，用还未释放的 index0 来溢出改变 chunk2 的 fd 的地址为 chunk4&lt;br /&gt;
-，原来应该通过释放由于后进先出通过 free1，free2 的顺序，fastbin 中是由 chunk2-&amp;gt;chunk1, 溢出后变为 chunk2-&amp;gt;chunk4，此时视为 chunk4 被释放放在 fastbin 中，因为需要让两个 index 指向同一个 chunk，就需要在重新申请堆块 chunk1 和 chunkl2 后再申请 chunk4，由于再 fastbin 中，是后进先出（在 fastbin 中：chunk2-&amp;gt;chunk4）所以给 index1 分配的是原来的 chunk2，而 index2 就被分配了 chunk4，&lt;/p&gt;
-&lt;p&gt;&amp;lt;del&amp;gt; 后面 mallco (0x80) 仍然分配的是 chunk4（我认为应该是原本就是指向 chunk4，且已经修改了大小，所以申请时能够通过 “chunksuize 与其对应的 fastbin_index 匹配” 这是一个节省资源的机制，给相同大小的直接分配，不用去再合并块等等），这时 index2 与 index4 都指向了 chuink4，再次释放 free4，chunk4 就进入 unsortbin（unsortedbin 中只有一个块时，就会使 fd 和 bk 指针指向同一个地址，即  &lt;code&gt;main_arena+88, main_arena相对libc固定偏移0x3c4b20,不同libc版本偏移不同&lt;/code&gt; ，因此  &lt;code&gt;libc=main_area_88-88-0x3c4b20&lt;/code&gt; ）&amp;lt;/del&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;先前的理解&lt;br /&gt;
+改变 index4 的大小后被认为是释放了，然后分配 fastbin (小于 0x80 的在这里) 根据后进先出，分配被认为是释放的 index4 为 index2，在将 index 的大小改回去，此时便让两个 index2 和 index4 都指向了同一个 chunk&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;通过堆溢出，用还未释放的 index0 来溢出改变 chunk2 的 fd 的地址为 chunk4&lt;br /&gt;
+，原来应该通过释放由于后进先出通过 free1，free2 的顺序，fastbin 中是由 chunk2-&amp;gt;chunk1, 溢出后变为 chunk2-&amp;gt;chunk4，此时视为 chunk4 被释放放在 fastbin 中，因为需要让两个 index 指向同一个 chunk，就需要在重新申请堆块 chunk1 和 chunkl2 后再申请 chunk4，由于再 fastbin 中，是后进先出（在 fastbin 中：chunk2-&amp;gt;chunk4）所以给 index1 分配的是原来的 chunk2，而 index2 就被分配了 chunk4，&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;后面 mallco (0x80) 仍然分配的是 chunk4（我认为应该是原本就是指向 chunk4，且已经修改了大小，所以申请时能够通过 “chunksuize 与其对应的 fastbin_index 匹配” 这是一个节省资源的机制，给相同大小的直接分配，不用去再合并块等等），这时 index2 与 index4 都指向了 chuink4，再次释放 free4，chunk4 就进入 unsortbin（unsortedbin 中只有一个块时，就会使 fd 和 bk 指针指向同一个地址，即  &lt;code&gt;main_arena+88, main_arena相对libc固定偏移0x3c4b20,不同libc版本偏移不同&lt;/code&gt; ，因此  &lt;code&gt;libc=main_area_88-88-0x3c4b20&lt;/code&gt; ）&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;最终利用：&lt;br /&gt;
 &lt;strong&gt;malloc_hook 是一个 libc 上的函数，如果指针不为空则会执行其指针指向的函数&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;1查看程序&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1查看程序&#34;&gt;#&lt;/a&gt; 1. 查看程序&lt;/h1&gt;
