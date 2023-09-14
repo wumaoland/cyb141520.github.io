@@ -218,7 +218,18 @@ fake_chunk=mian_arena-0x33
  one_gadget 对应的库&lt;br /&gt;
 （例如：one_gadget &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2xpYmMtMi4yMy5zbw==&#34;&gt;libc-2.23.so&lt;/span&gt; , 得到如下结果）&lt;br /&gt;
 &lt;img data-src=&#34;https://z1.ax1x.com/2023/09/14/pPRzZNV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;21查询程序对应libc版本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21查询程序对应libc版本&#34;&gt;#&lt;/a&gt; 21. 查询程序对应 libc 版本&lt;/h3&gt;
+&lt;h3 id=&#34;21查询程序对应glibc版本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21查询程序对应glibc版本&#34;&gt;#&lt;/a&gt; 21. 查询程序对应 glibc 版本&lt;/h3&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubmd1aS5jYy9lbC8zMzI3NzgzLmh0bWw/YWN0aW9uPW9uQ2xpY2s=&#34;&gt;https://www.ngui.cc/el/3327783.html?action=onClick&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9iYnMua2FueHVlLmNvbS90aHJlYWQtMjY5MTU1Lmh0bQ==&#34;&gt;https://bbs.kanxue.com/thread-269155.htm&lt;/span&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ldd 程序名  //用ldd命令查看当前对应glibc版本
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;1.ubuntu 16 环境（glibc 2.23~glibc 2.26）&lt;/p&gt;
+&lt;p&gt;2.ubuntu18&lt;sub&gt;ubuntu20 环境（glibc2.26&lt;/sub&gt;glibc2.32）&lt;/p&gt;
+&lt;p&gt;机制更新&lt;/p&gt;
+&lt;p&gt;(1) 在 glibc2.26 之后堆管理器中加入了 tcachebin，tcachebin 是 glibc 2.26 版本引入的一种优化机制，用于管理小型内存块的缓存，以加速内存分配和释放的性能。在 tcachebin 中每种大小的堆块最多只能存放 7 个。&lt;/p&gt;
+&lt;p&gt;加入了 tcachebin 后，释放的堆块就会优先进入 tcachebin 中，只有当释放的堆块是一个 large bin chunk (大小大于 0x410)，或者 tcachebin 对应大小的堆块已经满 7 个时才会置入 fastbin 或 unsortedbin 中&lt;/p&gt;
+&lt;p&gt;(2) 在加入了 tcachebin 后堆管理器在初始化时会先 malloc 一块大小为 0x251 的堆块存放 tcachebins 中指针&lt;/p&gt;
+&lt;p&gt;利用方式（要想堆块释放后进入 unsortedbin 中就要绕过 tcachebin，由于程序有堆块申请数量限制难以填满 tcachebin 所以选择 free 一个大小大于 0x410 的堆块）&lt;/p&gt;
 </content>
         <category term="pwn" />
         <category term="二进制" />
