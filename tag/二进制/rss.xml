@@ -16,6 +16,7 @@
         <category>Java</category>
         <category>C语言</category>
         <category>fastbin.attack</category>
+        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
             <title>Linux之系统调用</title>
@@ -119,11 +120,12 @@
 &lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;span&gt;n&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;payload&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;\x00&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x50&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rdi_ret&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;put_got&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;put_plt&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;返回地址&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendlineafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Input your Plaintext to be encrypted\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;payload&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recvline&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#返回地址中输出的字符串&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recvline&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#返回地址中输出的字符串&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    puts&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;u64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recvuntil&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;\n&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ljust&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;\0&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    puts&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;u64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;ljust&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h3 id=&#34;4有时接收不能用u64precv会出错利用-u64precvuntilbn-1ljust8b0&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4有时接收不能用u64precv会出错利用-u64precvuntilbn-1ljust8b0&#34;&gt;#&lt;/a&gt; 4. 有时接收不能用 u64 (p.recv ()), 会出错，利用 u64 (p.recvuntil (b&#39;\n&#39;)[:-1].ljust (8,b&#39;\0&#39;))&lt;/h3&gt;
 &lt;h3 id=&#34;5遇到要绕过strlen函数要绕过时用-bx00-截断&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5遇到要绕过strlen函数要绕过时用-bx00-截断&#34;&gt;#&lt;/a&gt; 5 遇到要绕过 strlen 函数要绕过时用 b&amp;quot;\x00&amp;quot; 截断&lt;/h3&gt;
 &lt;h3 id=&#34;6系统调用是调用execvebinshnullnull平常调用为systembinsh&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#6系统调用是调用execvebinshnullnull平常调用为systembinsh&#34;&gt;#&lt;/a&gt; 6. 系统调用是调用 execve (&amp;quot;/bin/sh&amp;quot;,NULL,NULL)【平常调用为 system (&amp;quot;/bin/sh&amp;quot;)】&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;32位程序系统调用号用 eax 储存, 第一 、 二 、 三参数分别在 ebx 、ecx 、edx中储存。 可以用 int 80 汇编指令调用
+&lt;pre&gt;&lt;code&gt;32位程序系统调用号用 eax 储存, 第一 、 二 、 三参数分别在 ebx 、ecx 、edx中储存。 可以用 int 80 汇编指令调用（）
 
 当eax=11时即为系统调用号调用命令execve，参数&amp;quot;/bin/sh&amp;quot;赋给ebx
-
-64位程序系统调用号用 rax 储存, 第一 、 二 、 三参数分别在 rdi 、rsi 、rdx中储存。 可以用 syscall 汇编指令调用
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfQR56.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;64位程序系统调用号用 rax 储存, 第一 、 二 、 三参数分别在 rdi 、rsi 、rdx中储存。 可以用 syscall 汇编指令调用
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;7有mprotect函数可以改变内存的读写权限&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#7有mprotect函数可以改变内存的读写权限&#34;&gt;#&lt;/a&gt; 7. 有 mprotect 函数可以改变内存的读写权限&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;mprotect(起始地址，修改内存长度，修改的权限（修改为7） )
@@ -204,13 +206,14 @@ str=&amp;quot;abc&amp;quot; ,      val=0
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;18修改glibc版本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#18修改glibc版本&#34;&gt;#&lt;/a&gt; 18. 修改 glibc 版本&lt;/h3&gt;
 &lt;p&gt;当本地 glibc 版本不同会导致堆的地址不同等问题（glibc2.26 版本之后会出现一个新的 TcacheBin，导致释放的 chunk 不会先进入 fastbin 中）&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;patchelf --set-interpreter ~/pwn/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/ld-2.23.so --set-rpath ~/Tools/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/ ~/Downloads/buuctf/babyheap_0ctf_2017
+&lt;pre&gt;&lt;code&gt;patchelf --set-interpreter ~/pwn/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/ld-2.23.so --set-rpath ~/pwn/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/ ~/Downloads/buuctf/babyheap_0ctf_2017
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;进入到 /pwn/glibc-all-in-one (自己的目录下)，cat list&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/13/pPRkcxf.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;用 ./download 下载我们需要的版本&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/13/pPRkoin.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;使用上面的命令换版本即可&lt;/p&gt;
+&lt;p&gt;【下载不超过请换源，vim download, 注释掉清华源，放出官方源】&lt;/p&gt;
 &lt;h3 id=&#34;19-关于malloc_hook&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#19-关于malloc_hook&#34;&gt;#&lt;/a&gt; 19. 关于 malloc_hook&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;malloc_hook&lt;/code&gt;  指向的地址不为空时则执行其指向的函数，可以以此来 gadget（配合  &lt;code&gt;one_gadget&lt;/code&gt;  使用）&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;malloc_hook=main_arena-0x10
@@ -220,10 +223,18 @@ fake_chunk=mian_arena-0x33
 所以 malloc_hook=fake_chunk+0x23
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;20-使用one_gadget工具来得到getshell的函数地址在对应的库目录下使用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#20-使用one_gadget工具来得到getshell的函数地址在对应的库目录下使用&#34;&gt;#&lt;/a&gt; 20. 使用 one_gadget 工具来得到 getshell 的函数地址（在对应的库目录下使用）&lt;/h3&gt;
-&lt;p&gt;该工具是基于对应的库来查找的，所以使用时 真正地址为 libc_base + 地址&lt;br /&gt;
+&lt;p&gt;该工具是基于对应的库来查找的，所以使用时 真正地址为 libc_base + 地址， &lt;strong&gt;下面的需要让 rax 满足对应的要求&lt;/strong&gt;&lt;br /&gt;
  one_gadget 对应的库&lt;br /&gt;
 （例如：one_gadget &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2xpYmMtMi4yMy5zbw==&#34;&gt;libc-2.23.so&lt;/span&gt; , 得到如下结果）&lt;br /&gt;
 &lt;img data-src=&#34;https://z1.ax1x.com/2023/09/14/pPRzZNV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vdW5yNHYzMS9wLzE1MTczODExLmh0bWw=&#34;&gt;https://www.cnblogs.com/unr4v31/p/15173811.html&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvMjcyMA==&#34;&gt;https://xz.aliyun.com/t/2720&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;one_gadget，这里记一下比较常用的（libc2.23-0ubuntu11.2 版本已经不在使用）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;og1=[0x45216,0x4526a,0xf02a4,0xf1147]    #libc2.23-0ubuntu11.2
+og2=[0x45226,0x4527a,0xf0364,0xf1207]    #libc2.23-0ubuntu11.3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;下面是利用 read 与 gadget 地址的关系爆破修改（1/16 概率）&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9iYnMua2FueHVlLmNvbS90aHJlYWQtMjYxMTEyLmh0bQ==&#34;&gt;https://bbs.kanxue.com/thread-261112.htm&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;21查询程序对应glibc版本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21查询程序对应glibc版本&#34;&gt;#&lt;/a&gt; 21. 查询程序对应 glibc 版本&lt;/h3&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubmd1aS5jYy9lbC8zMzI3NzgzLmh0bWw/YWN0aW9uPW9uQ2xpY2s=&#34;&gt;https://www.ngui.cc/el/3327783.html?action=onClick&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9iYnMua2FueHVlLmNvbS90aHJlYWQtMjY5MTU1Lmh0bQ==&#34;&gt;https://bbs.kanxue.com/thread-269155.htm&lt;/span&gt;&lt;/p&gt;

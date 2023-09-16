@@ -13,6 +13,7 @@
     <category term="Java" />
     <category term="C语言" />
     <category term="fastbin.attack" />
+    <category term="nc" />
     <entry>
         <id>https://vvwwvv.cn/2023/08/24/pwn/c%E5%87%BD%E6%95%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E/</id>
         <title>C语言函数及漏洞利用</title>

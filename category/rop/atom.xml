@@ -13,6 +13,7 @@
     <category term="Java" />
     <category term="C语言" />
     <category term="fastbin.attack" />
+    <category term="nc" />
     <entry>
         <id>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</id>
         <title>64位构造通用ROP，ret2csu</title>

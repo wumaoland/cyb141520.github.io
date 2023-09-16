@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Blog • Posts by &#34;nc&#34; tag</title>
+        <link>https://vvwwvv.cn</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 15 Sep 2023 11:01:15 +0800</pubDate>
+        <lastBuildDate>Fri, 15 Sep 2023 11:01:15 +0800</lastBuildDate>
+        <category>pwn</category>
+        <category>二进制</category>
+        <category>Linux</category>
+        <category>ret2csu</category>
+        <category>ctf</category>
+        <category>系统调用</category>
+        <category>Java</category>
+        <category>C语言</category>
+        <category>fastbin.attack</category>
+        <category>nc</category>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</guid>
+            <title>CTFshow(Test_your_nc部分,0~4)</title>
+            <link>https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</link>
+            <category>pwn</category>
+            <category>nc</category>
+            <pubDate>Fri, 15 Sep 2023 11:01:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;pwn0&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn0&#34;&gt;#&lt;/a&gt; pwn0&lt;/h1&gt;
+&lt;h2 id=&#34;题目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWt1sS.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;利用 ssh 连接，不知道为什么之前连接是失败的&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWffpV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;然后输入密码会加载一大堆东西&lt;/p&gt;
+&lt;p&gt;而且密码不在当前目录下需要到根目录查看&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWfLfx.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn1&#34;&gt;#&lt;/a&gt; pwn1&lt;/h1&gt;
+&lt;h2 id=&#34;题目-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-2&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhgDe.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;题目里已经说明有后门了，下载附件利用 ida 打开&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhqbQ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现输出完句子之后会直接执行 cat flag，那么直接 nc 连接即可&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhXUs.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn2&#34;&gt;#&lt;/a&gt; pwn2&lt;/h1&gt;
+&lt;h2 id=&#34;题目-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-3&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4pvT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;下载附件查看程序信息，发现是 64 位程序&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4WsU.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL4e0.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+发现有个 system (/bin/sh), 直接 给权限了，那么就直接可以获取 flag&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL7YF.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn3&#34;&gt;#&lt;/a&gt; pwn3&lt;/h1&gt;
+&lt;h2 id=&#34;题目-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-4&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLLl9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看保护是 64 位程序，ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLzTK.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOCfe.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOFld.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;这里考察我们对函数的理解&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;put 函数输出的是字符串&lt;/li&gt;
+&lt;li&gt;echo 主要用于打印简单的字符串和变量值&lt;/li&gt;
+&lt;li&gt;cat 用来查看文件内容，更侧重于处理文件，实现文件内容的读取和拼接等操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(只有 system (cat /flag) 输出了 flag，选择 4 只会输出字符串”/ctfshow_flag“)&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOllj.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn4&#34;&gt;#&lt;/a&gt; pwn4&lt;/h1&gt;
+&lt;h2 id=&#34;题目-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-5&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOonI.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看程序是 64 位，用 ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDMex.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;execve_func()&lt;/code&gt;  里有后门&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDlTK.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;strcmp(str1,str2)&lt;/code&gt;  该函数会进行比较，str1=str2 时会返回 0，所以输入 &lt;code&gt;CTFshowPWN&lt;/code&gt;  以此绕过判断&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDPe0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
