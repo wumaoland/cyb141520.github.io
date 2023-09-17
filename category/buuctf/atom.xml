@@ -3,7 +3,7 @@
     <id>https://vvwwvv.cn</id>
     <title>Blog • Posts by &#34;buuctf&#34; category</title>
     <link href="https://vvwwvv.cn" />
-    <updated>2023-09-12T13:08:15.000Z</updated>
+    <updated>2023-09-17T14:30:51.512Z</updated>
     <category term="pwn" />
     <category term="二进制" />
     <category term="Linux" />
@@ -14,6 +14,25 @@
     <category term="C语言" />
     <category term="fastbin.attack" />
     <category term="nc" />
+    <entry>
+        <id>https://vvwwvv.cn/2023/09/17/pwn/%E5%88%B7%E9%A2%98/BUUCTF/ez_pz_hackover_2016/</id>
+        <title>ez_pz_hackover_2016（）</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/09/17/pwn/%E5%88%B7%E9%A2%98/BUUCTF/ez_pz_hackover_2016/"/>
+        <content type="html">&lt;h1 id=&#34;1查看程序&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1查看程序&#34;&gt;#&lt;/a&gt; 1. 查看程序&lt;/h1&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/17/ymMrfyf3.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+发现没有开启 NX，有 rwx 段，可以利用 shellcode&lt;/p&gt;
+&lt;p&gt;利用 ida 查看&lt;br /&gt;
+&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/17/5VybmqFr.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/17/cG6l8WkS.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/17/Aib7xfrT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/17/6xAZOCsq.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;因为要写入 shellcode 并执行，所以我们需要利用栈溢出&lt;/p&gt;
+&lt;p&gt;chall 函数里的 fget 因为大小限制为 1024（0x400），所以我们无法溢出，但是，该函数末尾有个 vuln（s，0x400），里面的 memcpy 函数会将 s，复制给 dest，且有 0x400 的大小可以进行溢出。&lt;/p&gt;
+&lt;p&gt;我们需要绕过 &lt;code&gt;strcmp(s,crashme)&lt;/code&gt; , 可以利用 &lt;code&gt;\x00&lt;/code&gt;  截断&lt;/p&gt;
+</content>
+        <category term="pwn" />
+        <updated>2023-09-17T14:30:51.512Z</updated>
+    </entry>
     <entry>
         <id>https://vvwwvv.cn/2023/09/12/pwn/%E5%88%B7%E9%A2%98/BUUCTF/babyheap_0ctf_2017/</id>
         <title>babyheap_0ctf_2017，fastbin.attack之double.free</title>

@@ -5,6 +5,16 @@
     "home_page_url": "https://vvwwvv.cn",
     "items": [
         {
+            "id": "https://vvwwvv.cn/2023/09/17/pwn/%E5%88%B7%E9%A2%98/BUUCTF/ez_pz_hackover_2016/",
+            "url": "https://vvwwvv.cn/2023/09/17/pwn/%E5%88%B7%E9%A2%98/BUUCTF/ez_pz_hackover_2016/",
+            "title": "ez_pz_hackover_2016（）",
+            "date_published": "2023-09-17T14:30:51.512Z",
+            "content_html": "<h1 id=\"1查看程序\"><a class=\"anchor\" href=\"#1查看程序\">#</a> 1. 查看程序</h1>\n<p><img data-src=\"https://img1.imgtp.com/2023/09/17/ymMrfyf3.png\" alt=\"\" /><br />\n发现没有开启 NX，有 rwx 段，可以利用 shellcode</p>\n<p>利用 ida 查看<br />\n<img data-src=\"https://img1.imgtp.com/2023/09/17/5VybmqFr.png\" alt=\"\" /></p>\n<p><img data-src=\"https://img1.imgtp.com/2023/09/17/cG6l8WkS.png\" alt=\"\" /></p>\n<p><img data-src=\"https://img1.imgtp.com/2023/09/17/Aib7xfrT.png\" alt=\"\" /></p>\n<p><img data-src=\"https://img1.imgtp.com/2023/09/17/6xAZOCsq.png\" alt=\"\" /></p>\n<p>因为要写入 shellcode 并执行，所以我们需要利用栈溢出</p>\n<p>chall 函数里的 fget 因为大小限制为 1024（0x400），所以我们无法溢出，但是，该函数末尾有个 vuln（s，0x400），里面的 memcpy 函数会将 s，复制给 dest，且有 0x400 的大小可以进行溢出。</p>\n<p>我们需要绕过 <code>strcmp(s,crashme)</code> , 可以利用 <code>\\x00</code>  截断</p>\n",
+            "tags": [
+                "pwn"
+            ]
+        },
+        {
             "id": "https://vvwwvv.cn/2023/09/12/pwn/%E5%88%B7%E9%A2%98/BUUCTF/babyheap_0ctf_2017/",
             "url": "https://vvwwvv.cn/2023/09/12/pwn/%E5%88%B7%E9%A2%98/BUUCTF/babyheap_0ctf_2017/",
             "title": "babyheap_0ctf_2017，fastbin.attack之double.free",
