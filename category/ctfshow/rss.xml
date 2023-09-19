@@ -7,16 +7,75 @@
         <language>zh-CN</language>
         <pubDate>Fri, 15 Sep 2023 11:01:15 +0800</pubDate>
         <lastBuildDate>Fri, 15 Sep 2023 11:01:15 +0800</lastBuildDate>
+        <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
+        <category>C语言</category>
         <category>Linux</category>
         <category>ret2csu</category>
-        <category>ctf</category>
-        <category>系统调用</category>
-        <category>Java</category>
-        <category>C语言</category>
         <category>fastbin.attack</category>
+        <category>ctf</category>
         <category>nc</category>
+        <category>系统调用</category>
+        <category>windows</category>
+        <category>渗透</category>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</guid>
+            <title>CTFshow(Test_your_nc部分,0~4)</title>
+            <link>https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</link>
+            <category>pwn</category>
+            <category>nc</category>
+            <pubDate>Fri, 15 Sep 2023 11:01:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;pwn0&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn0&#34;&gt;#&lt;/a&gt; pwn0&lt;/h1&gt;
+&lt;h2 id=&#34;题目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWt1sS.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;利用 ssh 连接，不知道为什么之前连接是失败的&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWffpV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;然后输入密码会加载一大堆东西&lt;/p&gt;
+&lt;p&gt;而且密码不在当前目录下需要到根目录查看&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWfLfx.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn1&#34;&gt;#&lt;/a&gt; pwn1&lt;/h1&gt;
+&lt;h2 id=&#34;题目-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-2&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhgDe.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;题目里已经说明有后门了，下载附件利用 ida 打开&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhqbQ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现输出完句子之后会直接执行 cat flag，那么直接 nc 连接即可&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhXUs.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn2&#34;&gt;#&lt;/a&gt; pwn2&lt;/h1&gt;
+&lt;h2 id=&#34;题目-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-3&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4pvT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;下载附件查看程序信息，发现是 64 位程序&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4WsU.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL4e0.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+发现有个 system (/bin/sh), 直接 给权限了，那么就直接可以获取 flag&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL7YF.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn3&#34;&gt;#&lt;/a&gt; pwn3&lt;/h1&gt;
+&lt;h2 id=&#34;题目-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-4&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLLl9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看保护是 64 位程序，ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLzTK.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOCfe.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOFld.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;这里考察我们对函数的理解&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;put 函数输出的是字符串&lt;/li&gt;
+&lt;li&gt;echo 主要用于打印简单的字符串和变量值&lt;/li&gt;
+&lt;li&gt;cat 用来查看文件内容，更侧重于处理文件，实现文件内容的读取和拼接等操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(只有 system (cat /flag) 输出了 flag，选择 4 只会输出字符串”/ctfshow_flag“)&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOllj.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn4&#34;&gt;#&lt;/a&gt; pwn4&lt;/h1&gt;
+&lt;h2 id=&#34;题目-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-5&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOonI.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看程序是 64 位，用 ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDMex.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;execve_func()&lt;/code&gt;  里有后门&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDlTK.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;strcmp(str1,str2)&lt;/code&gt;  该函数会进行比较，str1=str2 时会返回 0，所以输入 &lt;code&gt;CTFshowPWN&lt;/code&gt;  以此绕过判断&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDPe0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow5-34/</guid>
             <title>CTFshow(前置基础部分-汇编,5~34)</title>
@@ -139,63 +198,6 @@ mov  eax,  [ecx+edx*2-6]  #eax=*(ecx+edx*2-6)
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&amp;lt;stdio.h&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&amp;lt;stdlib.h&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;define&lt;/span&gt; &lt;span class=&#34;token macro-name&#34;&gt;BUFFER_SIZE&lt;/span&gt; &lt;span class=&#34;token expression&#34;&gt;&lt;span class=&#34;token number&#34;&gt;1024&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    FILE &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;fp&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;char&lt;/span&gt; buffer&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;BUFFER_SIZE&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt; n&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    fp &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;fopen&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;key&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;rb&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;fp &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;token constant&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token function&#34;&gt;perror&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Nothing here!&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;char&lt;/span&gt; output&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;BUFFER_SIZE &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;9&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; offset &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    offset &lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sprintf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;output &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; offset&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;ctfshow&amp;#123;&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;n &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;fread&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;sizeof&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; BUFFER_SIZE&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; fp&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt; i &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; i &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; n&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; i&lt;span class=&#34;token operator&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; j &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; j &lt;span class=&#34;token operator&#34;&gt;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; j&lt;span class=&#34;token operator&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                offset &lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sprintf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;output &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; offset&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;%d&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;buffer&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&lt;/span&gt; j&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;i &lt;span class=&#34;token operator&#34;&gt;!=&lt;/span&gt; n &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                offset &lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sprintf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;output &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; offset&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;_&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;feof&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;fp&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;28&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            offset &lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sprintf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;output &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; offset&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34; &#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;29&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;30&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;31&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    offset &lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sprintf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;output &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; offset&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&amp;#125;&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;32&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;%s\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; output&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;33&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;fclose&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;fp&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;34&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;35&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;此处有 &lt;code&gt;fopen(&amp;quot;key&amp;quot;,:&amp;quot;rb&amp;quot;)&lt;/code&gt;  要打开文件 (rb 以读写方式打开一个二进制文件)，不能让其为空，手动创建一个 key 文件，题目说明 key 为 &lt;code&gt;CTFshow&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;创建完成后用 gcc 编译，执行程序&lt;br /&gt;
 &lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPhJc7Q.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</guid>
-            <title>CTFshow(Test_your_nc部分,0~4)</title>
-            <link>https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</link>
-            <category>pwn</category>
-            <category>nc</category>
-            <pubDate>Fri, 15 Sep 2023 11:01:15 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;pwn0&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn0&#34;&gt;#&lt;/a&gt; pwn0&lt;/h1&gt;
-&lt;h2 id=&#34;题目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWt1sS.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;利用 ssh 连接，不知道为什么之前连接是失败的&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWffpV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;然后输入密码会加载一大堆东西&lt;/p&gt;
-&lt;p&gt;而且密码不在当前目录下需要到根目录查看&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWfLfx.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;pwn1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn1&#34;&gt;#&lt;/a&gt; pwn1&lt;/h1&gt;
-&lt;h2 id=&#34;题目-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-2&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhgDe.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;题目里已经说明有后门了，下载附件利用 ida 打开&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhqbQ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;发现输出完句子之后会直接执行 cat flag，那么直接 nc 连接即可&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhXUs.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;pwn2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn2&#34;&gt;#&lt;/a&gt; pwn2&lt;/h1&gt;
-&lt;h2 id=&#34;题目-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-3&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4pvT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;下载附件查看程序信息，发现是 64 位程序&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4WsU.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;ida 打开&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL4e0.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-发现有个 system (/bin/sh), 直接 给权限了，那么就直接可以获取 flag&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL7YF.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;pwn3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn3&#34;&gt;#&lt;/a&gt; pwn3&lt;/h1&gt;
-&lt;h2 id=&#34;题目-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-4&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLLl9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;查看保护是 64 位程序，ida 打开&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLzTK.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOCfe.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOFld.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;这里考察我们对函数的理解&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;put 函数输出的是字符串&lt;/li&gt;
-&lt;li&gt;echo 主要用于打印简单的字符串和变量值&lt;/li&gt;
-&lt;li&gt;cat 用来查看文件内容，更侧重于处理文件，实现文件内容的读取和拼接等操作&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;(只有 system (cat /flag) 输出了 flag，选择 4 只会输出字符串”/ctfshow_flag“)&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOllj.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;pwn4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn4&#34;&gt;#&lt;/a&gt; pwn4&lt;/h1&gt;
-&lt;h2 id=&#34;题目-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-5&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOonI.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;查看程序是 64 位，用 ida 打开&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDMex.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;execve_func()&lt;/code&gt;  里有后门&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDlTK.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;strcmp(str1,str2)&lt;/code&gt;  该函数会进行比较，str1=str2 时会返回 0，所以输入 &lt;code&gt;CTFshowPWN&lt;/code&gt;  以此绕过判断&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDPe0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

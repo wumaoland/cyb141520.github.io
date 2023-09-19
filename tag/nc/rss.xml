@@ -7,16 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Fri, 15 Sep 2023 11:01:15 +0800</pubDate>
         <lastBuildDate>Fri, 15 Sep 2023 11:01:15 +0800</lastBuildDate>
+        <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
+        <category>C语言</category>
         <category>Linux</category>
         <category>ret2csu</category>
-        <category>ctf</category>
-        <category>系统调用</category>
-        <category>Java</category>
-        <category>C语言</category>
         <category>fastbin.attack</category>
+        <category>ctf</category>
         <category>nc</category>
+        <category>系统调用</category>
+        <category>windows</category>
+        <category>渗透</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</guid>
             <title>CTFshow(Test_your_nc部分,0~4)</title>

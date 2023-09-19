@@ -4,16 +4,18 @@
     <title>Blog • Posts by &#34;rop&#34; category</title>
     <link href="https://vvwwvv.cn" />
     <updated>2023-08-24T11:23:15.000Z</updated>
+    <category term="Java" />
     <category term="pwn" />
     <category term="二进制" />
+    <category term="C语言" />
     <category term="Linux" />
     <category term="ret2csu" />
-    <category term="ctf" />
-    <category term="系统调用" />
-    <category term="Java" />
-    <category term="C语言" />
     <category term="fastbin.attack" />
+    <category term="ctf" />
     <category term="nc" />
+    <category term="系统调用" />
+    <category term="windows" />
+    <category term="渗透" />
     <entry>
         <id>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</id>
         <title>64位构造通用ROP，ret2csu</title>

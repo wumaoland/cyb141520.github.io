@@ -7,16 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Mon, 18 Sep 2023 19:53:15 +0800</pubDate>
         <lastBuildDate>Mon, 18 Sep 2023 19:53:15 +0800</lastBuildDate>
+        <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
+        <category>C语言</category>
         <category>Linux</category>
         <category>ret2csu</category>
-        <category>ctf</category>
-        <category>系统调用</category>
-        <category>Java</category>
-        <category>C语言</category>
         <category>fastbin.attack</category>
+        <category>ctf</category>
         <category>nc</category>
+        <category>系统调用</category>
+        <category>windows</category>
+        <category>渗透</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/18/pwn/gdb%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95/</guid>
             <title>gdb本地调试，基于pwndbg</title>
@@ -318,76 +320,6 @@ pause()  #必要的，不能少
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</guid>
-            <title>64位构造通用ROP，ret2csu</title>
-            <link>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</link>
-            <category>pwn</category>
-            <category>ret2csu</category>
-            <pubDate>Thu, 24 Aug 2023 19:23:15 +0800</pubDate>
-            <description><![CDATA[ &lt;h1 id=&#34;ret2csu&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ret2csu&#34;&gt;#&lt;/a&gt; ret2csu&lt;/h1&gt;
-&lt;h2 id=&#34;原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#原理&#34;&gt;#&lt;/a&gt; 原理&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;64 位程序中，函数的前 6 个参数是通过寄存器传递的，但是大多数时候我们很难找到每个寄存器对应的 gadges。这时候，我们可以利用 x64 下的__libc_csu_init 中的 gadgets。&lt;/li&gt;
-&lt;li&gt;这个函数是用来对 libc 进行初始化操作的，而一般的程序都会调用 libc 函数，所以这个函数一定会存在。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;下面借用别人在ida摘出来的__libc_csu_init函数的汇编指令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#下面借用别人在ida摘出来的__libc_csu_init函数的汇编指令&#34;&gt;#&lt;/a&gt; 下面借用别人在 IDA 摘出来的__libc_csu_init 函数的汇编指令&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;.text:00000000004011B0 ; void _libc_csu_init(void)
-.text:00000000004011B0                 public __libc_csu_init
-.text:00000000004011B0 __libc_csu_init proc near               ; DATA XREF: _start+16↑o
-.text:00000000004011B0 ; __unwind &amp;#123;
-.text:00000000004011B0                 push    r15
-.text:00000000004011B2                 mov     r15, rdx
-.text:00000000004011B5                 push    r14
-.text:00000000004011B7                 mov     r14, rsi
-.text:00000000004011BA                 push    r13
-.text:00000000004011BC                 mov     r13d, edi
-.text:00000000004011BF                 push    r12
-.text:00000000004011C1                 lea     r12, __frame_dummy_init_array_entry
-.text:00000000004011C8                 push    rbp
-.text:00000000004011C9                 lea     rbp, __do_global_dtors_aux_fini_array_entry
-.text:00000000004011D0                 push    rbx
-.text:00000000004011D1                 sub     rbp, r12
-.text:00000000004011D4                 sub     rsp, 8
-.text:00000000004011D8                 call    _init_proc
-.text:00000000004011DD                 sar     rbp, 3
-.text:00000000004011E1                 jz      short loc_4011FE
-.text:00000000004011E3                 xor     ebx, ebx
-.text:00000000004011E5                 nop     dword ptr [rax]
-.text:00000000004011E8
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;gadgets2:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;.text:00000000004011E8 loc_4011E8:                             ; CODE XREF: __libc_csu_init+4C↓j
-.text:00000000004011E8                 mov     rdx, r15
-.text:00000000004011EB                 mov     rsi, r14
-.text:00000000004011EE                 mov     edi, r13d
-.text:00000000004011F1                 call    qword ptr [r12+rbx*8]
-.text:00000000004011F5                 add     rbx, 1
-.text:00000000004011F9                 cmp     rbp, rbx
-.text:00000000004011FC                 jnz     short loc_4011E8
-.text:00000000004011FE
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;gadgets1:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;.text:00000000004011FE loc_4011FE:                             ; CODE XREF: __libc_csu_init+31↑j
-.text:00000000004011FE                 add     rsp, 8
-.text:0000000000401202                 pop     rbx
-.text:0000000000401203                 pop     rbp
-.text:0000000000401204                 pop     r12
-.text:0000000000401206                 pop     r13
-.text:0000000000401208                 pop     r14
-.text:000000000040120A                 pop     r15
-.text:000000000040120C                 retn
-.text:000000000040120C ; &amp;#125; // starts at 4011B0
-.text:000000000040120C __libc_csu_init endp
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这里搬运之前在 CSDN 上发的文章（汇编代码执行顺序为先 gadgets2, 然后 gadgets1）&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/8abb18a591a445808abc86226a99d2c9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;pop 命令 会把栈中的值存入相应的寄存器中，那么我们可以通过往栈中写对应的数据来存入寄存器里&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/8400e847c08a419ba7c04f174dc26712.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;cmp&lt;/span&gt;     rbx, rbp   //cpm后的不同的调整指令有着不同的作用，这里 jnz 比较结果相同不跳转，不相同就跳转&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;jnz     short loc_400580&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;最后第二次回到 gadget1 时，此时已经给寄存器赋值完毕只需要回到 ret，此处填充 56 个 padding 字符是因为在地址 0x4011FE 处有   &lt;code&gt;add rsp , 8 &lt;/code&gt;  这会把 rsp 栈提高 8，所以要填充 8 个字符来站这个位置，后面的  &lt;code&gt;pop rbx ~ pop r15&lt;/code&gt;  共有 6 个寄存器，pop 了 6 次，所以总共是 （6+1）*8=56，所以填充 56 个字符即可到 ret 来控制程序执行&lt;/p&gt;
-&lt;p&gt;例题:&lt;a href=&#34;https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BA/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BApwn8(64%E4%BD%8D%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8ROP,ret2csu)/&#34; title=&#34;ret2csu&#34;&gt;https://vvwwvv.cn/2023/05/04/pwn/ 刷题 / 看雪社区 / 看雪社区 pwn8 (64 位构造通用 ROP,ret2csu)/&lt;/a&gt;&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/c%E5%87%BD%E6%95%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E/</guid>
             <title>C语言函数及漏洞利用</title>
             <link>https://vvwwvv.cn/2023/08/24/pwn/c%E5%87%BD%E6%95%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E/</link>
@@ -457,6 +389,76 @@ fread不区分文件尾和错误，因此调用者必须用feof和ferror才能�
 &lt;li&gt;source-- 指向要复制的数据源，类型强制转换为 void* 指针。&lt;/li&gt;
 &lt;li&gt;n-- 要被复制的字节数。&lt;/li&gt;
 &lt;/ul&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</guid>
+            <title>64位构造通用ROP，ret2csu</title>
+            <link>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</link>
+            <category>pwn</category>
+            <category>ret2csu</category>
+            <pubDate>Thu, 24 Aug 2023 19:23:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;ret2csu&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ret2csu&#34;&gt;#&lt;/a&gt; ret2csu&lt;/h1&gt;
+&lt;h2 id=&#34;原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#原理&#34;&gt;#&lt;/a&gt; 原理&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;64 位程序中，函数的前 6 个参数是通过寄存器传递的，但是大多数时候我们很难找到每个寄存器对应的 gadges。这时候，我们可以利用 x64 下的__libc_csu_init 中的 gadgets。&lt;/li&gt;
+&lt;li&gt;这个函数是用来对 libc 进行初始化操作的，而一般的程序都会调用 libc 函数，所以这个函数一定会存在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;下面借用别人在ida摘出来的__libc_csu_init函数的汇编指令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#下面借用别人在ida摘出来的__libc_csu_init函数的汇编指令&#34;&gt;#&lt;/a&gt; 下面借用别人在 IDA 摘出来的__libc_csu_init 函数的汇编指令&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;.text:00000000004011B0 ; void _libc_csu_init(void)
+.text:00000000004011B0                 public __libc_csu_init
+.text:00000000004011B0 __libc_csu_init proc near               ; DATA XREF: _start+16↑o
+.text:00000000004011B0 ; __unwind &amp;#123;
+.text:00000000004011B0                 push    r15
+.text:00000000004011B2                 mov     r15, rdx
+.text:00000000004011B5                 push    r14
+.text:00000000004011B7                 mov     r14, rsi
+.text:00000000004011BA                 push    r13
+.text:00000000004011BC                 mov     r13d, edi
+.text:00000000004011BF                 push    r12
+.text:00000000004011C1                 lea     r12, __frame_dummy_init_array_entry
+.text:00000000004011C8                 push    rbp
+.text:00000000004011C9                 lea     rbp, __do_global_dtors_aux_fini_array_entry
+.text:00000000004011D0                 push    rbx
+.text:00000000004011D1                 sub     rbp, r12
+.text:00000000004011D4                 sub     rsp, 8
+.text:00000000004011D8                 call    _init_proc
+.text:00000000004011DD                 sar     rbp, 3
+.text:00000000004011E1                 jz      short loc_4011FE
+.text:00000000004011E3                 xor     ebx, ebx
+.text:00000000004011E5                 nop     dword ptr [rax]
+.text:00000000004011E8
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;gadgets2:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.text:00000000004011E8 loc_4011E8:                             ; CODE XREF: __libc_csu_init+4C↓j
+.text:00000000004011E8                 mov     rdx, r15
+.text:00000000004011EB                 mov     rsi, r14
+.text:00000000004011EE                 mov     edi, r13d
+.text:00000000004011F1                 call    qword ptr [r12+rbx*8]
+.text:00000000004011F5                 add     rbx, 1
+.text:00000000004011F9                 cmp     rbp, rbx
+.text:00000000004011FC                 jnz     short loc_4011E8
+.text:00000000004011FE
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;gadgets1:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.text:00000000004011FE loc_4011FE:                             ; CODE XREF: __libc_csu_init+31↑j
+.text:00000000004011FE                 add     rsp, 8
+.text:0000000000401202                 pop     rbx
+.text:0000000000401203                 pop     rbp
+.text:0000000000401204                 pop     r12
+.text:0000000000401206                 pop     r13
+.text:0000000000401208                 pop     r14
+.text:000000000040120A                 pop     r15
+.text:000000000040120C                 retn
+.text:000000000040120C ; &amp;#125; // starts at 4011B0
+.text:000000000040120C __libc_csu_init endp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里搬运之前在 CSDN 上发的文章（汇编代码执行顺序为先 gadgets2, 然后 gadgets1）&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/8abb18a591a445808abc86226a99d2c9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;pop 命令 会把栈中的值存入相应的寄存器中，那么我们可以通过往栈中写对应的数据来存入寄存器里&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/8400e847c08a419ba7c04f174dc26712.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;cmp&lt;/span&gt;     rbx, rbp   //cpm后的不同的调整指令有着不同的作用，这里 jnz 比较结果相同不跳转，不相同就跳转&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;jnz     short loc_400580&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;最后第二次回到 gadget1 时，此时已经给寄存器赋值完毕只需要回到 ret，此处填充 56 个 padding 字符是因为在地址 0x4011FE 处有   &lt;code&gt;add rsp , 8 &lt;/code&gt;  这会把 rsp 栈提高 8，所以要填充 8 个字符来站这个位置，后面的  &lt;code&gt;pop rbx ~ pop r15&lt;/code&gt;  共有 6 个寄存器，pop 了 6 次，所以总共是 （6+1）*8=56，所以填充 56 个字符即可到 ret 来控制程序执行&lt;/p&gt;
+&lt;p&gt;例题:&lt;a href=&#34;https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BA/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BApwn8(64%E4%BD%8D%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8ROP,ret2csu)/&#34; title=&#34;ret2csu&#34;&gt;https://vvwwvv.cn/2023/05/04/pwn/ 刷题 / 看雪社区 / 看雪社区 pwn8 (64 位构造通用 ROP,ret2csu)/&lt;/a&gt;&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

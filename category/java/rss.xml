@@ -7,16 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Sun, 10 Sep 2023 16:35:45 +0800</pubDate>
         <lastBuildDate>Sun, 10 Sep 2023 16:35:45 +0800</lastBuildDate>
+        <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
+        <category>C语言</category>
         <category>Linux</category>
         <category>ret2csu</category>
-        <category>ctf</category>
-        <category>系统调用</category>
-        <category>Java</category>
-        <category>C语言</category>
         <category>fastbin.attack</category>
+        <category>ctf</category>
         <category>nc</category>
+        <category>系统调用</category>
+        <category>windows</category>
+        <category>渗透</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/10/Java/Java%E4%BD%9C%E4%B8%9A2/</guid>
             <title>Java作业2023/9/10(作业7)</title>

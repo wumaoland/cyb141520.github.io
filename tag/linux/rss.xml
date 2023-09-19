@@ -7,16 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Tue, 29 Aug 2023 20:15:56 +0800</pubDate>
         <lastBuildDate>Tue, 29 Aug 2023 20:15:56 +0800</lastBuildDate>
+        <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
+        <category>C语言</category>
         <category>Linux</category>
         <category>ret2csu</category>
-        <category>ctf</category>
-        <category>系统调用</category>
-        <category>Java</category>
-        <category>C语言</category>
         <category>fastbin.attack</category>
+        <category>ctf</category>
         <category>nc</category>
+        <category>系统调用</category>
+        <category>windows</category>
+        <category>渗透</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
             <title>Linux之系统调用</title>

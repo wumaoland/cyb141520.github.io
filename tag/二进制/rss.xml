@@ -7,16 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Mon, 18 Sep 2023 19:53:15 +0800</pubDate>
         <lastBuildDate>Mon, 18 Sep 2023 19:53:15 +0800</lastBuildDate>
+        <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
+        <category>C语言</category>
         <category>Linux</category>
         <category>ret2csu</category>
-        <category>ctf</category>
-        <category>系统调用</category>
-        <category>Java</category>
-        <category>C语言</category>
         <category>fastbin.attack</category>
+        <category>ctf</category>
         <category>nc</category>
+        <category>系统调用</category>
+        <category>windows</category>
+        <category>渗透</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/18/pwn/gdb%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95/</guid>
             <title>gdb本地调试，基于pwndbg</title>

