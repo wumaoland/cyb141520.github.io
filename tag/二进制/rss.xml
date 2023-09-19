@@ -5,8 +5,8 @@
         <link>https://vvwwvv.cn</link>
         <description></description>
         <language>zh-CN</language>
-        <pubDate>Mon, 18 Sep 2023 19:53:15 +0800</pubDate>
-        <lastBuildDate>Mon, 18 Sep 2023 19:53:15 +0800</lastBuildDate>
+        <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
+        <lastBuildDate>Tue, 19 Sep 2023 20:05:56 +0800</lastBuildDate>
         <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
@@ -19,6 +19,50 @@
         <category>系统调用</category>
         <category>windows</category>
         <category>渗透</category>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</guid>
+            <title>Linux命令和函数</title>
+            <link>https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</link>
+            <category>pwn</category>
+            <category>二进制</category>
+            <category>Linux</category>
+            <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;1linux执行多个命令shell命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1linux执行多个命令shell命令&#34;&gt;#&lt;/a&gt; 1.Linux 执行多个命令（shell 命令）&lt;/h1&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#逐条执行命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#即使命令执行错误也不影响后面的命令继续执行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#前面的成功执行后面才执行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; echoo &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#2 出错，不会执行 echo3 ，echo4&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#前一条命令失败然后才继续执行后面的命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#当第一个执行成功时，后面的就都不会执行；当第一个命令失败时，就开始执行 echo2，后面同理&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#混合使用分隔符&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 因为 || 分隔符，按照 顺序 只要前面三个执行成功一个其他的就不执行，然后执行 echo4（因为 &amp;amp;&amp;amp; 前面的被看作一个整体，一个成功就视为成功，就执行 echo 4）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhbmRhb3l1L2FydGljbGUvZGV0YWlscy8xMTcyOTY5MDc=&#34;&gt;https://blog.csdn.net/bandaoyu/article/details/117296907&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;2命令输出重定向&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2命令输出重定向&#34;&gt;#&lt;/a&gt; 2. 命令输出重定向&lt;/h1&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt;  &lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;  &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#将命令执行结果输出到 file 中，命令的输出结果覆盖原有文件的内容（会清空旧内容）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt;  &lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&lt;/span&gt;  &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#将命令的输出结果输出到 file 文件的原内容的下一行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;command&lt;/span&gt;  &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;  &lt;span class=&#34;token function&#34;&gt;file&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 将输入重定向到 file&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cucnVub29iLmNvbS9saW51eC9saW51eC1zaGVsbC1pby1yZWRpcmVjdGlvbnMuaHRtbA==&#34;&gt;https://www.runoob.com/linux/linux-shell-io-redirections.html&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;3fork函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3fork函数&#34;&gt;#&lt;/a&gt; 3.fork () 函数&lt;/h1&gt;
+&lt;p&gt;fork 函数用于创建一个进程，所创建的进程 &lt;strong&gt;复制父进程的代码段 / 数据段 / BSS 段 / 堆 / 栈等所有用户空间信息&lt;/strong&gt; ；在内核中操作系统重新为其申请了一个 PCB，并使用父进程的 PCB 进行初始化；&lt;/p&gt;
+&lt;p&gt;父进程与子进程的 pid 不同，&lt;strong&gt;执行顺序也不一定，要看系统的进程调度策略&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;fork 被调用一次会返回两次（后面的语句也就判断 2 次），返回 0 代表其是子进程，而在父进程中接到的返回值是子进程的 pid，fork 为负值代表出现错误&lt;/p&gt;
+&lt;p&gt;fork 调用的一个奇妙之处就是它仅仅被调用一次，却能够返回两次，它可能有三种不同的返回值：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;在父进程中，fork返回新创建子进程的进程ID；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code&gt;在子进程中，fork返回0；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果出现错误，fork 返回一个负值；&lt;/p&gt;
+&lt;p&gt;子进程的 fork（）返回值为 0  #第一次返回（不分先后，第一次返回也可能是父进程的 fork）&lt;br /&gt;
+父进程的 fork（）返回值为子进程的 pid  #第二次返回&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Nja2x1di9hcnRpY2xlL2RldGFpbHMvMTA5MTY5OTQx&#34;&gt;https://blog.csdn.net/cckluv/article/details/109169941&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;4linux下的exec命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4linux下的exec命令&#34;&gt;#&lt;/a&gt; 4.Linux 下的 exec 命令&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;在一个 shell 里面，执行 &lt;code&gt;exec ls；&lt;/code&gt; 那么，当列出了当前目录后，这个 shell 就自己退出了，因为这个 &lt;code&gt;shell进程已被替换为仅仅执行ls命令的一个进程&lt;/code&gt; ，执行结束自然也就退出了 。&lt;/li&gt;
+&lt;li&gt;exec 文件重定向，可以将文件的重定向就看为是 shell 程序的文件重定向， &lt;code&gt;当exec命令来对文件描述符操作的时候，就不会替换shell，而且操作完成后，还会继续执行接下来的命令。&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;应用：可以 &lt;code&gt;重新开启标准输出流&lt;/code&gt; ：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;exec （cat [文件名]）1&amp;gt;&amp;amp;0&lt;/code&gt; , 使文件的标准输出流到标准输入里 (在 Linux 系统中文件描述符 &lt;code&gt;1为标准输出流，0为标准输入流，2为标准错误（输出到屏幕）&lt;/code&gt; ，而通过 &lt;code&gt;&amp;amp;+文件描述符&lt;/code&gt; 的方式可以代替文件名，（这里就指向了该终端，所以结果显示在终端上 &lt;code&gt;因为默认打开一个终端后，0，1，2都指向该终端&lt;/code&gt; ）&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYnVsaC9hcnRpY2xlcy8xMjc2MDYxNy5odG1s&#34;&gt;https://www.cnblogs.com/bulh/articles/12760617.html&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMxMTg2MTIzL2FydGljbGUvZGV0YWlscy84MjE5MDc3Ng==&#34;&gt;https://blog.csdn.net/qq_31186123/article/details/82190776&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/18/pwn/gdb%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95/</guid>
             <title>gdb本地调试，基于pwndbg</title>

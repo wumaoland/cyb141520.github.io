@@ -21,7 +21,7 @@
         <category>渗透</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/c%E5%87%BD%E6%95%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E/</guid>
-            <title>C语言函数及漏洞利用</title>
+            <title>C语言函数（及漏洞利用）</title>
             <link>https://vvwwvv.cn/2023/08/24/pwn/c%E5%87%BD%E6%95%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E/</link>
             <category>pwn</category>
             <category>C语言</category>
@@ -89,6 +89,20 @@ fread不区分文件尾和错误，因此调用者必须用feof和ferror才能�
 &lt;li&gt;source-- 指向要复制的数据源，类型强制转换为 void* 指针。&lt;/li&gt;
 &lt;li&gt;n-- 要被复制的字节数。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1 id=&#34;8char-strcat-char-destination-const-char-source&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#8char-strcat-char-destination-const-char-source&#34;&gt;#&lt;/a&gt; 8.char * strcat ( char * destination, const char * source );&lt;/h1&gt;
+&lt;p&gt;功能：strcat 的实现模式是将 src 中的所有字符（连同字符串最后的’\0’一起）加到 dest 字符串中第一个‘\0’的位置，具体一点说就是将 dest 中第一个’\0’替换成 src 的第一个字符，然后该’\0’后的字符替换成 src 的第二个字符，后面以此类推。【把 src 所指向的字符串追加到 dest 所指向的字符串的结尾】&lt;/p&gt;
+&lt;p&gt;返回值：该函数返回一个指向最终的目标字符串 dest 的指针。&lt;/p&gt;
+&lt;h1 id=&#34;9fork&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#9fork&#34;&gt;#&lt;/a&gt; 9.fork（）&lt;/h1&gt;
+&lt;p&gt;fork 被调用一次会返回两次（后面的语句也就判断 2 次），返回 0 代表其是子进程，而在父进程中接到的返回值是子进程的 pid，fork 为负值代表出现错误&lt;/p&gt;
+&lt;p&gt;调用 fork 会产生一个子进程，子进程会复制父进程的当前状态，这时两个进程便会开始同时运行，且执行顺序不一定&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;子进程的fork（）返回值为0 #第一次返回（不分先后，第一次返回也可能是父进程的fork）
+父进程的fork（）返回值为子进程的pid  #第二次返回
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2N1aXQyMDE2MTIzMDcwL2FydGljbGUvZGV0YWlscy84MzI4MDEyNQ==&#34;&gt;https://blog.csdn.net/cuit2016123070/article/details/83280125&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;10int-fclose-file-fp-可以利用linux命令重定向标准输入输出控制&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#10int-fclose-file-fp-可以利用linux命令重定向标准输入输出控制&#34;&gt;#&lt;/a&gt; 10.int fclose (FILE *fp); 【可以利用 Linux 命令重定向标准输入输出控制】&lt;/h1&gt;
+&lt;p&gt;功能：关闭文件输出流（使用 fclose () 函数就可以把 缓冲区内最后剩余的数据输出到内核缓冲区，并释放 文件指针和有关的缓冲区。 ）&lt;/p&gt;
+&lt;p&gt;返回值：如果流成功关闭，fclose 返回 0，否则返回 EOF（-1）【关闭成功返回 1】。（如果流为 NULL，而且程序可以继续执行，fclose 设定 error number 给 EINVAL，并返回 EOF。）&lt;/p&gt;
+&lt;p&gt;绕过方式：Linux 的  &lt;code&gt;exec（cat [文件名]） 1&amp;gt;&amp;amp;0&lt;/code&gt;  ，在 Linux 系统中文件描述符 &lt;code&gt;1为标准输出流，0为标准输入流，2为标准错误（输出到屏幕）&lt;/code&gt; ，而通过 &lt;code&gt;&amp;amp;+文件描述符&lt;/code&gt; 的方式可以代替文件名，（这里就指向了该终端，所以结果显示在终端上 &lt;code&gt;因为默认打开一个终端后，0，1，2都指向该终端&lt;/code&gt; ）&lt;/p&gt;
  ]]></description>
         </item>
     </channel>
