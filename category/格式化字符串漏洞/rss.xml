@@ -16,8 +16,8 @@
         <category>C语言</category>
         <category>ret2csu</category>
         <category>nc</category>
-        <category>ctf</category>
         <category>fastbin.attack</category>
+        <category>ctf</category>
         <category>系统调用</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/12/pwn/%E5%88%B7%E9%A2%98/BUUCTF/bjdctf_2020_babyrop2/</guid>
