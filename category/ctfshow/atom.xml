@@ -411,12 +411,31 @@ main:
 &lt;p&gt;最后输入 &lt;code&gt;exec cat /ctf* 1&amp;gt;&amp;amp;0&lt;/code&gt;  会将 flag 输出到终端上，也可以是 &lt;code&gt;exec sh 1&amp;gt;&amp;amp;0&lt;/code&gt;  进行 shell 交互得到 flag&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/19/pP53ckj.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h1 id=&#34;pwn20relro保护&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn20relro保护&#34;&gt;#&lt;/a&gt; pwn20（RELRO 保护）&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;RELRO（RELocation Read-Only）&lt;/strong&gt; 是一种可选的二进制保护机制，用于增加程序的安全性。它主要通过限制和保护全局偏移表（Global Offset Table，简称 GOT）和过程链接表（Procedure LinkageTable，简称 PLT）的可写性来防止针对这些结构的攻击。&lt;/p&gt;
+&lt;p&gt;RELRO 保护有三种状态：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;No RELRO：在这种状态下，GOT 和 PLT 都是可写的，意味着攻击者可以修改这些表中的指针，从而进行攻击。这是最弱的保护状态。&lt;/li&gt;
+&lt;li&gt;Partial RELRO：在这种状态下，GOT 的开头部分被设置为只读（RO），而剩余部分仍然可写。这样可以防止一些简单的攻击，但仍存在一些漏洞。&lt;/li&gt;
+&lt;li&gt;Full RELRO：在这种状态下，GOT 和 PLT 都被设置为只读（RO）。这样做可以防止对这些结构的修改，提供更强的保护。任何对这些表的修改都会导致程序异常终止&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h2 id=&#34;题目-15&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-15&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/19/pP53vjK.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;got 表是否可写通过保护 RELRO 查看，FULL RELRO 代表着 got 表不可写，&lt;br /&gt;
 NO RELRO 代表可写，代表部分可写&lt;br /&gt;
 &lt;img data-src=&#34;https://z1.ax1x.com/2023/09/19/pP58PNd.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
-此处代表 got 表可写&lt;/p&gt;
+此处 &lt;code&gt;No RELRO&lt;/code&gt;  代表 got 表可写，plt 表可写&lt;/p&gt;
+&lt;p&gt;然后查看 &lt;code&gt;.got&lt;/code&gt;  表和 &lt;code&gt;.plt.got&lt;/code&gt;  表地址，利用命令在终端上直接输入 &lt;code&gt;readelf -s pwn20&lt;/code&gt;  即可（也可利用 ida 查看）&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/20/pPIkEMn.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p 1_1_0x600f18_0x600f28=&#34;&#34;&gt;ctfshow&lt;/p&gt;
+&lt;h1 id=&#34;pwn21&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn21&#34;&gt;#&lt;/a&gt; pwn21&lt;/h1&gt;
+&lt;h2 id=&#34;题目-16&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目-16&#34;&gt;#&lt;/a&gt; 题目&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/20/pPIkMiF.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看保护&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/20/pPIAPw6.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+发现是 &lt;code&gt;Partial RELRO&lt;/code&gt;  保护开启了一部分， &lt;code&gt;got&lt;/code&gt;  表开头部分被设置为只读，其他的剩余部分仍然可写，所以这里是 &lt;code&gt;got&lt;/code&gt;  不可写， &lt;code&gt;.plt.got&lt;/code&gt;  可写&lt;/p&gt;
+&lt;p&gt;查看各表的地址&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/20/pPIAEfe.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p 0_1_0x600ff0_0x601000=&#34;&#34;&gt;ctfshow&lt;/p&gt;
 </content>
         <category term="pwn" />
         <updated>2023-09-15T03:01:15.000Z</updated>
