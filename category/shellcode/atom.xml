@@ -8,14 +8,14 @@
     <category term="pwn" />
     <category term="二进制" />
     <category term="Linux" />
-    <category term="C语言" />
     <category term="windows" />
     <category term="渗透" />
+    <category term="C语言" />
     <category term="ret2csu" />
+    <category term="nc" />
     <category term="ctf" />
     <category term="fastbin.attack" />
     <category term="系统调用" />
-    <category term="nc" />
     <entry>
         <id>https://vvwwvv.cn/2023/09/22/pwn/%E5%88%B7%E9%A2%98/BUUCTF/orw/</id>
         <title>pwnable_orw（手写汇编之shellcode，沙盒机制）</title>

@@ -8,14 +8,14 @@
     <category term="pwn" />
     <category term="二进制" />
     <category term="Linux" />
-    <category term="C语言" />
     <category term="windows" />
     <category term="渗透" />
+    <category term="C语言" />
     <category term="ret2csu" />
+    <category term="nc" />
     <category term="ctf" />
     <category term="fastbin.attack" />
     <category term="系统调用" />
-    <category term="nc" />
     <entry>
         <id>https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</id>
         <title>Linux命令和函数</title>
