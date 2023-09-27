@@ -8,14 +8,14 @@
     <category term="pwn" />
     <category term="二进制" />
     <category term="Linux" />
+    <category term="C语言" />
     <category term="windows" />
     <category term="渗透" />
-    <category term="C语言" />
     <category term="ret2csu" />
-    <category term="nc" />
     <category term="fastbin.attack" />
     <category term="ctf" />
     <category term="系统调用" />
+    <category term="nc" />
     <entry>
         <id>https://vvwwvv.cn/2023/09/12/pwn/%E5%88%B7%E9%A2%98/BUUCTF/babyheap_0ctf_2017/</id>
         <title>babyheap_0ctf_2017，fastbin.attack之double.free</title>
@@ -54,7 +54,7 @@
 &lt;p&gt;要让两个 index 指向同一个 chunk，就需要借助 free 来实现，通过 &lt;strong&gt;free 两个 index (chunk1,chunk2)&lt;/strong&gt; ，使其到 fastbin 中，其会按照后进先出原则，再通过溢出&lt;strong&gt;使一个 index2 的 fd 指向 chunk4&lt;/strong&gt;，将原来的 fastbin 中&lt;strong&gt; chunk2-&amp;gt;chunk1 变换为了 chunk2-&amp;gt;chunk4&lt;/strong&gt;，此时 mallco （index1 的大小）时会将 chunk2 分配给 index1，而 mallco （index2 的大小）会将 chunk4 分配给 index2【注意此时要修改 chunk4 的 size 和 index2 的大小一致】，然后通过溢出 index3 将 chunk4 的 size 值恢复，然后再 mallco （index4 的大小）再释放，这时 chunk4 就会进入 unsorted bin , 并且 index2 也指向了 chunk4，可以通过 dump（index2）来泄露 main.arena+88 的地址&lt;/p&gt;
 &lt;p&gt;4.fastbin attack&lt;/p&gt;
 &lt;p&gt;原理：&lt;/p&gt;
-&lt;p&gt;通过 double free 利用 ：释放 chunk1 和 chunk2 然后 fastbin 里就会形成&lt;/p&gt;
+&lt;p&gt;通过 double free 利用 ：释放 chunk1 和 chunk2 然后 fastbin 里就会形成   &lt;code&gt;fd指向的是下一个chunk的pre_size位&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/13/pP22dJO.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;利用 double free 来再次释放 chunk1，会变成：&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/13/pP2fPJK.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;

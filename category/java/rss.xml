@@ -11,14 +11,14 @@
         <category>pwn</category>
         <category>二进制</category>
         <category>Linux</category>
+        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
-        <category>C语言</category>
         <category>ret2csu</category>
-        <category>nc</category>
         <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
+        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/24/Java/%E4%B8%80%E5%85%83%E4%BA%8C%E6%AC%A1%E6%96%B9%E7%A8%8B%E6%B1%82%E6%A0%B9/</guid>
             <title>Java作业2023/9/24(一元二次方程求根系统)</title>
