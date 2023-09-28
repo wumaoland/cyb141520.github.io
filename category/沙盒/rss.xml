@@ -7,18 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Fri, 22 Sep 2023 17:08:15 +0800</pubDate>
         <lastBuildDate>Fri, 22 Sep 2023 17:08:15 +0800</lastBuildDate>
-        <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
         <category>Linux</category>
-        <category>C语言</category>
-        <category>ret2csu</category>
         <category>windows</category>
         <category>渗透</category>
+        <category>Java</category>
+        <category>C语言</category>
+        <category>ret2csu</category>
         <category>fastbin.attack</category>
+        <category>nc</category>
         <category>ctf</category>
         <category>系统调用</category>
-        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/22/pwn/%E5%88%B7%E9%A2%98/BUUCTF/orw/</guid>
             <title>pwnable_orw（手写汇编之shellcode，沙盒机制）</title>
