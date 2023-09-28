@@ -10,15 +10,15 @@
         <category>pwn</category>
         <category>二进制</category>
         <category>Linux</category>
+        <category>Java</category>
         <category>windows</category>
         <category>渗透</category>
-        <category>Java</category>
         <category>C语言</category>
         <category>ret2csu</category>
-        <category>fastbin.attack</category>
-        <category>nc</category>
         <category>ctf</category>
+        <category>fastbin.attack</category>
         <category>系统调用</category>
+        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/ROP/ret2csu/</guid>
             <title>64位构造通用ROP，ret2csu</title>

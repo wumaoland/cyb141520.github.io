@@ -10,15 +10,15 @@
         <category>pwn</category>
         <category>二进制</category>
         <category>Linux</category>
+        <category>Java</category>
         <category>windows</category>
         <category>渗透</category>
-        <category>Java</category>
         <category>C语言</category>
         <category>ret2csu</category>
-        <category>fastbin.attack</category>
-        <category>nc</category>
         <category>ctf</category>
+        <category>fastbin.attack</category>
         <category>系统调用</category>
+        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/28/windows/Windows10%E4%B9%8B%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</guid>
             <title>Windows10永恒之黑漏洞复现（CVE-2020-0796）</title>
@@ -86,6 +86,10 @@ msfvenom -p windows/x64/meterpreter/bind_tcp lport=5555 -f py -o shellcode.txt&l
 &lt;img data-src=&#34;https://img1.imgtp.com/2023/09/28/nl4eh824.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
 &lt;img data-src=&#34;https://img1.imgtp.com/2023/09/28/GfgvCSw1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;到此永恒之黑漏洞就复现完毕&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9hcnRpY2xlLzEyMjExNjE=&#34;&gt;https://developer.aliyun.com/article/1221161&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MTQ5OTAwMzc=&#34;&gt;https://zhuanlan.zhihu.com/p/414990037&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS91XzE1MzI0NTgxLzQ4NjEyNTU=&#34;&gt;https://blog.51cto.com/u_15324581/4861255&lt;/span&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>

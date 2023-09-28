@@ -7,15 +7,15 @@
     <category term="pwn" />
     <category term="二进制" />
     <category term="Linux" />
+    <category term="Java" />
     <category term="windows" />
     <category term="渗透" />
-    <category term="Java" />
     <category term="C语言" />
     <category term="ret2csu" />
-    <category term="fastbin.attack" />
-    <category term="nc" />
     <category term="ctf" />
+    <category term="fastbin.attack" />
     <category term="系统调用" />
+    <category term="nc" />
     <entry>
         <id>https://vvwwvv.cn/2023/09/25/pwn/%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</id>
         <title>整数安全漏洞</title>

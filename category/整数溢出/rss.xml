@@ -10,15 +10,15 @@
         <category>pwn</category>
         <category>二进制</category>
         <category>Linux</category>
+        <category>Java</category>
         <category>windows</category>
         <category>渗透</category>
-        <category>Java</category>
         <category>C语言</category>
         <category>ret2csu</category>
-        <category>fastbin.attack</category>
-        <category>nc</category>
         <category>ctf</category>
+        <category>fastbin.attack</category>
         <category>系统调用</category>
+        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/25/pwn/%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</guid>
             <title>整数安全漏洞</title>
