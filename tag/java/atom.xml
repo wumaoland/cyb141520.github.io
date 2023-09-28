@@ -9,9 +9,9 @@
     <category term="二进制" />
     <category term="Linux" />
     <category term="C语言" />
+    <category term="ret2csu" />
     <category term="windows" />
     <category term="渗透" />
-    <category term="ret2csu" />
     <category term="fastbin.attack" />
     <category term="ctf" />
     <category term="系统调用" />
