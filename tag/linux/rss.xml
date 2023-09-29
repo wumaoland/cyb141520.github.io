@@ -7,10 +7,10 @@
         <language>zh-CN</language>
         <pubDate>Thu, 28 Sep 2023 14:15:56 +0800</pubDate>
         <lastBuildDate>Thu, 28 Sep 2023 14:15:56 +0800</lastBuildDate>
-        <category>Java</category>
         <category>pwn</category>
         <category>二进制</category>
         <category>Linux</category>
+        <category>Java</category>
         <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
@@ -21,13 +21,64 @@
         <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/28/pwn/%E4%B8%93%E6%A0%8F/%E6%A0%88%E8%BF%81%E7%A7%BB/</guid>
-            <title>栈迁移（）</title>
+            <title>栈迁移</title>
             <link>https://vvwwvv.cn/2023/09/28/pwn/%E4%B8%93%E6%A0%8F/%E6%A0%88%E8%BF%81%E7%A7%BB/</link>
             <category>pwn</category>
             <category>二进制</category>
             <category>Linux</category>
             <pubDate>Thu, 28 Sep 2023 14:15:56 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9ncy4zNjAuY24vcG9zdC9uc2EtZXRlcm5hbGJsdWUtc21iLmh0bWwjdG9jLTc3Mg==&#34;&gt;https://blogs.360.cn/post/nsa-eternalblue-smb.html#toc-772&lt;/span&gt;&lt;/p&gt;
+            <description><![CDATA[ &lt;p&gt;（之前写的没保存，这时第二遍写，我要杀人...）&lt;/p&gt;
+&lt;h1 id=&#34;栈的结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#栈的结构&#34;&gt;#&lt;/a&gt; 栈的结构&lt;/h1&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/28/pPb4Xp8.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;栈迁移的应用场景&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#栈迁移的应用场景&#34;&gt;#&lt;/a&gt; 栈迁移的应用场景&lt;/h1&gt;
+&lt;p&gt;栈迁移主要是为了解决栈溢出空间大小不足的问题，当我们的 ROP 链过长时很可能栈空间不够，并且 ebp 之前的空间其实只是填充一些没什么用的数据，所以需要一个新的地址空间来存放当前的 payload&lt;/p&gt;
+&lt;p&gt;我们的栈&lt;/p&gt;
+&lt;h1 id=&#34;1-leave和ret命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-leave和ret命令&#34;&gt;#&lt;/a&gt; 1. leave 和 ret 命令&lt;/h1&gt;
+&lt;p&gt;leave：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mov  esp , ebp
+pop   ebp       #执行pop时，ebp出栈，并且将esp地址内的值放入ebp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里要注意  &lt;code&gt;mov esp,ebp&lt;/code&gt;  是将 ebp 的地址付给 esp，也就是说将 esp 从栈顶拉下来到 ebp 的位置， &lt;code&gt;pop ebp&lt;/code&gt;  是将 esp 内部的值给 ebp&lt;/p&gt;
+&lt;p&gt;ret：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pop eip  #将esp的值放入eip，让eip寄存器去执行，并且esp+4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;2栈迁移&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2栈迁移&#34;&gt;#&lt;/a&gt; 2. 栈迁移&lt;/h1&gt;
+&lt;p&gt;首先要利用栈迁移需要通过溢出来改写部分数据，将 ebp 的值改为伪造的栈的栈顶，ret 一般改到 read 处来改写伪造的栈的数据【使伪造的栈的栈顶（ &lt;code&gt;fake_esp&lt;/code&gt; ）存入 &lt;code&gt;fake_ebp&lt;/code&gt;  的栈低】&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/29/pPqEOZ4.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;栈迁移要使用两次 leave_ret 来转移栈&lt;/p&gt;
+&lt;h2 id=&#34;第一次leave_ret来源于ebp后的ret&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#第一次leave_ret来源于ebp后的ret&#34;&gt;#&lt;/a&gt; 第一次 &lt;code&gt;leave_ret&lt;/code&gt;  (来源于 ebp 后的 ret)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;leave:&lt;/p&gt;
+&lt;p&gt;mov esp , ebp // 将 ebp 的地址赋给 esp，相当于将 esp 指向 ebp 相同的地方&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/29/pPqVMy8.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pop ebp //将esp指向的地方的值给ebp，这里是值，值！（等于将fake_esp的地址给了ebp），然后esp+4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/29/pPqValV.md.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;第一次写的时候有个疑问，第一次的 leave_ret 到底用的是谁的 &lt;code&gt;leave_ret&lt;/code&gt;  ，如果是 ebp 后的 ret 的，那么为什么后面还要在 ret 后加一个 &lt;code&gt;leave_ret&lt;/code&gt; ，这样加上 read 里面的 &lt;code&gt;leave_ret&lt;/code&gt;  相当与 3 个了；而如果用的是 read 内的 &lt;code&gt;leave_ret&lt;/code&gt;  那不是会将 esp 拉到伪造的 ebp 处吗，一个 ret 的地址就执行了两个 &lt;code&gt;leave_ret&lt;/code&gt; ？&lt;/p&gt;
+&lt;p&gt;我自己的理解：调用的 read 会在开辟一个新的栈帧，它的内部的 &lt;code&gt;leave_ret&lt;/code&gt;  不会干扰外面栈的寄存器，所以等于使用的是 ebp 后面的 ret&lt;/p&gt;
+&lt;p&gt;2.ret&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pop eip //将这里esp的值给eip，让eip去执行`read`，然后esp+4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/29/pPqV4mD.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;第二次调用leave_ret来源于leave_ret&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#第二次调用leave_ret来源于leave_ret&#34;&gt;#&lt;/a&gt; 第二次调用 &lt;code&gt;leave_ret&lt;/code&gt;  (来源于 leave_ret)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;leave&lt;/p&gt;
+&lt;p&gt;mov esp,ebp  // 将 ebp 的地址给 esp，这次使 esp 指向 fake_esp&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/29/pPqZChn.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;pop ebp // 将 esp 内的值给 ebp（fake_ebp 的地址给 ebp）&lt;br /&gt;
+&lt;img data-src=&#34;https://z1.ax1x.com/2023/09/29/pPqZGnO.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ret&lt;/p&gt;
+&lt;p&gt;pop eip  // 将 system_plt 给 eip 让它去执行，这里就可以 getshell 了，然后 eip+4&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这里我们也可以看见直接用 ret 执行了命令，这相当于我们平常栈溢出利用的 ret, 通过这种方式我们可以在没有执行权限的地方来构造我们的 getshell 代码来执行 (但是不能执行 shellcode，执行方式不同)&lt;/p&gt;
+&lt;p&gt;这样我们就完成了栈迁移&lt;/p&gt;
  ]]></description>
         </item>
         <item>
