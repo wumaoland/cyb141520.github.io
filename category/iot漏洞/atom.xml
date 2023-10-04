@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://vvwwvv.cn</id>
+    <title>Blog • Posts by &#34;iot漏洞&#34; category</title>
+    <link href="https://vvwwvv.cn" />
+    <updated>2023-09-30T11:23:15.000Z</updated>
+    <category term="pwn" />
+    <category term="Linux" />
+    <category term="Java" />
+    <category term="二进制" />
+    <category term="C语言" />
+    <category term="windows" />
+    <category term="渗透" />
+    <category term="ret2csu" />
+    <category term="ctf" />
+    <category term="系统调用" />
+    <category term="fastbin.attack" />
+    <category term="rop" />
+    <category term="nc" />
+    <entry>
+        <id>https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/D-Link/D-Link%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</id>
+        <title>D-Link路由器漏洞复现</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/D-Link/D-Link%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
+        <content type="html">&lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
+&lt;p&gt;D-Link DIR-816 A2 是中国台湾友讯（D-Link）公司的一款无线路由器。攻击者可借助‘datetime’参数中的 shell 元字符利用该漏洞在系统上执行任意命令。&lt;/p&gt;
+&lt;h1 id=&#34;1固件及环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1固件及环境&#34;&gt;#&lt;/a&gt; 1. 固件及环境&lt;/h1&gt;
+&lt;h2 id=&#34;测试环境ubuntu1604&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#测试环境ubuntu1604&#34;&gt;#&lt;/a&gt; 测试环境：Ubuntu16.04&lt;/h2&gt;
+&lt;h2 id=&#34;固件版本110b05&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#固件版本110b05&#34;&gt;#&lt;/a&gt; 固件版本：1.10B05&lt;/h2&gt;
+&lt;p&gt;在官网查找对应版本（D-Link DIR-816 A2）&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3d3dy5kbGluay5jb20uY24vdGVjaHN1cHBvcnQv&#34;&gt;http://www.dlink.com.cn/techsupport/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/30/2e9n0y09.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;静态分析工具ida&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#静态分析工具ida&#34;&gt;#&lt;/a&gt; 静态分析工具：IDA&lt;/h2&gt;
+&lt;h2 id=&#34;系统文件获取binwalk&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#系统文件获取binwalk&#34;&gt;#&lt;/a&gt; 系统文件获取：binwalk&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1JlRmlybUxhYnMvYmlud2Fsaw==&#34;&gt;https://github.com/ReFirmLabs/binwalk&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;在 Ubuntu16.04 中下载 &lt;code&gt;binwalk&lt;/code&gt; : &lt;code&gt;sudo apt install binwalk&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;动态调试工具qemu-ida&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#动态调试工具qemu-ida&#34;&gt;#&lt;/a&gt; 动态调试工具：qemu、IDA&lt;/h2&gt;
+&lt;p&gt;qemu 安装（Ubuntu22.10 下不成功）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install qemu
+#user mode,包含qemu-mips-static，qemu-mipsel-static,qemu-arm-static等
+sudo apt-get install qemu-user-static
+#system mode，包含qemu-system-mips，qemu-system-mipsel,qemu-system-arm等
+sudo apt-get install qemu-system
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;2利用binwalk进行固件解包&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2利用binwalk进行固件解包&#34;&gt;#&lt;/a&gt; 2. 利用 binwalk 进行固件解包&lt;/h1&gt;
+&lt;p&gt;1. 解包：&lt;br /&gt;
+ &lt;code&gt;binwalk -Me DIR-816A2_FWv1.10CNB05_R1B011D88210.img&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/30/cWDSxVvs.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看我们解的包，发现有个 &lt;code&gt;squashfs-root&lt;/code&gt; , 这就是我们需要的系统文件&lt;br /&gt;
+&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/30/ZUf7rJn3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/30/SyfhCepg.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;2. 查找 web 的根目录&lt;/p&gt;
+&lt;p&gt;一般可以通过 &lt;code&gt;find -name &amp;quot;*index*&amp;quot;&lt;/code&gt;  搜索出 web 的根目录在哪个具体目录下。&lt;br /&gt;
+&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/30/zCKiGAqg.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;3. 在 web 目录下执行命令 &lt;code&gt;file ../../bin/goahead&lt;/code&gt; ，即可查看发现是 mips 架构，在之后的 qemu 模拟器要用 mips 方式来模拟&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/30/AkXXt4pH.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;第三步的 &lt;code&gt;goahead&lt;/code&gt;  怎么来的具体还不目明确，有利用 nmap 扫描发现 80 端口是这个的&lt;/p&gt;
+&lt;p&gt;4. 利用 qumu 来模拟&lt;br /&gt;
+输入命令： &lt;code&gt;sudo qemu-mipsel -L ../../ -g 1234 ../../bin/goahead&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-g 使用qemu并将程序挂载在1234端口，等待调试。
+-L 是根目录的所在的位置。
+可以使用IDA远程调试连接1234端口，进行调试，获取使用gdb也可以调试。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;5. 利用 IDA 进行调试&lt;/p&gt;
+&lt;p&gt;找到源程序来利用 gdb 查看这里查看发现是 &lt;code&gt;mips-32-little&lt;/code&gt; , 保护全没开&lt;br /&gt;
+&lt;img data-src=&#34;https://img1.imgtp.com/2023/09/30/OqAkTic7.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;本来想用远程调试，但是连接失败了，只好找到源程序来手动托入 IDA 打开（32 位程序）&lt;/p&gt;
+</content>
+        <category term="二进制" />
+        <updated>2023-09-30T11:23:15.000Z</updated>
+    </entry>
+</feed>

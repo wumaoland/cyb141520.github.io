@@ -8,16 +8,17 @@
         <pubDate>Thu, 24 Aug 2023 19:23:15 +0800</pubDate>
         <lastBuildDate>Thu, 24 Aug 2023 19:23:15 +0800</lastBuildDate>
         <category>pwn</category>
-        <category>二进制</category>
         <category>Linux</category>
         <category>Java</category>
+        <category>二进制</category>
         <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
         <category>ret2csu</category>
-        <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
+        <category>fastbin.attack</category>
+        <category>rop</category>
         <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/c%E5%87%BD%E6%95%B0%E5%8F%8A%E6%BC%8F%E6%B4%9E/</guid>

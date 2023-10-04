@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Blog • Posts by &#34;alsr&#34; category</title>
+        <link>https://vvwwvv.cn</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 04 Oct 2023 14:15:56 +0800</pubDate>
+        <lastBuildDate>Wed, 04 Oct 2023 14:15:56 +0800</lastBuildDate>
+        <category>pwn</category>
+        <category>Linux</category>
+        <category>Java</category>
+        <category>二进制</category>
+        <category>C语言</category>
+        <category>windows</category>
+        <category>渗透</category>
+        <category>ret2csu</category>
+        <category>ctf</category>
+        <category>系统调用</category>
+        <category>fastbin.attack</category>
+        <category>rop</category>
+        <category>nc</category>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</guid>
+            <title>ASLR与PIE（例题：CTFshow的pwn26）</title>
+            <link>https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</link>
+            <category>pwn</category>
+            <category>Linux</category>
+            <pubDate>Wed, 04 Oct 2023 14:15:56 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;ASLR&lt;/code&gt;  与 &lt;code&gt;PIE&lt;/code&gt;  是不同的，两者不能认为是同一个机制，但是他们都是对地址进行 &lt;code&gt;随机化&lt;/code&gt; ，只不过作用的 &lt;code&gt;对象&lt;/code&gt; 和作用 &lt;code&gt;时期&lt;/code&gt; 不太一样&lt;/p&gt;
+&lt;h1 id=&#34;1aslr操作系统的功能&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1aslr操作系统的功能&#34;&gt;#&lt;/a&gt; 1.ASLR (操作系统的功能)：&lt;/h1&gt;
+&lt;p&gt;ASLR 是 &lt;code&gt;Linux操作系统&lt;/code&gt; 的功能选项，作用于程序 (ELF) 装入 &lt;code&gt;内存&lt;/code&gt; 运行时。是一种针对缓冲区溢出的安全保护技术，通过对加载地址的随机化，防止攻击者直接定位攻击代码位置，到达阻止溢出攻击的一种技术。&lt;/p&gt;
+&lt;h2 id=&#34;打开关闭aslr&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#打开关闭aslr&#34;&gt;#&lt;/a&gt; 打开 / 关闭 ASLR：&lt;/h2&gt;
+&lt;h3 id=&#34;查看aslr打开情况&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#查看aslr打开情况&#34;&gt;#&lt;/a&gt; 查看 ASLR 打开情况：&lt;/h3&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; /proc/sys/kernel/randomize_va_space&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h3 id=&#34;关闭alsr&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#关闭alsr&#34;&gt;#&lt;/a&gt; 关闭 ALSR&lt;/h3&gt;
+&lt;p&gt;1. 手动修改（长期生效）：&lt;/p&gt;
+&lt;p&gt;修改的是 randomize_va_space 文件的枚举值，设置的值不同，linux 内核加载程序的地址空间的策略就会不同&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# echo 0 &gt; /proc/sys/kernel/randomize_va_space&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;2. 利用 sysctl 控制 ASLR (临时有效，重启后复原):&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ &lt;span class=&#34;token function&#34;&gt;sysctl&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-w&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;kernel.randomize_va_space&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;3. 利用 setarch 控制单独程序的随机化：&lt;/p&gt;
+&lt;p&gt;如果你想历史关闭单个程序的 ASLR，使用 setarch 是很好的选择。setarch 命令如其名，改变程序的运行架构环境，并可以自定义环境 flag。&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;setarch &lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;uname&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-R&lt;/span&gt; ./your_program&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;pre&gt;&lt;code&gt;R参数代表关闭地址空间随机化（开启ADDR_NO_RANDOMIZE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;4.gbd 中关闭和开启：&lt;/p&gt;
+&lt;p&gt;在调试特定程序时，可以通过 set disable-randomization 命令开启或者关闭地址空间随机化。默认是关闭随机化的，也就是 on 状态&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;关闭ASLR：
+set disable-randomization on
+开启ASLR：
+set disable-randomization off
+查看ASLR状态：
+show disable-randomization
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;aslr保护&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#aslr保护&#34;&gt;#&lt;/a&gt; ASLR 保护：&lt;/h2&gt;
+&lt;p&gt;Linux 下的 ASLR 总共有三个级别： &lt;code&gt;0、1、2&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0：关闭ASLR，没有进行随机化，堆栈基地址每次都相同，并且libc.so每次的地址也相同。
+1：普通的ASLR。mmap基地址、栈基地址、.so加载基地址（共享库（.so\libraries））都将被随机化；但是堆没有随机化
+2：在1的基础上加上了堆基地址的随机化
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;2pie编译器的功能&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2pie编译器的功能&#34;&gt;#&lt;/a&gt; 2.PIE（编译器的功能）:&lt;/h1&gt;
+&lt;p&gt;PIE 叫做代码部分地址无关，PIE 是我们在编译（gcc）时可以选择的功能，作用于程序（ELF）编译过程。其针对的是代码段（.text）, 数据段（.data），为初始化全局变量 (.bbs) 等固定地址的防护，程序在开启了 pie 时，每次加载程序都会时程序的加载地址改变&lt;/p&gt;
+&lt;h2 id=&#34;开启pie&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#开启pie&#34;&gt;#&lt;/a&gt; 开启 PIE:&lt;/h2&gt;
+&lt;p&gt;在使用 gcc 编译时加入命令参数   &lt;code&gt;-fPIE&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;3开启aslrpie&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3开启aslrpie&#34;&gt;#&lt;/a&gt; 3. 开启 ASLR+PIE:&lt;/h1&gt;
+&lt;p&gt;开启 &lt;code&gt;ASLR+PIE&lt;/code&gt;  的一个直接的困扰就是，你会发现没有地方可以写，所有的 got 表、plt 表、bss 段地址都是不确定的。只有通过泄漏才可以确定地址，所以我们想利用时，必须先泄露函数的地址然后算出 libc 的基址才行。&lt;/p&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS9kdWFsbGF5LzE4NzY4NDE=&#34;&gt;https://blog.51cto.com/duallay/1876841&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubXJza3llLmNuL2FyY2hpdmVzLzkwNThkZmZjLyMlRTUlQkMlODAlRTUlOTAlQUYtUElF&#34;&gt;https://www.mrskye.cn/archives/9058dffc/# 开启 - PIE&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
