@@ -8,16 +8,16 @@
         <pubDate>Thu, 24 Aug 2023 19:23:15 +0800</pubDate>
         <lastBuildDate>Thu, 24 Aug 2023 19:23:15 +0800</lastBuildDate>
         <category>pwn</category>
+        <category>二进制</category>
         <category>Linux</category>
         <category>Java</category>
-        <category>二进制</category>
-        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
+        <category>C语言</category>
         <category>ret2csu</category>
+        <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
-        <category>fastbin.attack</category>
         <category>rop</category>
         <category>nc</category>
         <item>
@@ -104,6 +104,17 @@ fread不区分文件尾和错误，因此调用者必须用feof和ferror才能�
 &lt;p&gt;功能：关闭文件输出流（使用 fclose () 函数就可以把 缓冲区内最后剩余的数据输出到内核缓冲区，并释放 文件指针和有关的缓冲区。 ）&lt;/p&gt;
 &lt;p&gt;返回值：如果流成功关闭，fclose 返回 0，否则返回 EOF（-1）【关闭成功返回 1】。（如果流为 NULL，而且程序可以继续执行，fclose 设定 error number 给 EINVAL，并返回 EOF。）&lt;/p&gt;
 &lt;p&gt;绕过方式：Linux 的  &lt;code&gt;exec（cat [文件名]） 1&amp;gt;&amp;amp;0&lt;/code&gt;  ，在 Linux 系统中文件描述符 &lt;code&gt;1为标准输出流，0为标准输入流，2为标准错误（输出到屏幕）&lt;/code&gt; ，而通过 &lt;code&gt;&amp;amp;+文件描述符&lt;/code&gt; 的方式可以代替文件名，（这里就指向了该终端，所以结果显示在终端上 &lt;code&gt;因为默认打开一个终端后，0，1，2都指向该终端&lt;/code&gt; ）&lt;/p&gt;
+&lt;h1 id=&#34;11strtol&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#11strtol&#34;&gt;#&lt;/a&gt; 11.strtol()&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;strtol&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;str&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;endptr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; base&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;作用：将参数 str 所指向的字符串根据给定的 base 转换成一个长整型数（long int 型），base 必须介于 2 和 36 之间（包含），或者是特殊值 0&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;str  将要转换成长整型的字符串&lt;/li&gt;
+&lt;li&gt;endptr  对类型 char * 的引用（引用 str），其值设置为在 str 中 &lt;code&gt;数值型字符串&lt;/code&gt; 的下一个字符（如 123ab，则设置为 ab），用来判断是否转化成功&lt;/li&gt;
+&lt;li&gt;base 基数，如果为 0 则会根据字符串的前缀来进行判断进制；如果字符串以 &lt;code&gt;0x&lt;/code&gt;  或 &lt;code&gt;0X&lt;/code&gt;  开头，则视为十六进制；如果字符串以 &lt;code&gt;0&lt;/code&gt;  开头，则视为八进制；否则视为十进制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;返回值：&lt;/p&gt;
+&lt;p&gt;返回被转换的长整型数值，如果字符串不符合数字格式，则返回 0；若转换结果超出了 &lt;code&gt;long&lt;/code&gt;  整数的表示范围，会产生 &lt;code&gt;溢出&lt;/code&gt; ，并设置为 errno 为 ERANGE (可以使用 &amp;lt; srrno.h&amp;gt; 头文件中的 errno 变量来检查是否有溢出发生)&lt;/p&gt;
+&lt;p&gt;如果输入字符串不能被完全转换为整数，strtol () 函数将返回转换成功的部分，而 &lt;code&gt; endptr&lt;/code&gt;  将指向 &lt;code&gt;未转换&lt;/code&gt; 部分的第一个字符。在这个例子中， &lt;code&gt;endptr &lt;/code&gt; 是指向字符串 &lt;code&gt;末尾&lt;/code&gt; 的 &lt;code&gt;空字符 &#39;\0&#39;&lt;/code&gt; ，表示 &lt;code&gt;整个&lt;/code&gt; 输入字符串都被 &lt;code&gt;成功转换&lt;/code&gt; 为整数。&lt;/p&gt;
+&lt;p&gt;如果输入字符串包含 &lt;code&gt;非数字字符&lt;/code&gt; ，例如 &amp;quot;12ab&amp;quot;，那么  &lt;code&gt;endptr&lt;/code&gt;  将指向  &lt;code&gt;&amp;quot;ab&amp;quot;&lt;/code&gt;  的起始位置，指示 &lt;code&gt;转换失败&lt;/code&gt; 。&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

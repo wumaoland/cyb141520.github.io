@@ -5,16 +5,16 @@
     <link href="https://vvwwvv.cn" />
     <updated>2023-09-25T12:15:56.000Z</updated>
     <category term="pwn" />
+    <category term="二进制" />
     <category term="Linux" />
     <category term="Java" />
-    <category term="二进制" />
-    <category term="C语言" />
     <category term="windows" />
     <category term="渗透" />
+    <category term="C语言" />
     <category term="ret2csu" />
+    <category term="fastbin.attack" />
     <category term="ctf" />
     <category term="系统调用" />
-    <category term="fastbin.attack" />
     <category term="rop" />
     <category term="nc" />
     <entry>
@@ -46,8 +46,8 @@
 &lt;h2 id=&#34;上面两个函数都有一个类型为-size_t-的参数它是无符号整型的sizeof运算符的结果&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#上面两个函数都有一个类型为-size_t-的参数它是无符号整型的sizeof运算符的结果&#34;&gt;#&lt;/a&gt; 上面两个函数都有一个类型为 size_t 的参数，它是无符号整型的 sizeof 运算符的结果。&lt;/h2&gt;
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
         <category term="pwn" />
-        <category term="Linux" />
         <category term="二进制" />
+        <category term="Linux" />
         <updated>2023-09-25T12:15:56.000Z</updated>
     </entry>
 </feed>

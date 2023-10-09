@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Blog • Posts by &#34;柏鹭杯&#34; category</title>
+        <link>https://vvwwvv.cn</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 09 Oct 2023 17:08:15 +0800</pubDate>
+        <lastBuildDate>Mon, 09 Oct 2023 17:08:15 +0800</lastBuildDate>
+        <category>pwn</category>
+        <category>二进制</category>
+        <category>Linux</category>
+        <category>Java</category>
+        <category>windows</category>
+        <category>渗透</category>
+        <category>C语言</category>
+        <category>ret2csu</category>
+        <category>fastbin.attack</category>
+        <category>ctf</category>
+        <category>系统调用</category>
+        <category>rop</category>
+        <category>nc</category>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/10/09/pwn/%E5%88%B7%E9%A2%98/%E6%9F%8F%E9%B9%AD%E6%9D%AF/%E6%9F%8F%E9%B9%AD%E6%9D%AF2022%20%20pwn/</guid>
+            <title>柏鹭杯2022  pwn（）</title>
+            <link>https://vvwwvv.cn/2023/10/09/pwn/%E5%88%B7%E9%A2%98/%E6%9F%8F%E9%B9%AD%E6%9D%AF/%E6%9F%8F%E9%B9%AD%E6%9D%AF2022%20%20pwn/</link>
+            <category>pwn</category>
+            <pubDate>Mon, 09 Oct 2023 17:08:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;pwn1-note1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#pwn1-note1&#34;&gt;#&lt;/a&gt; pwn1 note1&lt;/h1&gt;
+&lt;h2 id=&#34;1程序分析&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1程序分析&#34;&gt;#&lt;/a&gt; 1. 程序分析&lt;/h2&gt;
+&lt;p&gt;64 位程序，发现保护全开了&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/2022picture/1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;ida 查看一下：&lt;/p&gt;
+&lt;p&gt;main:&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/2022picture/2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

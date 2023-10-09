@@ -8,16 +8,16 @@
         <pubDate>Sun, 01 Oct 2023 15:08:15 +0800</pubDate>
         <lastBuildDate>Sun, 01 Oct 2023 15:08:15 +0800</lastBuildDate>
         <category>pwn</category>
+        <category>二进制</category>
         <category>Linux</category>
         <category>Java</category>
-        <category>二进制</category>
-        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
+        <category>C语言</category>
         <category>ret2csu</category>
+        <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
-        <category>fastbin.attack</category>
         <category>rop</category>
         <category>nc</category>
         <item>
@@ -77,8 +77,8 @@
             <title>堆利用之UAF（use after free）</title>
             <link>https://vvwwvv.cn/2023/10/01/pwn/%E4%B8%93%E6%A0%8F/%E5%A0%86%E5%88%A9%E7%94%A8%E4%B9%8BUAF/</link>
             <category>pwn</category>
-            <category>Linux</category>
             <category>二进制</category>
+            <category>Linux</category>
             <pubDate>Sun, 01 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1漏洞原因&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1漏洞原因&#34;&gt;#&lt;/a&gt; 1. 漏洞原因&lt;/h1&gt;
 &lt;h2 id=&#34;ctfwiki上的示例&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ctfwiki上的示例&#34;&gt;#&lt;/a&gt; ctfWiki 上的示例：&lt;/h2&gt;

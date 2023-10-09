@@ -8,16 +8,16 @@
         <pubDate>Mon, 02 Oct 2023 14:15:56 +0800</pubDate>
         <lastBuildDate>Mon, 02 Oct 2023 14:15:56 +0800</lastBuildDate>
         <category>pwn</category>
+        <category>二进制</category>
         <category>Linux</category>
         <category>Java</category>
-        <category>二进制</category>
-        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
+        <category>C语言</category>
         <category>ret2csu</category>
+        <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
-        <category>fastbin.attack</category>
         <category>rop</category>
         <category>nc</category>
         <item>
@@ -25,8 +25,8 @@
             <title>堆利用之unlink（例题：hitcon2014_stkof）</title>
             <link>https://vvwwvv.cn/2023/10/02/pwn/%E4%B8%93%E6%A0%8F/%E5%A0%86%E5%88%A9%E7%94%A8%E4%B9%8Bunlink/</link>
             <category>pwn</category>
-            <category>Linux</category>
             <category>二进制</category>
+            <category>Linux</category>
             <pubDate>Mon, 02 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;libc 源码下载：&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2Z0cC5nbnUub3JnL2dudS9nbGliYy8=&#34;&gt;http://ftp.gnu.org/gnu/glibc/&lt;/span&gt;&lt;/p&gt;
@@ -130,8 +130,8 @@ BK-&amp;gt;fd = FD   并且  FD=P-&amp;gt;fd
             <title>堆利用之UAF（use after free）</title>
             <link>https://vvwwvv.cn/2023/10/01/pwn/%E4%B8%93%E6%A0%8F/%E5%A0%86%E5%88%A9%E7%94%A8%E4%B9%8BUAF/</link>
             <category>pwn</category>
-            <category>Linux</category>
             <category>二进制</category>
+            <category>Linux</category>
             <pubDate>Sun, 01 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1漏洞原因&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1漏洞原因&#34;&gt;#&lt;/a&gt; 1. 漏洞原因&lt;/h1&gt;
 &lt;h2 id=&#34;ctfwiki上的示例&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ctfwiki上的示例&#34;&gt;#&lt;/a&gt; ctfWiki 上的示例：&lt;/h2&gt;
@@ -265,8 +265,8 @@ sudo apt-get install qemu-system
             <title>栈迁移</title>
             <link>https://vvwwvv.cn/2023/09/28/pwn/%E4%B8%93%E6%A0%8F/%E6%A0%88%E8%BF%81%E7%A7%BB/</link>
             <category>pwn</category>
-            <category>Linux</category>
             <category>二进制</category>
+            <category>Linux</category>
             <pubDate>Thu, 28 Sep 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;（之前写的没保存，这是第二遍写，我要杀人...）&lt;/p&gt;
 &lt;h1 id=&#34;栈的结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#栈的结构&#34;&gt;#&lt;/a&gt; 栈的结构&lt;/h1&gt;
@@ -327,8 +327,8 @@ pop   ebp       #执行pop时，ebp出栈，并且将esp地址内的值放入ebp
             <title>整数安全漏洞</title>
             <link>https://vvwwvv.cn/2023/09/25/pwn/%E4%B8%93%E6%A0%8F/%E6%95%B4%E6%95%B0%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E/</link>
             <category>pwn</category>
-            <category>Linux</category>
             <category>二进制</category>
+            <category>Linux</category>
             <pubDate>Mon, 25 Sep 2023 20:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;内容参考了《CTF 竞赛权威指南 Pwn 篇》&lt;/p&gt;
 &lt;h1 id=&#34;一-计算机中的整数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一-计算机中的整数&#34;&gt;#&lt;/a&gt; 一、计算机中的整数&lt;/h1&gt;
@@ -360,8 +360,8 @@ pop   ebp       #执行pop时，ebp出栈，并且将esp地址内的值放入ebp
             <title>Linux命令和函数</title>
             <link>https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</link>
             <category>pwn</category>
-            <category>Linux</category>
             <category>二进制</category>
+            <category>Linux</category>
             <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1linux执行多个命令shell命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1linux执行多个命令shell命令&#34;&gt;#&lt;/a&gt; 1.Linux 执行多个命令（shell 命令）&lt;/h1&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#逐条执行命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#即使命令执行错误也不影响后面的命令继续执行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#前面的成功执行后面才执行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; echoo &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#2 出错，不会执行 echo3 ，echo4&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#前一条命令失败然后才继续执行后面的命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#当第一个执行成功时，后面的就都不会执行；当第一个命令失败时，就开始执行 echo2，后面同理&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#混合使用分隔符&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 因为 || 分隔符，按照 顺序 只要前面三个执行成功一个其他的就不执行，然后执行 echo4（因为 &amp;amp;&amp;amp; 前面的被看作一个整体，一个成功就视为成功，就执行 echo 4）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhbmRhb3l1L2FydGljbGUvZGV0YWlscy8xMTcyOTY5MDc=&#34;&gt;https://blog.csdn.net/bandaoyu/article/details/117296907&lt;/span&gt;&lt;/p&gt;
@@ -446,8 +446,8 @@ pause()  #
             <title>Linux之系统调用</title>
             <link>https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</link>
             <category>pwn</category>
-            <category>Linux</category>
             <category>二进制</category>
+            <category>Linux</category>
             <pubDate>Tue, 29 Aug 2023 20:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;一系统调用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一系统调用&#34;&gt;#&lt;/a&gt; 一。系统调用&lt;/h1&gt;
 &lt;p&gt;系统调用也是一个函数，但是系统调用运行在内核态，用户自定义的函数在用户态。而我们想要调用在内核态的指令（如关闭 / 打开中断，I/O 操作等），就需要利用系统调用作为接口，让用户进入内核态。&lt;/p&gt;
@@ -631,8 +631,8 @@ seccomp-tools dump ./pwn&lt;/p&gt;
             <title>堆</title>
             <link>https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/</link>
             <category>pwn</category>
-            <category>Linux</category>
             <category>二进制</category>
+            <category>Linux</category>
             <pubDate>Thu, 24 Aug 2023 20:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;chunk 的 p 位设为 1 即上一个 chunk 被使用并且上一个 chunk 可以使用 pre_size 的空间  （用来储存前一个物理相邻的 chunk 的数据 ，（两个都空闲才合并）&lt;/p&gt;
  ]]></description>
@@ -878,6 +878,8 @@ pause()  #必要的，不能少
 &lt;h3 id=&#34;32利用libc本地库查询计算地址&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#32利用libc本地库查询计算地址&#34;&gt;#&lt;/a&gt; 32. 利用 libc 本地库查询计算地址：&lt;/h3&gt;
 &lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;span&gt;n&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;libc_base&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;puts&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;symbols&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;puts&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;system&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;libc_base&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;symbols&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;system&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;binsh&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;libc_base&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;libc&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;search&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;b&#34;/bin/sh&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#这里一定要转化为字节，不然会报错&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;log&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;info&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;system:&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;hex&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;system&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;log&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;info&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;binsh:&#34;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;hex&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;binsh&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;泄露的地址（64 位）：&lt;br /&gt;
 &lt;img data-src=&#34;https://z1.ax1x.com/2023/10/04/pPO4sa9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;33malloc返回值的指针指向data域&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#33malloc返回值的指针指向data域&#34;&gt;#&lt;/a&gt; 33.malloc 返回值的指针指向 data 域&lt;/h3&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;p1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;malloc&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x400&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;// 申请了一个大 chunk&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;free&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;p1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;// 释放后先进入 unsorted 然后根据情况进入 largebin 中【大于 512 (1024) 字节】（进入 smallbin 是  size  小于 0x3f0，大于 0x3f0 就进入 largebin）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p1&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x3f1&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;// 修改 size 域（p1 指向 data 域）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p1&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;   &lt;span class=&#34;token comment&#34;&gt;// 修改 fd&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p1&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x7fffffff&lt;/span&gt; df18&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;   &lt;span class=&#34;token comment&#34;&gt;// 修改 bk&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p1&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;    &lt;span class=&#34;token comment&#34;&gt;// 修改 fd_nextsize&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p1&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x7fffffff&lt;/span&gt; df10&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;    &lt;span class=&#34;token comment&#34;&gt;// 修改 bk_nextsize&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdnimg.cn/20210120152320897.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMjAyMjM3,size_16,color_FFFFFF,t_70&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>

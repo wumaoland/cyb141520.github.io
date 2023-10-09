@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://vvwwvv.cn</id>
+    <title>Blog • Posts by &#34;fortify&#34; category</title>
+    <link href="https://vvwwvv.cn" />
+    <updated>2023-10-07T06:15:56.000Z</updated>
+    <category term="pwn" />
+    <category term="二进制" />
+    <category term="Linux" />
+    <category term="Java" />
+    <category term="windows" />
+    <category term="渗透" />
+    <category term="C语言" />
+    <category term="ret2csu" />
+    <category term="fastbin.attack" />
+    <category term="ctf" />
+    <category term="系统调用" />
+    <category term="rop" />
+    <category term="nc" />
+    <entry>
+        <id>https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</id>
+        <title>FORTIFY_SOURCE（例题：CTFshow的pwn32）</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/"/>
+        <content type="html">&lt;h1 id=&#34;1简介在编译时进行设置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1简介在编译时进行设置&#34;&gt;#&lt;/a&gt; 1. 简介（在编译时进行设置）：&lt;/h1&gt;
+&lt;p&gt;fority 是轻微的检测，用于检查缓冲区溢出的错误，在程序采用打量的字符串或者内存操作函数适用，例如：memcpy、memset、stpcpy、strcpy、strncpy、strncat、sprintf、snprintf、vsprintf、gets 以及宽字符的变体。&lt;/p&gt;
+&lt;h1 id=&#34;2作用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2作用&#34;&gt;#&lt;/a&gt; 2. 作用：&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;FORTIFY_SOURCE&lt;/code&gt;  是一个  &lt;code&gt;C/C++&lt;/code&gt;  编译器提供的安全保护机制，旨在防止缓冲区溢出和其他与字符串和内存操作相关的安全漏洞。它是在编译时自动 &lt;code&gt;插入的一组额外代码&lt;/code&gt; ，用于增强程序对于缓冲区溢出和其他常见安全问题的防护。 &lt;code&gt;FORTIFY_SOURCE &lt;/code&gt; 提供了以下主要功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;运行时长度检查： &lt;code&gt;FORTIFY_SOURCE&lt;/code&gt;  会在编译时自动将长度检查代码插入到一些危险的库函数中，例如 &lt;code&gt;strcpy、strcat、sprintf&lt;/code&gt;  等。这些代码会检查目标缓冲区的长度，以确保操作不会导致溢出。如果检测到溢出情况，程序会立即终止，从而防止潜在的漏洞利用。&lt;/li&gt;
+&lt;li&gt;缓冲区溢出检测： &lt;code&gt;FORTIFY_SOURCE&lt;/code&gt;  还会将额外的保护机制添加到一些敏感的库函数中，例如 memcpy、memmove、memset 等。这些机制可以检测传递给这些函数的源和目标缓冲区是否有重叠，并防止潜在的缓冲区溢出。&lt;/li&gt;
+&lt;li&gt;安全警告和错误报告：当  &lt;code&gt;FORTIFY_SOURCE&lt;/code&gt;  检测到潜在的缓冲区溢出或其他安全问题时，它会生成相应的警告和错误报告。 &lt;code&gt;FORTIFY_SOURCE&lt;/code&gt;  提供了一层额外的安全保护，它可以在很大程度上减少常见的 &lt;code&gt;缓冲区溢出&lt;/code&gt; 和 &lt;code&gt;字符串操作&lt;/code&gt; 相关的安全漏洞。&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;3级别&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3级别&#34;&gt;#&lt;/a&gt; 3. 级别&lt;/h1&gt;
+&lt;h2 id=&#34;1_fortify_source设置为1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1_fortify_source设置为1&#34;&gt;#&lt;/a&gt; 1. &lt;code&gt;_FORTIFY_SOURCE&lt;/code&gt;  设置为 1&lt;/h2&gt;
+&lt;p&gt;启用 Fortify 功能的基本级别。 在编译时进行一些安全检查，如缓冲区边界检查、格式化字符串检查等。 在 &lt;code&gt;运行时&lt;/code&gt; 进行 &lt;code&gt;某些&lt;/code&gt; 检查，如检测函数返回值和大小的一致性。 如果检测到潜在的安全问题，会触发运行时错误，并终止程序执行。【这里会导致无法进行缓冲区溢出，但是格式化字符串仍然有用】&lt;/p&gt;
+&lt;p&gt;将编译器设置为优化 1（gcc -O1），并且当出现上面简介中的情形时，在程序编译时就会进行检查，但并不会改变程序功能。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gcc -D_FORTIFY_SOURCE=1&lt;/code&gt;   只会在编译时检查（特别像一些头文件  &lt;code&gt;#include &amp;lt;string.h&amp;gt;&lt;/code&gt; ）&lt;/p&gt;
+&lt;h2 id=&#34;2_fortify_source设置为2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2_fortify_source设置为2&#34;&gt;#&lt;/a&gt; 2. &lt;code&gt;_FORTIFY_SOURCE&lt;/code&gt;  设置为 2&lt;/h2&gt;
+&lt;p&gt;当设置为 2 时，一些检查功能会被加入进来，但是也会造成程序崩溃；&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gcc -D_FORTIFY_SOURCE=2&lt;/code&gt;   程序执行时也会进行检查，当检查到缓冲区溢出时，就会终止程序&lt;/p&gt;
+&lt;h1 id=&#34;开启&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#开启&#34;&gt;#&lt;/a&gt; 开启：&lt;/h1&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;gcc &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;test&lt;/span&gt; test.c //默认不开启该检查&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;gcc &lt;span class=&#34;token parameter variable&#34;&gt;-D_FORTIFY_SOURCE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;test&lt;/span&gt; test.c //较弱的检查&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;gcc &lt;span class=&#34;token parameter variable&#34;&gt;-D_FORTIFY_SOURCE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-o&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;test&lt;/span&gt; test.c //较强的检查&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vU3BpZGVyLXNwaWRlcnMvcC84Nzk4NjI4Lmh0bWw=&#34;&gt;https://www.cnblogs.com/Spider-spiders/p/8798628.html&lt;/span&gt;&lt;/p&gt;
+</content>
+        <category term="pwn" />
+        <category term="Linux" />
+        <updated>2023-10-07T06:15:56.000Z</updated>
+    </entry>
+</feed>
