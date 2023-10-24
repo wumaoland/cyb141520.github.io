@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://vvwwvv.cn</id>
+    <title>cumt-08213014-cyb • Posts by &#34;个人网页&#34; category</title>
+    <link href="https://vvwwvv.cn" />
+    <updated>2023-10-16T12:05:56.000Z</updated>
+    <category term="Java" />
+    <category term="pwn" />
+    <category term="二进制" />
+    <category term="C++" />
+    <category term="C语言" />
+    <category term="Linux" />
+    <category term="Apache" />
+    <category term="报错" />
+    <category term="windows" />
+    <category term="渗透" />
+    <category term="ret2csu" />
+    <category term="how2heap" />
+    <category term="fastbin.attack" />
+    <category term="ctf" />
+    <category term="系统调用" />
+    <category term="rop" />
+    <category term="nc" />
+    <entry>
+        <id>https://vvwwvv.cn/2023/10/16/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5/</id>
+        <title>个人主页</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/10/16/%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5/"/>
+        <content type="html">&lt;p&gt;# &lt;code&gt;                                         基本资料         &lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;center本人是一名大三在读学生就读与中国矿业大学计算机学院专业为信息安全专业个人的学习方向是二进制漏洞挖掘对于各种溢出漏洞有所涉猎是信息安全专业科技社团bxs成员参加过各类ctf竞赛也获得过部分奖项center&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#center本人是一名大三在读学生就读与中国矿业大学计算机学院专业为信息安全专业个人的学习方向是二进制漏洞挖掘对于各种溢出漏洞有所涉猎是信息安全专业科技社团bxs成员参加过各类ctf竞赛也获得过部分奖项center&#34;&gt;#&lt;/a&gt; &amp;lt;center&amp;gt; 本人是一名大三在读学生，就读与中国矿业大学计算机学院专业为信息安全专业，个人的学习方向是二进制漏洞挖掘，对于各种溢出漏洞有所涉猎，是信息安全专业科技社团 BXS 成员，参加过各类 CTF 竞赛，也获得过部分奖项 &amp;lt;/center&amp;gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;姓名：陈一波&lt;/li&gt;
+&lt;li&gt;性别：男&lt;/li&gt;
+&lt;li&gt;年龄：20&lt;/li&gt;
+&lt;li&gt;学历：本科&lt;/li&gt;
+&lt;li&gt;在读学校：中国矿业大学&lt;/li&gt;
+&lt;li&gt;邮箱：1415206596@qq.com&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;# &lt;code&gt;                                        专业技能         &lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;center在校期间学习过c语言sql数据库自主学习过汇编语言对于程序调试gdb较为熟练能够运用ida等逆向分析软件对于linux系统下的glibc的内存管理malloc等有所研究center&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#center在校期间学习过c语言sql数据库自主学习过汇编语言对于程序调试gdb较为熟练能够运用ida等逆向分析软件对于linux系统下的glibc的内存管理malloc等有所研究center&#34;&gt;#&lt;/a&gt; &amp;lt;center&amp;gt; 在校期间学习过 &lt;code&gt;c++语言&lt;/code&gt; ， &lt;code&gt;sql数据库&lt;/code&gt; ，自主学习过 &lt;code&gt;汇编语言&lt;/code&gt; ，对于程序调试（gdb）较为熟练，能够运用 &lt;code&gt;IDA&lt;/code&gt;  等逆向分析软件，对于 Linux 系统下的 &lt;code&gt;glibc&lt;/code&gt;  的内存管理（ &lt;code&gt;malloc&lt;/code&gt;  等）有所研究 &amp;lt;/center&amp;gt;&lt;/h3&gt;
+</content>
+        <updated>2023-10-16T12:05:56.000Z</updated>
+    </entry>
+</feed>
