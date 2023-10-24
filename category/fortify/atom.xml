@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://vvwwvv.cn</id>
-    <title>cumt-08213014-cyb • Posts by &#34;fortify&#34; category</title>
+    <title>0110 0011 0111 1001 0110 0010 • Posts by &#34;fortify&#34; category</title>
     <link href="https://vvwwvv.cn" />
     <updated>2023-10-07T06:15:56.000Z</updated>
     <category term="Java" />
@@ -16,11 +16,11 @@
     <category term="渗透" />
     <category term="ret2csu" />
     <category term="how2heap" />
-    <category term="nc" />
     <category term="fastbin.attack" />
     <category term="ctf" />
     <category term="系统调用" />
     <category term="rop" />
+    <category term="nc" />
     <entry>
         <id>https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</id>
         <title>FORTIFY_SOURCE（例题：CTFshow的pwn32）</title>

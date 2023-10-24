@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>cumt-08213014-cyb • Posts by &#34;linux&#34; category</title>
+        <title>0110 0011 0111 1001 0110 0010 • Posts by &#34;linux&#34; category</title>
         <link>https://vvwwvv.cn</link>
         <description></description>
         <language>zh-CN</language>
@@ -19,11 +19,11 @@
         <category>渗透</category>
         <category>ret2csu</category>
         <category>how2heap</category>
-        <category>nc</category>
         <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
         <category>rop</category>
+        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/16/Linux/Linux%E8%80%83%E6%A0%B8%E5%91%BD%E4%BB%A4%E4%B8%8Eshell/</guid>
             <title>Linux命令与shell脚本（Linux课程考核）</title>
@@ -202,7 +202,7 @@ tail -c字节数 [file_name] //显示文件尾部C个字节的内容
 &lt;p&gt;浏览器访问本机 ip 地址&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%5BN%5B1VPT%25N27P%60AV%607KH1HPV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;创建一个测试页面用于查看是否成功搭建了 Web 服务器&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;echo &amp;quot;Hello World&amp;quot;&amp;gt;/var/www/html/mywebsite/index.html
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;Hello World&amp;quot;&amp;gt;/var/www/html/vvwwv/index.html
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;使用该命令时，发现没有权限，尽管加上 &lt;code&gt;sudo&lt;/code&gt;  也不行，所以使用 &lt;code&gt;root&lt;/code&gt;  账户执行该命令&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/MMQ%24FBMRO%24%5BI7%7EFTF5D%5DPTV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
@@ -214,6 +214,9 @@ tail -c字节数 [file_name] //显示文件尾部C个字节的内容
 &lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/E32L%28L%7DA%60MP2WE5EORRQXH5.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;测试成功&lt;/p&gt;
 &lt;h1 id=&#34;4个人网页&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4个人网页&#34;&gt;#&lt;/a&gt; 4. 个人网页&lt;/h1&gt;
+&lt;p&gt;【基于 js 和 html 使用了一些 css3 的效果（利用 css3 判断屏幕）】&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/OM1%28JQCT%60I5W%24ZJ06XGL8MG.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%5D%7D%60%4017%24WIN5T2D8G34ZLMOT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>

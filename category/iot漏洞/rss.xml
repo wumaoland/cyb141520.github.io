@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>cumt-08213014-cyb • Posts by &#34;iot漏洞&#34; category</title>
+        <title>0110 0011 0111 1001 0110 0010 • Posts by &#34;iot漏洞&#34; category</title>
         <link>https://vvwwvv.cn</link>
         <description></description>
         <language>zh-CN</language>
@@ -19,11 +19,11 @@
         <category>渗透</category>
         <category>ret2csu</category>
         <category>how2heap</category>
-        <category>nc</category>
         <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
         <category>rop</category>
+        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/D-Link/D-Link%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</guid>
             <title>D-Link路由器漏洞复现</title>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-        <title>cumt-08213014-cyb • Posts by &#34;渗透&#34; tag</title>
+        <title>0110 0011 0111 1001 0110 0010 • Posts by &#34;渗透&#34; tag</title>
         <link>https://vvwwvv.cn</link>
         <description></description>
         <language>zh-CN</language>
@@ -19,11 +19,11 @@
         <category>渗透</category>
         <category>ret2csu</category>
         <category>how2heap</category>
-        <category>nc</category>
         <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
         <category>rop</category>
+        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/28/windows/Windows10%E4%B9%8B%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</guid>
             <title>Windows10永恒之黑漏洞复现（CVE-2020-0796）</title>
