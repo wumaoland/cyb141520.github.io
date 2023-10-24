@@ -8,22 +8,22 @@
         <pubDate>Tue, 12 Sep 2023 21:08:15 +0800</pubDate>
         <lastBuildDate>Tue, 12 Sep 2023 21:08:15 +0800</lastBuildDate>
         <category>Java</category>
-        <category>pwn</category>
-        <category>二进制</category>
-        <category>C++</category>
-        <category>C语言</category>
         <category>Linux</category>
         <category>Apache</category>
+        <category>pwn</category>
+        <category>二进制</category>
         <category>报错</category>
+        <category>C++</category>
+        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
         <category>ret2csu</category>
         <category>how2heap</category>
+        <category>nc</category>
         <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
         <category>rop</category>
-        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/12/pwn/%E5%88%B7%E9%A2%98/BUUCTF/bjdctf_2020_babyrop2/</guid>
             <title>bjdctf_2020_babyrop2（格式化字符串漏洞）</title>

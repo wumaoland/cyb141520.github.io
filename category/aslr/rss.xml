@@ -8,28 +8,28 @@
         <pubDate>Wed, 04 Oct 2023 14:15:56 +0800</pubDate>
         <lastBuildDate>Wed, 04 Oct 2023 14:15:56 +0800</lastBuildDate>
         <category>Java</category>
-        <category>pwn</category>
-        <category>二进制</category>
-        <category>C++</category>
-        <category>C语言</category>
         <category>Linux</category>
         <category>Apache</category>
+        <category>pwn</category>
+        <category>二进制</category>
         <category>报错</category>
+        <category>C++</category>
+        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
         <category>ret2csu</category>
         <category>how2heap</category>
+        <category>nc</category>
         <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
         <category>rop</category>
-        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</guid>
             <title>ASLR与PIE（例题：CTFshow的pwn31）</title>
             <link>https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</link>
-            <category>pwn</category>
             <category>Linux</category>
+            <category>pwn</category>
             <pubDate>Wed, 04 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;ASLR&lt;/code&gt;  与 &lt;code&gt;PIE&lt;/code&gt;  是不同的，两者不能认为是同一个机制，但是他们都是对地址进行 &lt;code&gt;随机化&lt;/code&gt; ，只不过作用的 &lt;code&gt;对象&lt;/code&gt; 和作用 &lt;code&gt;时期&lt;/code&gt; 不太一样&lt;/p&gt;

@@ -5,22 +5,22 @@
     <link href="https://vvwwvv.cn" />
     <updated>2023-10-04T06:15:56.000Z</updated>
     <category term="Java" />
-    <category term="pwn" />
-    <category term="二进制" />
-    <category term="C++" />
-    <category term="C语言" />
     <category term="Linux" />
     <category term="Apache" />
+    <category term="pwn" />
+    <category term="二进制" />
     <category term="报错" />
+    <category term="C++" />
+    <category term="C语言" />
     <category term="windows" />
     <category term="渗透" />
     <category term="ret2csu" />
     <category term="how2heap" />
+    <category term="nc" />
     <category term="fastbin.attack" />
     <category term="ctf" />
     <category term="系统调用" />
     <category term="rop" />
-    <category term="nc" />
     <entry>
         <id>https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</id>
         <title>ASLR与PIE（例题：CTFshow的pwn31）</title>
@@ -66,8 +66,8 @@ show disable-randomization
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS9kdWFsbGF5LzE4NzY4NDE=&#34;&gt;https://blog.51cto.com/duallay/1876841&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubXJza3llLmNuL2FyY2hpdmVzLzkwNThkZmZjLyMlRTUlQkMlODAlRTUlOTAlQUYtUElF&#34;&gt;https://www.mrskye.cn/archives/9058dffc/# 开启 - PIE&lt;/span&gt;&lt;/p&gt;
 </content>
-        <category term="pwn" />
         <category term="Linux" />
+        <category term="pwn" />
         <updated>2023-10-04T06:15:56.000Z</updated>
     </entry>
 </feed>

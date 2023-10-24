@@ -8,22 +8,22 @@
         <pubDate>Mon, 16 Oct 2023 20:05:56 +0800</pubDate>
         <lastBuildDate>Mon, 16 Oct 2023 20:05:56 +0800</lastBuildDate>
         <category>Java</category>
-        <category>pwn</category>
-        <category>二进制</category>
-        <category>C++</category>
-        <category>C语言</category>
         <category>Linux</category>
         <category>Apache</category>
+        <category>pwn</category>
+        <category>二进制</category>
         <category>报错</category>
+        <category>C++</category>
+        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
         <category>ret2csu</category>
         <category>how2heap</category>
+        <category>nc</category>
         <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
         <category>rop</category>
-        <category>nc</category>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/16/Linux/Linux%E8%80%83%E6%A0%B8%E5%91%BD%E4%BB%A4%E4%B8%8Eshell/</guid>
             <title>Linux命令与shell脚本（Linux课程考核）</title>
@@ -220,8 +220,8 @@ tail -c字节数 [file_name] //显示文件尾部C个字节的内容
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</guid>
             <title>FORTIFY_SOURCE（例题：CTFshow的pwn32）</title>
             <link>https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</link>
-            <category>pwn</category>
             <category>Linux</category>
+            <category>pwn</category>
             <pubDate>Sat, 07 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1简介在编译时进行设置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1简介在编译时进行设置&#34;&gt;#&lt;/a&gt; 1. 简介（在编译时进行设置）：&lt;/h1&gt;
 &lt;p&gt;fority 是轻微的检测，用于检查缓冲区溢出的错误，在程序采用打量的字符串或者内存操作函数适用，例如：memcpy、memset、stpcpy、strcpy、strncpy、strncat、sprintf、snprintf、vsprintf、gets 以及宽字符的变体。&lt;/p&gt;
@@ -250,8 +250,8 @@ tail -c字节数 [file_name] //显示文件尾部C个字节的内容
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/05/Linux/large_bin_attack/</guid>
             <title>large bin attack（为house利用系列打下基础）</title>
             <link>https://vvwwvv.cn/2023/10/05/Linux/large_bin_attack/</link>
-            <category>pwn</category>
             <category>Linux</category>
+            <category>pwn</category>
             <pubDate>Thu, 05 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1large-bin&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1large-bin&#34;&gt;#&lt;/a&gt; 1.Large bin&lt;/h1&gt;
 &lt;h2 id=&#34;1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1&#34;&gt;#&lt;/a&gt; 1.&lt;/h2&gt;
@@ -308,8 +308,8 @@ bk_nextsize指向了上一组的第一个chunk
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</guid>
             <title>ASLR与PIE（例题：CTFshow的pwn31）</title>
             <link>https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</link>
-            <category>pwn</category>
             <category>Linux</category>
+            <category>pwn</category>
             <pubDate>Wed, 04 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;ASLR&lt;/code&gt;  与 &lt;code&gt;PIE&lt;/code&gt;  是不同的，两者不能认为是同一个机制，但是他们都是对地址进行 &lt;code&gt;随机化&lt;/code&gt; ，只不过作用的 &lt;code&gt;对象&lt;/code&gt; 和作用 &lt;code&gt;时期&lt;/code&gt; 不太一样&lt;/p&gt;
@@ -393,12 +393,21 @@ glibc：2.36-0ubuntu4&lt;br /&gt;
  ]]></description>
         </item>
         <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+            <title>CentOS 7搭建web服务器与个人网页制作（Apache）</title>
+            <link>https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+            <category>Linux</category>
+            <category>Apache</category>
+            <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
+            <description><![CDATA[  ]]></description>
+        </item>
+        <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</guid>
             <title>Linux(shell)命令和函数</title>
             <link>https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</link>
+            <category>Linux</category>
             <category>pwn</category>
             <category>二进制</category>
-            <category>Linux</category>
             <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1linux执行多个命令shell命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1linux执行多个命令shell命令&#34;&gt;#&lt;/a&gt; 1.Linux 执行多个命令（shell 命令）&lt;/h1&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#逐条执行命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#即使命令执行错误也不影响后面的命令继续执行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#前面的成功执行后面才执行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; echoo &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#2 出错，不会执行 echo3 ，echo4&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#前一条命令失败然后才继续执行后面的命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#当第一个执行成功时，后面的就都不会执行；当第一个命令失败时，就开始执行 echo2，后面同理&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#混合使用分隔符&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 因为 || 分隔符，按照 顺序 只要前面三个执行成功一个其他的就不执行，然后执行 echo4（因为 &amp;amp;&amp;amp; 前面的被看作一个整体，一个成功就视为成功，就执行 echo 4）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhbmRhb3l1L2FydGljbGUvZGV0YWlscy8xMTcyOTY5MDc=&#34;&gt;https://blog.csdn.net/bandaoyu/article/details/117296907&lt;/span&gt;&lt;/p&gt;
@@ -461,21 +470,12 @@ glibc：2.36-0ubuntu4&lt;br /&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
-            <title>CentOS 7搭建web服务器与个人网页制作（Apache）</title>
-            <link>https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
-            <category>Linux</category>
-            <category>Apache</category>
-            <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
-            <description><![CDATA[  ]]></description>
-        </item>
-        <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
             <title>Linux之系统调用</title>
             <link>https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</link>
+            <category>Linux</category>
             <category>pwn</category>
             <category>二进制</category>
-            <category>Linux</category>
             <pubDate>Tue, 29 Aug 2023 20:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;一系统调用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一系统调用&#34;&gt;#&lt;/a&gt; 一。系统调用&lt;/h1&gt;
 &lt;p&gt;系统调用也是一个函数，但是系统调用运行在内核态，用户自定义的函数在用户态。而我们想要调用在内核态的指令（如关闭 / 打开中断，I/O 操作等），就需要利用系统调用作为接口，让用户进入内核态。&lt;/p&gt;
@@ -658,9 +658,9 @@ seccomp-tools dump ./pwn&lt;/p&gt;
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/</guid>
             <title>堆</title>
             <link>https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/</link>
+            <category>Linux</category>
             <category>pwn</category>
             <category>二进制</category>
-            <category>Linux</category>
             <pubDate>Thu, 24 Aug 2023 20:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;chunk 的 p 位设为 1 即上一个 chunk 被使用并且上一个 chunk 可以使用 pre_size 的空间  （用来储存前一个物理相邻的 chunk 的数据 ，（两个都空闲才合并）&lt;/p&gt;
  ]]></description>
