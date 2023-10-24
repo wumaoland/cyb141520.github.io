@@ -4,14 +4,18 @@
     <title>Blog • Posts by &#34;unlink&#34; category</title>
     <link href="https://vvwwvv.cn" />
     <updated>2023-10-02T09:08:15.000Z</updated>
-    <category term="pwn" />
-    <category term="二进制" />
-    <category term="Linux" />
     <category term="Java" />
+    <category term="pwn" />
+    <category term="Linux" />
+    <category term="Apache" />
+    <category term="二进制" />
+    <category term="报错" />
+    <category term="C语言" />
+    <category term="C++" />
     <category term="windows" />
     <category term="渗透" />
-    <category term="C语言" />
     <category term="ret2csu" />
+    <category term="how2heap" />
     <category term="fastbin.attack" />
     <category term="ctf" />
     <category term="系统调用" />
@@ -226,8 +230,8 @@ BK-&amp;gt;fd = FD   并且  FD=P-&amp;gt;fd
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vTDBnNG4tYmxvZy9wLzEyOTY1MTg3Lmh0bWw=&#34;&gt;https://www.cnblogs.com/L0g4n-blog/p/12965187.html&lt;/span&gt;&lt;/p&gt;
 </content>
         <category term="pwn" />
-        <category term="二进制" />
         <category term="Linux" />
+        <category term="二进制" />
         <updated>2023-10-02T06:15:56.000Z</updated>
     </entry>
     <entry>

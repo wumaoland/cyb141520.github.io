@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Blog • All posts by \"报错\" tag",
+    "description": "",
+    "home_page_url": "https://vvwwvv.cn",
+    "items": [
+        {
+            "id": "https://vvwwvv.cn/2023/10/14/Linux/%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86/",
+            "url": "https://vvwwvv.cn/2023/10/14/Linux/%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86/",
+            "title": "故障处理记录",
+            "date_published": "2023-10-14T03:01:15.000Z",
+            "content_html": "<h1 id=\"1ubuntu2210这里对ubuntu进行更新-清华源用-update报错出现404\"><a class=\"anchor\" href=\"#1ubuntu2210这里对ubuntu进行更新-清华源用-update报错出现404\">#</a> 1.ubuntu22.10（这里对 ubuntu 进行更新） 清华源用 update 报错（出现 404）</h1>\n<p>换成中科大的源就好了 (23.04 的源)</p>\n<pre><code>deb https://mirrors.ustc.edu.cn/ubuntu/ lunar main restricted universe multiverse\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ lunar main restricted universe multiverse\n\ndeb https://mirrors.ustc.edu.cn/ubuntu/ lunar-security main restricted universe multiverse\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ lunar-security main restricted universe multiverse\n\ndeb https://mirrors.ustc.edu.cn/ubuntu/ lunar-updates main restricted universe multiverse\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ lunar-updates main restricted universe multiverse\n\ndeb https://mirrors.ustc.edu.cn/ubuntu/ lunar-backports main restricted universe multiverse\ndeb-src https://mirrors.ustc.edu.cn/ubuntu/ lunar-backports main restricted universe multiverse\n\n## Not recommended\n# deb https://mirrors.ustc.edu.cn/ubuntu/ lunar-proposed main restricted universe multiverse\n# deb-src https://mirrors.ustc.edu.cn/ubuntu/ lunar-proposed main restricted universe multiverse\n\n</code></pre>\n<h1 id=\"2pwn调试c程序缺少libstdcso6\"><a class=\"anchor\" href=\"#2pwn调试c程序缺少libstdcso6\">#</a> 2.pwn 调试 c<ins> 程序缺少 libstdc</ins>.so.6</h1>\n<p><img data-src=\"https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/D%5BMTG2K7YH%28H7HU9NKS%5B%25UO.png\" alt=\"\" /></p>\n<p>首先安装：</p>\n<p><code>sudo apt install libstdc++6</code></p>\n<p>然后安装下面的，报错了：</p>\n<p><code>sudo apt install lib32stdc++6</code></p>\n<p><img data-src=\"https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/P%5DOAL5A6GP62CHDLRN%255EQO.png\" alt=\"\" /></p>\n<p>换源（23.04）后安装即可成功运行 c++ 程序</p>\n<p>另一种方式：</p>\n<p><span class=\"exturl\" data-url=\"aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hkejIzMy9hcnRpY2xlL2RldGFpbHMvMTI3NDcwNzMz\">https://blog.csdn.net/xdz233/article/details/127470733</span></p>\n",
+            "tags": [
+                "报错"
+            ]
+        }
+    ]
+}

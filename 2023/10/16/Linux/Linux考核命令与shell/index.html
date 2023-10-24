@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="Blog" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml"><link rel="alternate" type="application/json" title="Blog" href="https://vvwwvv.cn/feed.json"/><link rel="preconnect" href="https://lf9-cdn-tos.bytecdntp.com"/><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"/><link rel="dns-prefetch" href="https://unpkg.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/css/app.css?v=0.3.5"><script src="https://cdn.staticfile.org/vue/3.2.45/vue.global.prod.js"></script><link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css"/><meta name="keywords" content="Linux"/><link rel="canonical" href="https://vvwwvv.cn/2023/10/16/Linux/Linux%E8%80%83%E6%A0%B8%E5%91%BD%E4%BB%A4%E4%B8%8Eshell/"><title>Linux命令与shell脚本（Linux课程考核）</title><meta name="generator" content="Hexo 6.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">Linux命令与shell脚本（Linux课程考核）</h1><div class="meta"><span class="item" title="创建时间：2023-10-16 20:05:56"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2023-10-16T20:05:56+08:00">2023-10-16</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>8.5k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>8 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">vvwwv'blog</a></li></ul><ul class="right" id="rightNav"><li class="item theme" @click="changeThemeByBtn"><i class="ic" :class="{'i-sun': !themeStatus,'i-moon': themeStatus}"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><img src="https://ooo.0x0.ooo/2023/03/09/Y0xvg.jpg"></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/Linux/" itemprop="item" rel="index" title="分类于Linux"><span itemprop="name">Linux<meta itemprop="position" content="0"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://vvwwvv.cn/2023/10/16/Linux/Linux%E8%80%83%E6%A0%B8%E5%91%BD%E4%BB%A4%E4%B8%8Eshell/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="vvwwv"/><meta itemprop="description" content=", "/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="Blog"/></span><div class="body md" itemprop="articleBody"><h1 id="1基础命令"><a class="anchor" href="#1基础命令">#</a> 1. 基础命令</h1>
+<h2 id="1-ls命令查看当前目录文件"><a class="anchor" href="#1-ls命令查看当前目录文件">#</a> 1. ls 命令（查看当前目录文件）</h2>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%7BRP%28%7D1S1RI%7EZCB%5DP%24PO8R%5DR.png" alt="" /></p>
+<p>这里我创建一个 <code>.2021cyb</code>  的隐藏文件，利用 <code>ls -all</code>  查看文件和执行权限</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/W%7B%7BP_TUL%7E8%7B%7D%60B%29LI%7BA%60%7DY5.png" alt="" /></p>
+<h2 id="2-chmod命令修改权限"><a class="anchor" href="#2-chmod命令修改权限">#</a> 2. chmod 命令（修改权限）</h2>
+<p>在上面利用 ls 命令查看文件 <code>.2021cyb</code>  的权限（d 表示文件夹，拥有者 rwx；组群 r-x；其他 r-x）, 改变组群权限为  <code>可读可写</code> ，其他权限为  <code>可执行</code></p>
+<p><code>chmod 761 .2021cyb</code></p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/ZUJ8T%28%5BGPCOWA79VC6R45QD.png" alt="" /></p>
+<p>权限：</p>
+<p>4 对应 r；2 对应 w；1 对应 x（也就是二进制 100，010，001）</p>
+<h2 id="3-cd命令更改当前目录"><a class="anchor" href="#3-cd命令更改当前目录">#</a> 3. cd 命令（更改当前目录）</h2>
+<p>进入前面创建的文件  <code>cd .2021cyb</code></p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/9I_0%25V8EPZI%5DYH%7B7C%5B5%7BAYJ.png" alt="" /></p>
+<p>从该目录进入其他目录 (从根目录进入)</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/PG56%7E%5BBF605KUNXSQHMJR36.png" alt="" /></p>
+<p>返回上一次目录  <code>cd -</code></p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/Z%7D_KP_91U%28P5_ND3TL%29%25XPM.png" alt="" /></p>
+<p>返回上级目录  <code>cd ..</code></p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/_XTV%293%40II_5T7Q%25%24%7E0Z3G%29C.png" alt="" /></p>
+<h2 id="4mkdir创建目录"><a class="anchor" href="#4mkdir创建目录">#</a> 4.mkdir（创建目录）</h2>
+<p>创建一个 cumt 目录</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/B1X%5D4Q7HS%7EBL13E%7EENQ59Q4.png" alt="" /></p>
+<h2 id="5-rmdir-删除空目录"><a class="anchor" href="#5-rmdir-删除空目录">#</a> 5. rmdir (删除空目录)</h2>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/1%60V0T6N82QCY24E95K9T%7B4S.png" alt="" /></p>
+<h2 id="6touch可以创建文件"><a class="anchor" href="#6touch可以创建文件">#</a> 6.touch (可以创建文件)</h2>
+<p>创建一个 cumt 文件</p>
+<p><code>touch cumt</code></p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/XS8XT_1%40%25J8VXLBF%248%28V117.png" alt="" /></p>
+<p>这里发现是权限最前面的符号为 <code>-</code> （不是 d）, 也证明是个文件</p>
+<h2 id="7rm命令删除文件"><a class="anchor" href="#7rm命令删除文件">#</a> 7.rm 命令 (删除文件)</h2>
+<ul>
+<li>-r ： 递归删除，删除目录，在删除这一目录前会事先删除目录中的内容（避免删除了目录而使目录中的文件无处存放的问题）</li>
+<li>i ： 交互删除，为每一个删除操作询问一次删除确认</li>
+<li>f ： 强制删除，忽视不存在的文件，无视任何的确认提示</li>
+</ul>
+<p>这里递归删除创建的 <code>.2021cyb</code>  目录（里面有 cumt 文件）</p>
+<p>删除前：<br />
+<img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/9W4_%5DXK%25%7B4IM%5BJ%7E%28K%25WOYIF.png" alt="" /></p>
+<p>删除后：<br />
+<img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%247%40NDC4AIMS4D66NVZ77KYN.png" alt="" /></p>
+<h2 id="8查看文件内容cat-more-less"><a class="anchor" href="#8查看文件内容cat-more-less">#</a> 8. 查看文件内容 (cat more less)</h2>
+<p>这里放入一个长度超过一屏的脚本，分别利用 cat、more、less 命令查看</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/BXT_F%7D3B2BE9%28FV%7D55R9C%5DB.png" alt="" /></p>
+<p>1.cat (cat 是一次性显示整个文件的内容)<br />
+<img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%29RI%5BA3OF%40CY%5D57U%7BKT%29G7CD.png" alt="" /></p>
+<p>2.more (more 会以一页一页的显示方便使用者逐页阅读，按空格键（space）就往下一页显示，按 b 键就会往回（back）一页)</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/RI739%5BK%5BOY%24AXE%409Z7499JA.png" alt="" /></p>
+<p>3.less（less 时，就可以使用方向键 等按键的功能来往前往后翻看文件）<br />
+<img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/0%7B6R363G%7E8PRYC%7DBX%24%25JX%7DB.png" alt="" /></p>
+<h2 id="9find命令查找文件-可以查询被修改的文件"><a class="anchor" href="#9find命令查找文件-可以查询被修改的文件">#</a> 9.find 命令（查找文件 可以查询被修改的文件）</h2>
+<p>返回到根目录下，查找刚刚的 <code>babyheap.py</code>  文件</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/VXEXQ%29RDHULM_F%7ESM%407VL51.png" alt="" /></p>
+<p>用 find 命令可以查询被修改的文件</p>
+<pre><code>find / -cmin -60 //查找在 n 分钟内状态发生变化的文件（例如权限）
+find / -mmin -60 //查找过去一小时改变的文件
+find / -amin -60 //查找过去一小时访问的文件
+</code></pre>
+<p>查找过去一小时改变的文件:</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/9QT9D%7BD%40PLAOZT%60P%25%40%29A1PN.png" alt="" /></p>
+<h2 id="10文件压缩与解压"><a class="anchor" href="#10文件压缩与解压">#</a> 10. 文件压缩与解压</h2>
+<p>压缩：</p>
+<pre><code>	zip 压缩文件名 源文件           //压缩文件
+zip -r 压缩文件名 源目录(***/)  //压缩目录
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/DYW%5BZRK%28W3QP%5B%7EX%25S%7E5%40%7E%29F.png" alt="" /></p>
+<pre><code>gzip 源文件                    //压缩为.gz格式，源文件会消失
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/T4%25_%5BOGJYPES%25Z0JO%60YG0UC.png" alt="" /></p>
+<p>解压：</p>
+<pre><code>	unzip 压缩文件                 // 解压缩文件
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/AA6PM8S6SL3T2O4%28%7D9_31%281.png" alt="" /></p>
+<pre><code>gunzip 压缩文件                 //解压缩文件
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%29MMF%7B%7ES9Q%60N4RDTIAWLL1%29S.png" alt="" /></p>
+<h2 id="11netstat端口查看"><a class="anchor" href="#11netstat端口查看">#</a> 11.netstat（端口查看）</h2>
+<pre><code>    -a 表示所有
+    -n 不查询dns
+    -t 表示tcp协议
+    -u 表示udp协议
+    -p 查询占用的查询
+    -i 查询正在监听的查询
+</code></pre>
+<p>查询 <code>netstat -ntupl</code></p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%28N6KRU5Z%5DDPCH9D7%60%29RH%7B_C.png" alt="" /></p>
+<h2 id="12ps命令进程查询"><a class="anchor" href="#12ps命令进程查询">#</a> 12.ps 命令（进程查询）</h2>
+<pre><code>a 显示现行终端机上所有进程，包括其他用户进程
+U 以用户为主的格式来显示进程状况
+x 显示所有进程
+A 显示所有进程
+f 做一个更完整的输出
+</code></pre>
+<p>执行 <code>ps aux</code>  (以用户为主的格式来显示所有进程)</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/FDWR86%7EJ%28%29YA%60H%7DOZV%25REE8.png" alt="" /></p>
+<h2 id="13kill命令终止进程"><a class="anchor" href="#13kill命令终止进程">#</a> 13.kill 命令（终止进程）</h2>
+<p>这里再开启一个终端执行 <code>vim babyheap.py</code> , 然后终止该进程</p>
+<pre><code>kill -15 pid（默认） //大部分进程先释放资源，再停止
+kill -9  pid    //exit信号不会被阻塞，所以kill能顺利杀掉进程
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/RR3%240MM%7B6A1HHWW%2827PWV%7BQ.png" alt="" /></p>
+<h2 id="14tail命令加参数可以动态读取正在变化的文件比如读取不断写入的日志"><a class="anchor" href="#14tail命令加参数可以动态读取正在变化的文件比如读取不断写入的日志">#</a> 14.tail 命令 (加参数可以动态读取正在变化的文件【比如读取不断写入的日志】)</h2>
+<pre><code>tail -f [file_name] //动态读取文件内容
+tail -n行数 [file_name] //显示文件尾部n行的内容
+tail -c字节数 [file_name] //显示文件尾部C个字节的内容
+</code></pre>
+<p>执行  <code>tail -f babyheap.py</code>  (利用 echo 命令输入内容)</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/CC%7DF7CCXCENXH%7E%25CMKDUNF0.png" alt="" /></p>
+<h2 id="15echo命令输出传递给-echo-的参数被打印到标准输出中"><a class="anchor" href="#15echo命令输出传递给-echo-的参数被打印到标准输出中">#</a> 15.echo 命令（输出，传递给  <code>echo</code>  的参数被打印到 <code>标准输出</code> 中）</h2>
+<pre><code>执行命令 echo `date`
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/0%5BRNZYU1%5B%7E3%5D%29C4%292N2N0%602.png" alt="" /></p>
+<h2 id="16cfilt-命令"><a class="anchor" href="#16cfilt-命令">#</a> 16. <code>c++filt</code>  命令</h2>
+<p>c<ins>filt 的作用就是还原函数名字，它可以帮我们查找动态链接库中缺少的函数，还原崩溃堆栈中一大串的函数名字母等等 (在 C</ins> 中， 是允许函数重载的， 也就引出了编译器的 name mangling 机制)</p>
+<p>这里查看一个 ida 反汇编出来的函数</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%40J%25ZPGFS%29%24S545_LU%249Z3AY.png" alt="" /></p>
+<p>执行 <code>c++filt</code>  命令</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/YD%7B6%2903SB%7E%7E94%28516W%5D%40D%7B3.png" alt="" /></p>
+<p>看到还原成了我们可以识别的函数名字</p>
+<h1 id="2shell编程"><a class="anchor" href="#2shell编程">#</a> 2.shell 编程</h1>
+<h2 id="1功能"><a class="anchor" href="#1功能">#</a> 1. 功能：</h2>
+<p>多人抽签游戏，对于输入的不同名字，产生一个随机数</p>
+<p>具体功能：</p>
+<ol>
+<li>输入人名，产生 0-99 之间的数字</li>
+<li>重复输入相同的名字，产生的数字与之前相同</li>
+<li>前面出现过的数字后面不能再次出现</li>
+<li>将名字和产生的数字记录到一个文件内</li>
+<li>脚本不会自己停止</li>
+</ol>
+<h2 id="2代码命名为cybsh"><a class="anchor" href="#2代码命名为cybsh">#</a> 2. 代码 (命名为 <code>cyb.sh</code> )：</h2>
+<figure class="highlight shell"><figcaption data-lang="Bash"><span>l</span></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function-name function">creat_number</span><span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>        <span class="token comment">## 产生已经出现过的数字，需要再次生成随机数，利用 while 脚本来实现</span></pre></td></tr><tr><td data-num="4"></td><td><pre>	<span class="token keyword">while</span> <span class="token builtin class-name">:</span></pre></td></tr><tr><td data-num="5"></td><td><pre>	<span class="token keyword">do</span></pre></td></tr><tr><td data-num="6"></td><td><pre>            <span class="token comment">## 产生一个 1-99 之间的随机数</span></pre></td></tr><tr><td data-num="7"></td><td><pre>		<span class="token assign-left variable">nu</span><span class="token operator">=</span>$<span class="token punctuation">[</span><span class="token environment constant">$RANDOM</span>%99+1<span class="token punctuation">]</span></pre></td></tr><tr><td data-num="8"></td><td><pre>            <span class="token comment">##n 为数字出现的次数</span></pre></td></tr><tr><td data-num="9"></td><td><pre>		<span class="token assign-left variable">n</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">awk</span> <span class="token parameter variable">-F</span> <span class="token string">':'</span> <span class="token parameter variable">-v</span> <span class="token assign-left variable">NUMBER</span><span class="token operator">=</span>$nu <span class="token string">'$2==NUMBER'</span>  /home/vvwwv/Public/name.log<span class="token operator">|</span><span class="token function">wc</span> <span class="token parameter variable">-l</span><span class="token variable">`</span></span></pre></td></tr><tr><td data-num="10"></td><td><pre>		<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$n</span> <span class="token parameter variable">-gt</span> <span class="token number">0</span> <span class="token punctuation">]</span></pre></td></tr><tr><td data-num="11"></td><td><pre>		<span class="token keyword">then</span></pre></td></tr><tr><td data-num="12"></td><td><pre>			<span class="token builtin class-name">continue</span></pre></td></tr><tr><td data-num="13"></td><td><pre>		<span class="token keyword">else</span></pre></td></tr><tr><td data-num="14"></td><td><pre>			<span class="token builtin class-name">echo</span> <span class="token variable">$nu</span></pre></td></tr><tr><td data-num="15"></td><td><pre>			<span class="token builtin class-name">break</span></pre></td></tr><tr><td data-num="16"></td><td><pre>		<span class="token keyword">fi</span></pre></td></tr><tr><td data-num="17"></td><td><pre>	<span class="token keyword">done</span></pre></td></tr><tr><td data-num="18"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="19"></td><td><pre></pre></td></tr><tr><td data-num="20"></td><td><pre><span class="token keyword">while</span> <span class="token builtin class-name">:</span></pre></td></tr><tr><td data-num="21"></td><td><pre><span class="token keyword">do</span></pre></td></tr><tr><td data-num="22"></td><td><pre>        <span class="token comment">## 进行交互输入名字</span></pre></td></tr><tr><td data-num="23"></td><td><pre>	<span class="token builtin class-name">read</span> <span class="token parameter variable">-p</span> <span class="token string">"Please input your name:"</span> name</pre></td></tr><tr><td data-num="24"></td><td><pre></pre></td></tr><tr><td data-num="25"></td><td><pre>	<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-f</span> /home/vvwwv/Public/name.log <span class="token punctuation">]</span></pre></td></tr><tr><td data-num="26"></td><td><pre>	<span class="token keyword">then</span></pre></td></tr><tr><td data-num="27"></td><td><pre>            <span class="token comment">## 文件里为空时为第一次执行脚本，之间打印数字</span></pre></td></tr><tr><td data-num="28"></td><td><pre>		<span class="token assign-left variable">number</span><span class="token operator">=</span>$<span class="token punctuation">[</span><span class="token environment constant">$RANDOM</span>%99+1<span class="token punctuation">]</span></pre></td></tr><tr><td data-num="29"></td><td><pre>		<span class="token builtin class-name">echo</span> <span class="token string">"Your number is: <span class="token variable">$number</span>"</span></pre></td></tr><tr><td data-num="30"></td><td><pre>		<span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$name</span>:<span class="token variable">$name</span>"</span> <span class="token operator">></span> /home/vvwwv/Public/name.log</pre></td></tr><tr><td data-num="31"></td><td><pre>	<span class="token keyword">else</span></pre></td></tr><tr><td data-num="32"></td><td><pre>            <span class="token comment">## 名字重复出现</span></pre></td></tr><tr><td data-num="33"></td><td><pre>		<span class="token assign-left variable">n</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">awk</span> <span class="token parameter variable">-F</span> <span class="token string">':'</span> <span class="token parameter variable">-v</span> <span class="token assign-left variable">NAME</span><span class="token operator">=</span>$name <span class="token string">'$1 == NAME'</span> /home/vvwwv/Public/name.log<span class="token operator">|</span><span class="token function">wc</span> <span class="token parameter variable">-l</span><span class="token variable">`</span></span></pre></td></tr><tr><td data-num="34"></td><td><pre>		<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$n</span> <span class="token parameter variable">-gt</span> <span class="token number">0</span> <span class="token punctuation">]</span></pre></td></tr><tr><td data-num="35"></td><td><pre>		<span class="token keyword">then</span></pre></td></tr><tr><td data-num="36"></td><td><pre>			<span class="token builtin class-name">echo</span> <span class="token string">"The name already exist."</span></pre></td></tr><tr><td data-num="37"></td><td><pre>			<span class="token function">awk</span> <span class="token parameter variable">-F</span> <span class="token string">':'</span> <span class="token parameter variable">-v</span> <span class="token assign-left variable">NAME</span><span class="token operator">=</span><span class="token variable">$name</span> <span class="token string">'$1 == NAME'</span> /home/vvwwv/Public/name.log</pre></td></tr><tr><td data-num="38"></td><td><pre>			<span class="token builtin class-name">continue</span></pre></td></tr><tr><td data-num="39"></td><td><pre>		<span class="token keyword">else</span></pre></td></tr><tr><td data-num="40"></td><td><pre>			<span class="token assign-left variable">number</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span>creat_number<span class="token variable">`</span></span></pre></td></tr><tr><td data-num="41"></td><td><pre>		<span class="token keyword">fi</span></pre></td></tr><tr><td data-num="42"></td><td><pre>                <span class="token comment">## 将名字和数字存入 name.log 中</span></pre></td></tr><tr><td data-num="43"></td><td><pre>		<span class="token builtin class-name">echo</span> <span class="token string">"Your number is: <span class="token variable">$number</span>"</span></pre></td></tr><tr><td data-num="44"></td><td><pre>		<span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$name</span>:<span class="token variable">$number</span>"</span> <span class="token operator">>></span> /home/vvwwv/Public/name.log</pre></td></tr><tr><td data-num="45"></td><td><pre>	<span class="token keyword">fi</span></pre></td></tr><tr><td data-num="46"></td><td><pre><span class="token keyword">done</span></pre></td></tr></table></figure><h2 id="3运行"><a class="anchor" href="#3运行">#</a> 3. 运行：</h2>
+<p>执行 <code>cyb.sh</code></p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/2%5B%5BOSS_B5%24NOF8D%7E%7EVE%5BO0S.png" alt="" /></p>
+<p>输入  <code>aaa</code> ; <code>bbb</code> ; <code>ccc</code></p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/D%7DSNMOU%60H%5DDU%5B7BCCQ%28%7D4T6.png" alt="" /></p>
+<p>查看 <code>name.log</code>  文件</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/BR%7B%28%5B%242Y65865PV%29UVE%7BF77.png" alt="" /></p>
+<p>再次输入 <code>aaa</code> ，提示说明名字已经存在</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%7DR8X%28KX9%243CYTPYKX9IE%28DV.png" alt="" /></p>
+<h1 id="3在linux下搭建apache服务器"><a class="anchor" href="#3在linux下搭建apache服务器">#</a> 3. 在 Linux 下搭建 Apache 服务器</h1>
+<h2 id="1安装apache"><a class="anchor" href="#1安装apache">#</a> 1. 安装 Apache</h2>
+<pre><code>sudo yum install httpd
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/FG343FNLD7ZU93T%29H%29E%297ON.png" alt="" /></p>
+<h2 id="2启动apache服务"><a class="anchor" href="#2启动apache服务">#</a> 2. 启动 Apache 服务</h2>
+<pre><code>sudo systemctl start httpd.service
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/K2RYJ6%28BLJ0ZT139K%40%246J%7BB.png" alt="" /></p>
+<h2 id="3将apache服务设置为开启自启动"><a class="anchor" href="#3将apache服务设置为开启自启动">#</a> 3. 将 Apache 服务设置为开启自启动</h2>
+<pre><code>sudo systemctl enable httpd.service
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/10WY%280645%60%28F3EUC__%248%40CA.png" alt="" /></p>
+<h2 id="4创建网站目录"><a class="anchor" href="#4创建网站目录">#</a> 4. 创建网站目录</h2>
+<p>创建一个网站目录来存放网页文件</p>
+<pre><code>sudo mkdir /var/www/html/vvwwv
+</code></pre>
+<p>看见已经产生了目录</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/UV30%7D8%40%604T4JLFU8JFMGX1T.png" alt="" /></p>
+<h2 id="5进行ip配置"><a class="anchor" href="#5进行ip配置">#</a> 5. 进行 ip 配置</h2>
+<p>1. 查看本机 ip（这里我的虚拟机的网站配置是桥接模式）</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/0%29ZL7I3ZJ5SY9P0%28Z%7DD%25Q%7ER.png" alt="" /></p>
+<p>2. 设置子接口 ip 地址</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%40LA795%5BN409AN68E8ASHY%5DL.png" alt="" /></p>
+<h2 id="6编辑配置文件"><a class="anchor" href="#6编辑配置文件">#</a> 6. 编辑配置文件</h2>
+<pre><code>vim /etc/httpd/conf/httpd.conf
+</code></pre>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%60_MP%5D%404RHA4%40%7E7ZV%251E%7D%5D%7BJ.png" alt="" /></p>
+<h2 id="7测试是否成功"><a class="anchor" href="#7测试是否成功">#</a> 7. 测试是否成功</h2>
+<p>浏览器访问本机 ip 地址</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%5BN%5B1VPT%25N27P%60AV%607KH1HPV.png" alt="" /></p>
+<p>创建一个测试页面用于查看是否成功搭建了 Web 服务器</p>
+<pre><code>echo &quot;Hello World&quot;&gt;/var/www/html/mywebsite/index.html
+</code></pre>
+<p>使用该命令时，发现没有权限，尽管加上 <code>sudo</code>  也不行，所以使用 <code>root</code>  账户执行该命令</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/MMQ%24FBMRO%24%5BI7%7EFTF5D%5DPTV.png" alt="" /></p>
+<p>可以发现确实创建并且写入了内容</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/THKBCY%601MCA%7E%28O%29H7W7GOM9.png" alt="" /></p>
+<p>重启 httpd 服务</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/B79E96Z%60%5D%5DP%7B6AETW53Z%281M.png" alt="" /></p>
+<p>浏览器访问子接口 ip</p>
+<p><img data-src="https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/E32L%28L%7DA%60MP2WE5EORRQXH5.png" alt="" /></p>
+<p>测试成功</p>
+<h1 id="4个人网页"><a class="anchor" href="#4个人网页">#</a> 4. 个人网页</h1>
+<div class="tags"><a href="/tags/Linux/" rel="tag"><i class="ic i-tag"></i>Linux</a></div></div><footer><div class="meta"><span class="icon"><i class="ic i-eye"></i></span><span>此文章已被阅读次数:</span><span class="waline-pageview-count" id="twikoo_visitors" data-path="2023/10/16/Linux/Linux考核命令与shell/">正在加载...</span><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于</span><time title="修改时间：2023-10-23 01:16:11" itemprop="dateModified" datetime="2023-10-23T01:16:11+08:00">2023-10-23</time></span></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>vvwwv<i class="ic i-at"><em>@</em></i>Blog</li><li class="link"><strong>本文链接：</strong><a href="https://vvwwvv.cn/2023/10/16/Linux/Linux%E8%80%83%E6%A0%B8%E5%91%BD%E4%BB%A4%E4%B8%8Eshell/" title="Linux命令与shell脚本（Linux课程考核）">https://vvwwvv.cn/2023/10/16/Linux/Linux考核命令与shell/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2023/10/15/pwn/c++%E5%87%BD%E6%95%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF%E7%B1%BB/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;ooo.0x0.ooo&#x2F;2023&#x2F;03&#x2F;09&#x2F;Y0iNK.jpg" title="C++函数及模板"><span class="type">上一篇</span><span class="category"><i class="ic i-flag"></i>PWN专栏</span><h3>C++函数及模板</h3></a></div><div class="item right"><a href="/2023/10/19/pwn/%E4%B8%93%E6%A0%8F/how2heap%202.23/" rel="next" itemprop="url" data-background-image="https:&#x2F;&#x2F;ooo.0x0.ooo&#x2F;2023&#x2F;03&#x2F;09&#x2F;Y0iNK.jpg" title="how2heap(glibc2.23)"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>PWN专栏</span><h3>how2heap(glibc2.23)</h3></a></div></div><div class="wrap" id="wcomments"></div><script type="module" data-pjax="data-pjax">import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+
+setTimeout(function () {
+    init({
+        el: '#wcomments',
+        serverURL: 'https://vvwwvv.zeabur.app',
+        lang: 'zh-CN',
+        locale: {},
+        emoji: ["https://unpkg.com/@waline/emojis@1.0.1/weibo","https://unpkg.com/@waline/emojis@1.0.1/alus","https://unpkg.com/@waline/emojis@1.0.1/bilibili","https://unpkg.com/@waline/emojis@1.0.1/qq","https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/tw-emoji"],
+        meta: ["nick","mail","link"],
+        requiredMeta: ["nick","mail"],
+        wordLimit: 0,
+        pageSize: 10,
+        pageview: true,
+        path: window.location.pathname,
+        dark: 'html[data-theme="dark"]'
+    });
+}, 1000)</script></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text"> 1. 基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-ls%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text"> 1. ls 命令（查看当前目录文件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-chmod%E5%91%BD%E4%BB%A4%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90"><span class="toc-number">1.2.</span> <span class="toc-text"> 2. chmod 命令（修改权限）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-cd%E5%91%BD%E4%BB%A4%E6%9B%B4%E6%94%B9%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95"><span class="toc-number">1.3.</span> <span class="toc-text"> 3. cd 命令（更改当前目录）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4mkdir%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-number">1.4.</span> <span class="toc-text"> 4.mkdir（创建目录）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-rmdir-%E5%88%A0%E9%99%A4%E7%A9%BA%E7%9B%AE%E5%BD%95"><span class="toc-number">1.5.</span> <span class="toc-text"> 5. rmdir (删除空目录)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6touch%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="toc-number">1.6.</span> <span class="toc-text"> 6.touch (可以创建文件)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7rm%E5%91%BD%E4%BB%A4%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="toc-number">1.7.</span> <span class="toc-text"> 7.rm 命令 (删除文件)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9cat-more-less"><span class="toc-number">1.8.</span> <span class="toc-text"> 8. 查看文件内容 (cat more less)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9find%E5%91%BD%E4%BB%A4%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6-%E5%8F%AF%E4%BB%A5%E6%9F%A5%E8%AF%A2%E8%A2%AB%E4%BF%AE%E6%94%B9%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">1.9.</span> <span class="toc-text"> 9.find 命令（查找文件 可以查询被修改的文件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E6%96%87%E4%BB%B6%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B"><span class="toc-number">1.10.</span> <span class="toc-text"> 10. 文件压缩与解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11netstat%E7%AB%AF%E5%8F%A3%E6%9F%A5%E7%9C%8B"><span class="toc-number">1.11.</span> <span class="toc-text"> 11.netstat（端口查看）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12ps%E5%91%BD%E4%BB%A4%E8%BF%9B%E7%A8%8B%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.12.</span> <span class="toc-text"> 12.ps 命令（进程查询）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13kill%E5%91%BD%E4%BB%A4%E7%BB%88%E6%AD%A2%E8%BF%9B%E7%A8%8B"><span class="toc-number">1.13.</span> <span class="toc-text"> 13.kill 命令（终止进程）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14tail%E5%91%BD%E4%BB%A4%E5%8A%A0%E5%8F%82%E6%95%B0%E5%8F%AF%E4%BB%A5%E5%8A%A8%E6%80%81%E8%AF%BB%E5%8F%96%E6%AD%A3%E5%9C%A8%E5%8F%98%E5%8C%96%E7%9A%84%E6%96%87%E4%BB%B6%E6%AF%94%E5%A6%82%E8%AF%BB%E5%8F%96%E4%B8%8D%E6%96%AD%E5%86%99%E5%85%A5%E7%9A%84%E6%97%A5%E5%BF%97"><span class="toc-number">1.14.</span> <span class="toc-text"> 14.tail 命令 (加参数可以动态读取正在变化的文件【比如读取不断写入的日志】)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15echo%E5%91%BD%E4%BB%A4%E8%BE%93%E5%87%BA%E4%BC%A0%E9%80%92%E7%BB%99-echo-%E7%9A%84%E5%8F%82%E6%95%B0%E8%A2%AB%E6%89%93%E5%8D%B0%E5%88%B0%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E4%B8%AD"><span class="toc-number">1.15.</span> <span class="toc-text"> 15.echo 命令（输出，传递给  echo  的参数被打印到 标准输出 中）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16cfilt-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.16.</span> <span class="toc-text"> 16. c++filt  命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2shell%E7%BC%96%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text"> 2.shell 编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E5%8A%9F%E8%83%BD"><span class="toc-number">2.1.</span> <span class="toc-text"> 1. 功能：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E4%BB%A3%E7%A0%81%E5%91%BD%E5%90%8D%E4%B8%BAcybsh"><span class="toc-number">2.2.</span> <span class="toc-text"> 2. 代码 (命名为 cyb.sh )：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E8%BF%90%E8%A1%8C"><span class="toc-number">2.3.</span> <span class="toc-text"> 3. 运行：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E5%9C%A8linux%E4%B8%8B%E6%90%AD%E5%BB%BAapache%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text"> 3. 在 Linux 下搭建 Apache 服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E5%AE%89%E8%A3%85apache"><span class="toc-number">3.1.</span> <span class="toc-text"> 1. 安装 Apache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E5%90%AF%E5%8A%A8apache%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.2.</span> <span class="toc-text"> 2. 启动 Apache 服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E5%B0%86apache%E6%9C%8D%E5%8A%A1%E8%AE%BE%E7%BD%AE%E4%B8%BA%E5%BC%80%E5%90%AF%E8%87%AA%E5%90%AF%E5%8A%A8"><span class="toc-number">3.3.</span> <span class="toc-text"> 3. 将 Apache 服务设置为开启自启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E5%88%9B%E5%BB%BA%E7%BD%91%E7%AB%99%E7%9B%AE%E5%BD%95"><span class="toc-number">3.4.</span> <span class="toc-text"> 4. 创建网站目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E8%BF%9B%E8%A1%8Cip%E9%85%8D%E7%BD%AE"><span class="toc-number">3.5.</span> <span class="toc-text"> 5. 进行 ip 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E7%BC%96%E8%BE%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.6.</span> <span class="toc-text"> 6. 编辑配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E6%B5%8B%E8%AF%95%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F"><span class="toc-number">3.7.</span> <span class="toc-text"> 7. 测试是否成功</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E4%B8%AA%E4%BA%BA%E7%BD%91%E9%A1%B5"><span class="toc-number">4.</span> <span class="toc-text"> 4. 个人网页</span></a></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li ><a href="/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/" rel="bookmark" title="堆">堆</a></li><li ><a href="/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/" rel="bookmark" title="Linux之系统调用">Linux之系统调用</a></li><li ><a href="/2023/08/29/pwn/%E4%B8%93%E6%A0%8F/DynELF/" rel="bookmark" title="DynELF">DynELF</a></li><li ><a href="/2023/08/29/pwn/%E4%B8%93%E6%A0%8F/%E6%B2%99%E7%9B%92%E6%9C%BA%E5%88%B6/" rel="bookmark" title="沙盒机制">沙盒机制</a></li><li ><a href="/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="bookmark" title="CentOS 7搭建web服务器与个人网页制作（Apache）">CentOS 7搭建web服务器与个人网页制作（Apache）</a></li><li ><a href="/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/" rel="bookmark" title="Linux(shell)命令和函数">Linux(shell)命令和函数</a></li><li  class="active"><a href="/2023/10/16/Linux/Linux%E8%80%83%E6%A0%B8%E5%91%BD%E4%BB%A4%E4%B8%8Eshell/" rel="bookmark" title="Linux命令与shell脚本（Linux课程考核）">Linux命令与shell脚本（Linux课程考核）</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" itemprop="image" alt="vvwwv" data-src="/assets/avatar.jpg"/><p class="name" itemprop="name">vvwwv</p><div class="description" itemprop="description"></div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">58</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">51</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">17</span><span class="name">标签</span></a></div></nav><div class="social"><a href="https://github.com/cyb141520" class="item github" rel="noopener" title="https:&#x2F;&#x2F;github.com&#x2F;cyb141520" target="_blank"><i class="ic i-github"></i></a><a href="/1415206596@qq.com" class="item email" title="1415206596@qq.com"><i class="ic i-envelope"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item dropdown"><a href="javascript:void(0);"><i class="ic i-user"></i>关于</a><ul class="submenu"><li class="item"><a href="/about/" rel="section"><i class="ic i-user"></i>关于本站</a></li><li class="item"><a href="/admiration/" rel="section"><i class="ic i-coffee"></i>赞赏博主</a></li></ul></li><li class="item dropdown"><a href="javascript:void(0);"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li><li class="item"><a href="/friends/" rel="section"><i class="ic i-heart"></i>友链</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2023/10/19/pwn/%E4%B8%93%E6%A0%8F/how2heap%202.23/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2023/10/15/pwn/c++%E5%87%BD%E6%95%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF%E7%B1%BB/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/Linux/" title="分类于Linux">Linux</a><i class="ic i-angle-right"></i><a href="/categories/Linux/PWN%E4%B8%93%E6%A0%8F/" title="分类于PWN专栏">PWN专栏</a><i class="ic i-angle-right"></i><a href="/categories/Linux/PWN%E4%B8%93%E6%A0%8F/CTF/" title="分类于CTF">CTF</a></div><span><a href="/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">Linux之系统调用</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/CTF/" title="分类于CTF">CTF</a></div><span><a href="/2023/05/04/pwn/%E5%88%B7%E9%A2%98/BUUCTF/buuctf-pwn/">buuctf.pwn</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Java/" title="分类于Java">Java</a></div><span><a href="/2023/09/10/Java/Java%E4%BD%9C%E4%B8%9A1/">Java作业2023/9/10(作业5)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/CTF/" title="分类于CTF">CTF</a><i class="ic i-angle-right"></i><a href="/categories/CTF/PWN%E4%B8%93%E6%A0%8F/" title="分类于PWN专栏">PWN专栏</a></div><span><a href="/2023/10/15/pwn/c++%E5%87%BD%E6%95%B0%E5%8F%8A%E6%A8%A1%E6%9D%BF%E7%B1%BB/">C++函数及模板</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/CTF/" title="分类于CTF">CTF</a><i class="ic i-angle-right"></i><a href="/categories/CTF/BUUCTF/" title="分类于BUUCTF">BUUCTF</a></div><span><a href="/2023/09/10/pwn/%E5%88%B7%E9%A2%98/BUUCTF/PicoCTF_2018_rop_chain1/">PicoCTF_2018_rop_chain</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/CTF/" title="分类于CTF">CTF</a><i class="ic i-angle-right"></i><a href="/categories/CTF/CTFshow/" title="分类于CTFshow">CTFshow</a><i class="ic i-angle-right"></i><a href="/categories/CTF/CTFshow/%E6%A0%88%E6%BA%A2%E5%87%BA/" title="分类于栈溢出">栈溢出</a></div><span><a href="/2023/10/14/pwn/%E5%88%B7%E9%A2%98/ctfshow/47-57/">CTFshow(栈溢出部分,47~57)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/Java/" title="分类于Java">Java</a></div><span><a href="/2023/09/10/Java/Java%E4%BD%9C%E4%B8%9A2/">Java作业2023/9/10(作业7)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/CTF/" title="分类于CTF">CTF</a><i class="ic i-angle-right"></i><a href="/categories/CTF/CTFshow/" title="分类于CTFshow">CTFshow</a></div><span><a href="/2023/09/15/pwn/%E5%88%B7%E9%A2%98/ctfshow/ctfshow5-34/">CTFshow(前置基础部分-汇编,5~34)</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/CTF/" title="分类于CTF">CTF</a><i class="ic i-angle-right"></i><a href="/categories/CTF/BUUCTF/" title="分类于BUUCTF">BUUCTF</a><i class="ic i-angle-right"></i><a href="/categories/CTF/BUUCTF/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/" title="分类于格式化字符串漏洞">格式化字符串漏洞</a></div><span><a href="/2023/09/12/pwn/%E5%88%B7%E9%A2%98/BUUCTF/bjdctf_2020_babyrop2/">bjdctf_2020_babyrop2（格式化字符串漏洞）</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/PWN%E4%B8%93%E6%A0%8F/" title="分类于PWN专栏">PWN专栏</a><i class="ic i-angle-right"></i><a href="/categories/PWN%E4%B8%93%E6%A0%8F/CTF/" title="分类于CTF">CTF</a><i class="ic i-angle-right"></i><a href="/categories/PWN%E4%B8%93%E6%A0%8F/CTF/Linux/" title="分类于Linux">Linux</a><i class="ic i-angle-right"></i><a href="/categories/PWN%E4%B8%93%E6%A0%8F/CTF/Linux/large-bin-attack/" title="分类于large bin attack">large bin attack</a></div><span><a href="/2023/10/05/Linux/large_bin_attack/">large bin attack（为house利用系列打下基础）</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2><ul class="leancloud-recent-comment" id="new-comment"><li class="item" v-for="com in coms"><a v-bind:href="root + com.href" data-pjax-state="data-pjax-state"><span class="breadcrumb">{{com.nick}} @ {{com.time}}</span><span>{{com.text}}<br/></span></a></li></ul></div></div><div class="status"><div class="copyright">&copy; 2022 -<span itemprop="copyrightYear">2023</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">vvwwv @ vvwwv'blog</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">277k 字</span><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">4:12</span></div><div class="powered-by">基于 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & Theme.<a href="https://github.com/theme-shoka-x/hexo-theme-shokaX/" rel="noopener" target="_blank">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+        path: `2023/10/16/Linux/Linux考核命令与shell/`,
+        favicon: {
+        show: `不负韶华`,
+        hide: `以梦为马！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,
+    chart: false,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=default,fetch"></script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.0.2/pace.min.js"></script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/algoliasearch/4.12.1/algoliasearch-lite.umd.min.js"></script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/instantsearch.js/4.39.0/instantsearch.production.min.js"></script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/quicklink/2.2.0/quicklink.umd.min.js"></script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/??jquery/3.5.1/jquery.min.js,fancybox/3.5.7/jquery.fancybox.min.js,justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" async></script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/KaTeX/0.15.2/contrib/copy-tex.min.js" async></script><script src="/js/app.js?v=0.3.5"></script>
+    <script type="module" data-pjax>
+        let items = []
+        import { RecentComments } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs'
+        RecentComments({
+          serverURL: 'https://vvwwvv.zeabur.app',
+          count: 10,
+        }).then(({ comments }) => {
+          comments.forEach(function (item) {
+              let cText = (item.orig.length > 50) ? item.orig.substring(0,50)+'...' : item.orig
+              item.url = item.url !== '/' ?  '/' + item.url : item.url;
+              const siteLink = item.url + "#" + item.objectId
+              items.push({
+                  href: siteLink,
+                  nick: item.nick,
+                  time: item.insertedAt.split('T').shift(),
+                  text: cText
+              })
+          })
+          Vue.createApp({
+            data() {
+                return {
+                    coms: items,
+                    root: ''
+                }
+            }
+          }).mount('#new-comment')
+        }).catch(function (err) {
+          console.error(err)
+        })
+    </script>
+    </body></html>

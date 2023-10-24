@@ -3,20 +3,216 @@
     <id>https://vvwwvv.cn</id>
     <title>Blog • Posts by &#34;linux&#34; tag</title>
     <link href="https://vvwwvv.cn" />
-    <updated>2023-10-07T06:15:56.000Z</updated>
-    <category term="pwn" />
-    <category term="二进制" />
-    <category term="Linux" />
+    <updated>2023-10-16T12:05:56.000Z</updated>
     <category term="Java" />
+    <category term="pwn" />
+    <category term="Linux" />
+    <category term="Apache" />
+    <category term="二进制" />
+    <category term="报错" />
+    <category term="C语言" />
+    <category term="C++" />
     <category term="windows" />
     <category term="渗透" />
-    <category term="C语言" />
     <category term="ret2csu" />
+    <category term="how2heap" />
     <category term="fastbin.attack" />
     <category term="ctf" />
     <category term="系统调用" />
     <category term="rop" />
     <category term="nc" />
+    <entry>
+        <id>https://vvwwvv.cn/2023/10/16/Linux/Linux%E8%80%83%E6%A0%B8%E5%91%BD%E4%BB%A4%E4%B8%8Eshell/</id>
+        <title>Linux命令与shell脚本（Linux课程考核）</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/10/16/Linux/Linux%E8%80%83%E6%A0%B8%E5%91%BD%E4%BB%A4%E4%B8%8Eshell/"/>
+        <content type="html">&lt;h1 id=&#34;1基础命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1基础命令&#34;&gt;#&lt;/a&gt; 1. 基础命令&lt;/h1&gt;
+&lt;h2 id=&#34;1-ls命令查看当前目录文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1-ls命令查看当前目录文件&#34;&gt;#&lt;/a&gt; 1. ls 命令（查看当前目录文件）&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%7BRP%28%7D1S1RI%7EZCB%5DP%24PO8R%5DR.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;这里我创建一个 &lt;code&gt;.2021cyb&lt;/code&gt;  的隐藏文件，利用 &lt;code&gt;ls -all&lt;/code&gt;  查看文件和执行权限&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/W%7B%7BP_TUL%7E8%7B%7D%60B%29LI%7BA%60%7DY5.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-chmod命令修改权限&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2-chmod命令修改权限&#34;&gt;#&lt;/a&gt; 2. chmod 命令（修改权限）&lt;/h2&gt;
+&lt;p&gt;在上面利用 ls 命令查看文件 &lt;code&gt;.2021cyb&lt;/code&gt;  的权限（d 表示文件夹，拥有者 rwx；组群 r-x；其他 r-x）, 改变组群权限为  &lt;code&gt;可读可写&lt;/code&gt; ，其他权限为  &lt;code&gt;可执行&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;chmod 761 .2021cyb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/ZUJ8T%28%5BGPCOWA79VC6R45QD.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;权限：&lt;/p&gt;
+&lt;p&gt;4 对应 r；2 对应 w；1 对应 x（也就是二进制 100，010，001）&lt;/p&gt;
+&lt;h2 id=&#34;3-cd命令更改当前目录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3-cd命令更改当前目录&#34;&gt;#&lt;/a&gt; 3. cd 命令（更改当前目录）&lt;/h2&gt;
+&lt;p&gt;进入前面创建的文件  &lt;code&gt;cd .2021cyb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/9I_0%25V8EPZI%5DYH%7B7C%5B5%7BAYJ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;从该目录进入其他目录 (从根目录进入)&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/PG56%7E%5BBF605KUNXSQHMJR36.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;返回上一次目录  &lt;code&gt;cd -&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/Z%7D_KP_91U%28P5_ND3TL%29%25XPM.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;返回上级目录  &lt;code&gt;cd ..&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/_XTV%293%40II_5T7Q%25%24%7E0Z3G%29C.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4mkdir创建目录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4mkdir创建目录&#34;&gt;#&lt;/a&gt; 4.mkdir（创建目录）&lt;/h2&gt;
+&lt;p&gt;创建一个 cumt 目录&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/B1X%5D4Q7HS%7EBL13E%7EENQ59Q4.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;5-rmdir-删除空目录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5-rmdir-删除空目录&#34;&gt;#&lt;/a&gt; 5. rmdir (删除空目录)&lt;/h2&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/1%60V0T6N82QCY24E95K9T%7B4S.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;6touch可以创建文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#6touch可以创建文件&#34;&gt;#&lt;/a&gt; 6.touch (可以创建文件)&lt;/h2&gt;
+&lt;p&gt;创建一个 cumt 文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;touch cumt&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/XS8XT_1%40%25J8VXLBF%248%28V117.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;这里发现是权限最前面的符号为 &lt;code&gt;-&lt;/code&gt; （不是 d）, 也证明是个文件&lt;/p&gt;
+&lt;h2 id=&#34;7rm命令删除文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#7rm命令删除文件&#34;&gt;#&lt;/a&gt; 7.rm 命令 (删除文件)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;-r ： 递归删除，删除目录，在删除这一目录前会事先删除目录中的内容（避免删除了目录而使目录中的文件无处存放的问题）&lt;/li&gt;
+&lt;li&gt;i ： 交互删除，为每一个删除操作询问一次删除确认&lt;/li&gt;
+&lt;li&gt;f ： 强制删除，忽视不存在的文件，无视任何的确认提示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里递归删除创建的 &lt;code&gt;.2021cyb&lt;/code&gt;  目录（里面有 cumt 文件）&lt;/p&gt;
+&lt;p&gt;删除前：&lt;br /&gt;
+&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/9W4_%5DXK%25%7B4IM%5BJ%7E%28K%25WOYIF.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;删除后：&lt;br /&gt;
+&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%247%40NDC4AIMS4D66NVZ77KYN.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;8查看文件内容cat-more-less&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#8查看文件内容cat-more-less&#34;&gt;#&lt;/a&gt; 8. 查看文件内容 (cat more less)&lt;/h2&gt;
+&lt;p&gt;这里放入一个长度超过一屏的脚本，分别利用 cat、more、less 命令查看&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/BXT_F%7D3B2BE9%28FV%7D55R9C%5DB.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;1.cat (cat 是一次性显示整个文件的内容)&lt;br /&gt;
+&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%29RI%5BA3OF%40CY%5D57U%7BKT%29G7CD.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;2.more (more 会以一页一页的显示方便使用者逐页阅读，按空格键（space）就往下一页显示，按 b 键就会往回（back）一页)&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/RI739%5BK%5BOY%24AXE%409Z7499JA.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;3.less（less 时，就可以使用方向键 等按键的功能来往前往后翻看文件）&lt;br /&gt;
+&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/0%7B6R363G%7E8PRYC%7DBX%24%25JX%7DB.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;9find命令查找文件-可以查询被修改的文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#9find命令查找文件-可以查询被修改的文件&#34;&gt;#&lt;/a&gt; 9.find 命令（查找文件 可以查询被修改的文件）&lt;/h2&gt;
+&lt;p&gt;返回到根目录下，查找刚刚的 &lt;code&gt;babyheap.py&lt;/code&gt;  文件&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/VXEXQ%29RDHULM_F%7ESM%407VL51.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;用 find 命令可以查询被修改的文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;find / -cmin -60 //查找在 n 分钟内状态发生变化的文件（例如权限）
+find / -mmin -60 //查找过去一小时改变的文件
+find / -amin -60 //查找过去一小时访问的文件
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查找过去一小时改变的文件:&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/9QT9D%7BD%40PLAOZT%60P%25%40%29A1PN.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;10文件压缩与解压&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#10文件压缩与解压&#34;&gt;#&lt;/a&gt; 10. 文件压缩与解压&lt;/h2&gt;
+&lt;p&gt;压缩：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	zip 压缩文件名 源文件           //压缩文件
+zip -r 压缩文件名 源目录(***/)  //压缩目录
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/DYW%5BZRK%28W3QP%5B%7EX%25S%7E5%40%7E%29F.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gzip 源文件                    //压缩为.gz格式，源文件会消失
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/T4%25_%5BOGJYPES%25Z0JO%60YG0UC.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;解压：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;	unzip 压缩文件                 // 解压缩文件
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/AA6PM8S6SL3T2O4%28%7D9_31%281.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gunzip 压缩文件                 //解压缩文件
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%29MMF%7B%7ES9Q%60N4RDTIAWLL1%29S.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;11netstat端口查看&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#11netstat端口查看&#34;&gt;#&lt;/a&gt; 11.netstat（端口查看）&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;    -a 表示所有
+    -n 不查询dns
+    -t 表示tcp协议
+    -u 表示udp协议
+    -p 查询占用的查询
+    -i 查询正在监听的查询
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;查询 &lt;code&gt;netstat -ntupl&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%28N6KRU5Z%5DDPCH9D7%60%29RH%7B_C.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;12ps命令进程查询&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#12ps命令进程查询&#34;&gt;#&lt;/a&gt; 12.ps 命令（进程查询）&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;a 显示现行终端机上所有进程，包括其他用户进程
+U 以用户为主的格式来显示进程状况
+x 显示所有进程
+A 显示所有进程
+f 做一个更完整的输出
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;执行 &lt;code&gt;ps aux&lt;/code&gt;  (以用户为主的格式来显示所有进程)&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/FDWR86%7EJ%28%29YA%60H%7DOZV%25REE8.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;13kill命令终止进程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#13kill命令终止进程&#34;&gt;#&lt;/a&gt; 13.kill 命令（终止进程）&lt;/h2&gt;
+&lt;p&gt;这里再开启一个终端执行 &lt;code&gt;vim babyheap.py&lt;/code&gt; , 然后终止该进程&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kill -15 pid（默认） //大部分进程先释放资源，再停止
+kill -9  pid    //exit信号不会被阻塞，所以kill能顺利杀掉进程
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/RR3%240MM%7B6A1HHWW%2827PWV%7BQ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;14tail命令加参数可以动态读取正在变化的文件比如读取不断写入的日志&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#14tail命令加参数可以动态读取正在变化的文件比如读取不断写入的日志&#34;&gt;#&lt;/a&gt; 14.tail 命令 (加参数可以动态读取正在变化的文件【比如读取不断写入的日志】)&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;tail -f [file_name] //动态读取文件内容
+tail -n行数 [file_name] //显示文件尾部n行的内容
+tail -c字节数 [file_name] //显示文件尾部C个字节的内容
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;执行  &lt;code&gt;tail -f babyheap.py&lt;/code&gt;  (利用 echo 命令输入内容)&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/CC%7DF7CCXCENXH%7E%25CMKDUNF0.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;15echo命令输出传递给-echo-的参数被打印到标准输出中&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#15echo命令输出传递给-echo-的参数被打印到标准输出中&#34;&gt;#&lt;/a&gt; 15.echo 命令（输出，传递给  &lt;code&gt;echo&lt;/code&gt;  的参数被打印到 &lt;code&gt;标准输出&lt;/code&gt; 中）&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;执行命令 echo `date`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/0%5BRNZYU1%5B%7E3%5D%29C4%292N2N0%602.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;16cfilt-命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#16cfilt-命令&#34;&gt;#&lt;/a&gt; 16. &lt;code&gt;c++filt&lt;/code&gt;  命令&lt;/h2&gt;
+&lt;p&gt;c&lt;ins&gt;filt 的作用就是还原函数名字，它可以帮我们查找动态链接库中缺少的函数，还原崩溃堆栈中一大串的函数名字母等等 (在 C&lt;/ins&gt; 中， 是允许函数重载的， 也就引出了编译器的 name mangling 机制)&lt;/p&gt;
+&lt;p&gt;这里查看一个 ida 反汇编出来的函数&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%40J%25ZPGFS%29%24S545_LU%249Z3AY.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;执行 &lt;code&gt;c++filt&lt;/code&gt;  命令&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/YD%7B6%2903SB%7E%7E94%28516W%5D%40D%7B3.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;看到还原成了我们可以识别的函数名字&lt;/p&gt;
+&lt;h1 id=&#34;2shell编程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2shell编程&#34;&gt;#&lt;/a&gt; 2.shell 编程&lt;/h1&gt;
+&lt;h2 id=&#34;1功能&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1功能&#34;&gt;#&lt;/a&gt; 1. 功能：&lt;/h2&gt;
+&lt;p&gt;多人抽签游戏，对于输入的不同名字，产生一个随机数&lt;/p&gt;
+&lt;p&gt;具体功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;输入人名，产生 0-99 之间的数字&lt;/li&gt;
+&lt;li&gt;重复输入相同的名字，产生的数字与之前相同&lt;/li&gt;
+&lt;li&gt;前面出现过的数字后面不能再次出现&lt;/li&gt;
+&lt;li&gt;将名字和产生的数字记录到一个文件内&lt;/li&gt;
+&lt;li&gt;脚本不会自己停止&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;2代码命名为cybsh&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2代码命名为cybsh&#34;&gt;#&lt;/a&gt; 2. 代码 (命名为 &lt;code&gt;cyb.sh&lt;/code&gt; )：&lt;/h2&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function-name function&#34;&gt;creat_number&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token comment&#34;&gt;## 产生已经出现过的数字，需要再次生成随机数，利用 while 脚本来实现&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;do&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token comment&#34;&gt;## 产生一个 1-99 之间的随机数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token assign-left variable&#34;&gt;nu&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;$&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token environment constant&#34;&gt;$RANDOM&lt;/span&gt;%99+1&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token comment&#34;&gt;##n 为数字出现的次数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token assign-left variable&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;awk&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-F&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:&#39;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;NUMBER&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;$nu &lt;span class=&#34;token string&#34;&gt;&#39;$2==NUMBER&#39;&lt;/span&gt;  /home/vvwwv/Public/name.log&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;wc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$n&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-gt&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;			&lt;span class=&#34;token builtin class-name&#34;&gt;continue&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;			&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$nu&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;			&lt;span class=&#34;token builtin class-name&#34;&gt;break&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;done&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;do&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token comment&#34;&gt;## 进行交互输入名字&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token builtin class-name&#34;&gt;read&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-p&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Please input your name:&#34;&lt;/span&gt; name&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-f&lt;/span&gt; /home/vvwwv/Public/name.log &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token comment&#34;&gt;## 文件里为空时为第一次执行脚本，之间打印数字&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;28&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token assign-left variable&#34;&gt;number&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;$&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token environment constant&#34;&gt;$RANDOM&lt;/span&gt;%99+1&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;29&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Your number is: &lt;span class=&#34;token variable&#34;&gt;$number&lt;/span&gt;&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;30&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$name&lt;/span&gt;:&lt;span class=&#34;token variable&#34;&gt;$name&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; /home/vvwwv/Public/name.log&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;31&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;32&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            &lt;span class=&#34;token comment&#34;&gt;## 名字重复出现&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;33&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token assign-left variable&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;awk&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-F&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:&#39;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;NAME&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;$name &lt;span class=&#34;token string&#34;&gt;&#39;$1 == NAME&#39;&lt;/span&gt; /home/vvwwv/Public/name.log&lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;wc&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-l&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;34&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$n&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-gt&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;35&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;36&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;			&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;The name already exist.&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;37&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;			&lt;span class=&#34;token function&#34;&gt;awk&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-F&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;:&#39;&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;NAME&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$name&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;$1 == NAME&#39;&lt;/span&gt; /home/vvwwv/Public/name.log&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;38&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;			&lt;span class=&#34;token builtin class-name&#34;&gt;continue&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;39&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;40&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;			&lt;span class=&#34;token assign-left variable&#34;&gt;number&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;creat_number&lt;span class=&#34;token variable&#34;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;41&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;42&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                &lt;span class=&#34;token comment&#34;&gt;## 将名字和数字存入 name.log 中&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;43&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Your number is: &lt;span class=&#34;token variable&#34;&gt;$number&lt;/span&gt;&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;44&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;		&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;&lt;span class=&#34;token variable&#34;&gt;$name&lt;/span&gt;:&lt;span class=&#34;token variable&#34;&gt;$number&lt;/span&gt;&#34;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&lt;/span&gt; /home/vvwwv/Public/name.log&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;45&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;46&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;done&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;3运行&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3运行&#34;&gt;#&lt;/a&gt; 3. 运行：&lt;/h2&gt;
+&lt;p&gt;执行 &lt;code&gt;cyb.sh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/2%5B%5BOSS_B5%24NOF8D%7E%7EVE%5BO0S.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;输入  &lt;code&gt;aaa&lt;/code&gt; ; &lt;code&gt;bbb&lt;/code&gt; ; &lt;code&gt;ccc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/D%7DSNMOU%60H%5DDU%5B7BCCQ%28%7D4T6.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;查看 &lt;code&gt;name.log&lt;/code&gt;  文件&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/BR%7B%28%5B%242Y65865PV%29UVE%7BF77.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;再次输入 &lt;code&gt;aaa&lt;/code&gt; ，提示说明名字已经存在&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%7DR8X%28KX9%243CYTPYKX9IE%28DV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;3在linux下搭建apache服务器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3在linux下搭建apache服务器&#34;&gt;#&lt;/a&gt; 3. 在 Linux 下搭建 Apache 服务器&lt;/h1&gt;
+&lt;h2 id=&#34;1安装apache&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1安装apache&#34;&gt;#&lt;/a&gt; 1. 安装 Apache&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo yum install httpd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/FG343FNLD7ZU93T%29H%29E%297ON.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2启动apache服务&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2启动apache服务&#34;&gt;#&lt;/a&gt; 2. 启动 Apache 服务&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl start httpd.service
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/K2RYJ6%28BLJ0ZT139K%40%246J%7BB.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3将apache服务设置为开启自启动&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3将apache服务设置为开启自启动&#34;&gt;#&lt;/a&gt; 3. 将 Apache 服务设置为开启自启动&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemctl enable httpd.service
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/10WY%280645%60%28F3EUC__%248%40CA.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4创建网站目录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4创建网站目录&#34;&gt;#&lt;/a&gt; 4. 创建网站目录&lt;/h2&gt;
+&lt;p&gt;创建一个网站目录来存放网页文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo mkdir /var/www/html/vvwwv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;看见已经产生了目录&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/UV30%7D8%40%604T4JLFU8JFMGX1T.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;5进行ip配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5进行ip配置&#34;&gt;#&lt;/a&gt; 5. 进行 ip 配置&lt;/h2&gt;
+&lt;p&gt;1. 查看本机 ip（这里我的虚拟机的网站配置是桥接模式）&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/0%29ZL7I3ZJ5SY9P0%28Z%7DD%25Q%7ER.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;2. 设置子接口 ip 地址&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%40LA795%5BN409AN68E8ASHY%5DL.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;6编辑配置文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#6编辑配置文件&#34;&gt;#&lt;/a&gt; 6. 编辑配置文件&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;vim /etc/httpd/conf/httpd.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%60_MP%5D%404RHA4%40%7E7ZV%251E%7D%5D%7BJ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;7测试是否成功&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#7测试是否成功&#34;&gt;#&lt;/a&gt; 7. 测试是否成功&lt;/h2&gt;
+&lt;p&gt;浏览器访问本机 ip 地址&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%5BN%5B1VPT%25N27P%60AV%607KH1HPV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;创建一个测试页面用于查看是否成功搭建了 Web 服务器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;Hello World&amp;quot;&amp;gt;/var/www/html/mywebsite/index.html
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用该命令时，发现没有权限，尽管加上 &lt;code&gt;sudo&lt;/code&gt;  也不行，所以使用 &lt;code&gt;root&lt;/code&gt;  账户执行该命令&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/MMQ%24FBMRO%24%5BI7%7EFTF5D%5DPTV.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;可以发现确实创建并且写入了内容&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/THKBCY%601MCA%7E%28O%29H7W7GOM9.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;重启 httpd 服务&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/B79E96Z%60%5D%5DP%7B6AETW53Z%281M.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;浏览器访问子接口 ip&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/E32L%28L%7DA%60MP2WE5EORRQXH5.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;测试成功&lt;/p&gt;
+&lt;h1 id=&#34;4个人网页&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#4个人网页&#34;&gt;#&lt;/a&gt; 4. 个人网页&lt;/h1&gt;
+</content>
+        <category term="Linux" />
+        <updated>2023-10-16T12:05:56.000Z</updated>
+    </entry>
     <entry>
         <id>https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</id>
         <title>FORTIFY_SOURCE（例题：CTFshow的pwn32）</title>
@@ -255,8 +451,8 @@ BK-&amp;gt;fd = FD   并且  FD=P-&amp;gt;fd
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vTDBnNG4tYmxvZy9wLzEyOTY1MTg3Lmh0bWw=&#34;&gt;https://www.cnblogs.com/L0g4n-blog/p/12965187.html&lt;/span&gt;&lt;/p&gt;
 </content>
         <category term="pwn" />
-        <category term="二进制" />
         <category term="Linux" />
+        <category term="二进制" />
         <updated>2023-10-02T06:15:56.000Z</updated>
     </entry>
     <entry>
@@ -339,8 +535,8 @@ dlmalloc不会缓存大于256kb的内存块，因为这样的内存块太大了�
 &lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;span&gt;n&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; LibcSearcher &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;context&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;log_level &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;debug&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;remote&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;node4.buuoj.cn&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;27648&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#p=process(&#34;./hacknote&#34;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;system_binsh&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0x8048945&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;size&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;content&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;choice :&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;1&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Note size :&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;size&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Content :&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;content&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;recvuntil&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Success !&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;delete&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;index&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;choice :&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;2&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Index :&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;index&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;print_a&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;index&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendlineafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;choice :&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;3&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendlineafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Index :&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;index&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#这里要加换行，不然无法成功&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;add&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;aaaa&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;add&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;bbbb&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;add&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;cccc&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;delete&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;28&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;delete&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;29&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;30&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;add&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;p32&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;system_binsh&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#这里的 8 是程序创建的 chunk 的大小释放后被我们申请回来利用，原本这里 fd 存放的是 print_note_content&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;31&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;print_a&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#给 index0 申请 chunk1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;32&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;p&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/10/02/pPLQeXR.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </content>
         <category term="pwn" />
-        <category term="二进制" />
         <category term="Linux" />
+        <category term="二进制" />
         <updated>2023-10-01T06:15:56.000Z</updated>
     </entry>
     <entry>
@@ -401,8 +597,8 @@ pop   ebp       #执行pop时，ebp出栈，并且将esp地址内的值放入ebp
 &lt;p&gt;这样我们就完成了栈迁移&lt;/p&gt;
 </content>
         <category term="pwn" />
-        <category term="二进制" />
         <category term="Linux" />
+        <category term="二进制" />
         <updated>2023-09-28T06:15:56.000Z</updated>
     </entry>
     <entry>
@@ -434,13 +630,22 @@ pop   ebp       #执行pop时，ebp出栈，并且将esp地址内的值放入ebp
 &lt;h2 id=&#34;上面两个函数都有一个类型为-size_t-的参数它是无符号整型的sizeof运算符的结果&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#上面两个函数都有一个类型为-size_t-的参数它是无符号整型的sizeof运算符的结果&#34;&gt;#&lt;/a&gt; 上面两个函数都有一个类型为 size_t 的参数，它是无符号整型的 sizeof 运算符的结果。&lt;/h2&gt;
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
         <category term="pwn" />
-        <category term="二进制" />
         <category term="Linux" />
+        <category term="二进制" />
         <updated>2023-09-25T12:15:56.000Z</updated>
     </entry>
     <entry>
+        <id>https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
+        <title>CentOS 7搭建web服务器与个人网页制作（Apache）</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+        <content type="html"></content>
+        <category term="Linux" />
+        <category term="Apache" />
+        <updated>2023-09-19T12:05:56.000Z</updated>
+    </entry>
+    <entry>
         <id>https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</id>
-        <title>Linux命令和函数</title>
+        <title>Linux(shell)命令和函数</title>
         <link rel="alternate" href="https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/"/>
         <content type="html">&lt;h1 id=&#34;1linux执行多个命令shell命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1linux执行多个命令shell命令&#34;&gt;#&lt;/a&gt; 1.Linux 执行多个命令（shell 命令）&lt;/h1&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;l&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#逐条执行命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#即使命令执行错误也不影响后面的命令继续执行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#前面的成功执行后面才执行&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; echoo &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#2 出错，不会执行 echo3 ，echo4&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#前一条命令失败然后才继续执行后面的命令&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;#当第一个执行成功时，后面的就都不会执行；当第一个命令失败时，就开始执行 echo2，后面同理&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#混合使用分隔符&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;||&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;  &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;# 因为 || 分隔符，按照 顺序 只要前面三个执行成功一个其他的就不执行，然后执行 echo4（因为 &amp;amp;&amp;amp; 前面的被看作一个整体，一个成功就视为成功，就执行 echo 4）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JhbmRhb3l1L2FydGljbGUvZGV0YWlscy8xMTcyOTY5MDc=&#34;&gt;https://blog.csdn.net/bandaoyu/article/details/117296907&lt;/span&gt;&lt;/p&gt;
@@ -476,10 +681,34 @@ pop   ebp       #执行pop时，ebp出栈，并且将esp地址内的值放入ebp
 &lt;p&gt;&lt;code&gt;exec （cat [文件名]）1&amp;gt;&amp;amp;0&lt;/code&gt; , 使文件的标准输出流到标准输入里 (在 Linux 系统中文件描述符 &lt;code&gt;1为标准输出流，0为标准输入流，2为标准错误（输出到屏幕）&lt;/code&gt; ，而通过 &lt;code&gt;&amp;amp;+文件描述符&lt;/code&gt; 的方式可以代替文件名，（这里就指向了该终端，所以结果显示在终端上 &lt;code&gt;因为默认打开一个终端后，0，1，2都指向该终端&lt;/code&gt; ）&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYnVsaC9hcnRpY2xlcy8xMjc2MDYxNy5odG1s&#34;&gt;https://www.cnblogs.com/bulh/articles/12760617.html&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMxMTg2MTIzL2FydGljbGUvZGV0YWlscy84MjE5MDc3Ng==&#34;&gt;https://blog.csdn.net/qq_31186123/article/details/82190776&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;5echo命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#5echo命令&#34;&gt;#&lt;/a&gt; 5.echo 命令&lt;/h1&gt;
+&lt;p&gt;echo 命令是 Linux 中最基本和最常用的命令之一。 传递给  &lt;code&gt;echo&lt;/code&gt;  的参数被打印到 &lt;code&gt;标准输出&lt;/code&gt; 中。&lt;/p&gt;
+&lt;p&gt;echo 通常用于  &lt;code&gt;shell 脚本&lt;/code&gt; 中，用于 &lt;code&gt;显示消息&lt;/code&gt; 或 &lt;code&gt;输出&lt;/code&gt; 其他命令的结果。&lt;br /&gt;
+ &lt;code&gt;Shell&lt;/code&gt;  的  &lt;code&gt;echo&lt;/code&gt;  指令与  &lt;code&gt;PHP&lt;/code&gt;  的  &lt;code&gt;echo &lt;/code&gt; 指令类似，都是用于字符串的输出&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;echo &amp;quot;test&amp;quot;&lt;/code&gt;  与 &lt;code&gt;echo test&lt;/code&gt;  效果一致，双引号可以省略&lt;/p&gt;
+&lt;h2 id=&#34;显示结果定向至文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#显示结果定向至文件&#34;&gt;#&lt;/a&gt; 显示结果定向至文件&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;echo &amp;quot;It is a test&amp;quot; &amp;gt; myfile&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;显示命令执行结果&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#显示命令执行结果&#34;&gt;#&lt;/a&gt; 显示命令执行结果&lt;/h2&gt;
+&lt;p&gt;这里运用的是反双引号&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo `date`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://z1.ax1x.com/2023/10/12/piSgSDU.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;6-cfilt-命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#6-cfilt-命令&#34;&gt;#&lt;/a&gt; 6.  &lt;code&gt;c++filt&lt;/code&gt;  命令&lt;/h1&gt;
+&lt;p&gt;在 C++ 中， 是允许函数重载的， 也就引出了编译器的 name mangling 机制&lt;/p&gt;
+&lt;p&gt;c++filt 的作用就是还原函数名字，它可以帮我们查找动态链接库中缺少的函数，还原崩溃堆栈中一大串的函数名字母等等&lt;/p&gt;
+&lt;p&gt;查看一个 ida 反编译出来的 c++ 伪代码&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%40J%25ZPGFS%29%24S545_LU%249Z3AY.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;利用命令 &lt;code&gt;c++filt&lt;/code&gt; &lt;br /&gt;
+&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/BI5T2747GW%29%5BFJ6Q4CGGQ8P.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;可以发现将原来的函数还原了，后面的乱序代码原来为  &lt;code&gt;compare&lt;/code&gt;  (用作判断相等 &lt;code&gt;==&lt;/code&gt; )&lt;/p&gt;
+&lt;p&gt;c&lt;ins&gt;filt 命令可以还原 C&lt;/ins&gt; 为实现函数重载采用 name mangling 搞出来的奇奇怪怪的函数名&lt;br /&gt;
+注册信号回调函数方式：signal (SIGSEGV, show_stack);，SIGSEGV 代表无效的内存引用&lt;br /&gt;
+注意 C 语言和 C++ 在编译后函数命名方式的不同，C 语言不支持严格意义的重载，C++ 支持&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3d3dy4wMDhjdC50b3AvYmxvZy8yMDIwLzA1LzE2LyVFNCVCRCVCRiVFNyU5NCVBOGMtZmlsdCVFNSU5MSVCRCVFNCVCQiVBNCVFOCVCRiU5OCVFNSU4RSU5RkMtJUU3JUJDJTk2JUU4JUFGJTkxJUU1JTkwJThFJUU3JTlBJTg0JUU1JTg3JUJEJUU2JTk1JUIwJUU1JTkwJThELw==&#34;&gt;http://www.008ct.top/blog/2020/05/16 / 使用 c-filt 命令还原 C - 编译后的函数名 /&lt;/span&gt;&lt;/p&gt;
 </content>
         <category term="pwn" />
-        <category term="二进制" />
         <category term="Linux" />
+        <category term="二进制" />
         <updated>2023-09-19T12:05:56.000Z</updated>
     </entry>
     <entry>
@@ -581,8 +810,8 @@ pop   ebp       #执行pop时，ebp出栈，并且将esp地址内的值放入ebp
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&amp;lt;unistd.h&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; flides&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;终止文件描述符 flides 与其对应的文件间的联系，文件描述符被释放，可重新使用。&lt;/p&gt;
 </content>
         <category term="pwn" />
-        <category term="二进制" />
         <category term="Linux" />
+        <category term="二进制" />
         <updated>2023-08-29T12:15:56.000Z</updated>
     </entry>
     <entry>
@@ -592,8 +821,8 @@ pop   ebp       #执行pop时，ebp出栈，并且将esp地址内的值放入ebp
         <content type="html">&lt;p&gt;chunk 的 p 位设为 1 即上一个 chunk 被使用并且上一个 chunk 可以使用 pre_size 的空间  （用来储存前一个物理相邻的 chunk 的数据 ，（两个都空闲才合并）&lt;/p&gt;
 </content>
         <category term="pwn" />
-        <category term="二进制" />
         <category term="Linux" />
+        <category term="二进制" />
         <updated>2023-08-24T12:15:56.000Z</updated>
     </entry>
 </feed>

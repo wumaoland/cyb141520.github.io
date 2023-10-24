@@ -7,14 +7,18 @@
         <language>zh-CN</language>
         <pubDate>Wed, 04 Oct 2023 14:15:56 +0800</pubDate>
         <lastBuildDate>Wed, 04 Oct 2023 14:15:56 +0800</lastBuildDate>
-        <category>pwn</category>
-        <category>二进制</category>
-        <category>Linux</category>
         <category>Java</category>
+        <category>pwn</category>
+        <category>Linux</category>
+        <category>Apache</category>
+        <category>二进制</category>
+        <category>报错</category>
+        <category>C语言</category>
+        <category>C++</category>
         <category>windows</category>
         <category>渗透</category>
-        <category>C语言</category>
         <category>ret2csu</category>
+        <category>how2heap</category>
         <category>fastbin.attack</category>
         <category>ctf</category>
         <category>系统调用</category>
