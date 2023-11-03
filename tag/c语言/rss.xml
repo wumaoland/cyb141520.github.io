@@ -8,15 +8,15 @@
         <pubDate>Thu, 24 Aug 2023 19:23:15 +0800</pubDate>
         <lastBuildDate>Thu, 24 Aug 2023 19:23:15 +0800</lastBuildDate>
         <category>Java</category>
-        <category>Linux</category>
-        <category>Apache</category>
         <category>pwn</category>
+        <category>Linux</category>
         <category>二进制</category>
+        <category>Apache</category>
         <category>报错</category>
         <category>C++</category>
-        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
+        <category>C语言</category>
         <category>ret2csu</category>
         <category>how2heap</category>
         <category>fastbin.attack</category>
@@ -192,6 +192,21 @@ fread不区分文件尾和错误，因此调用者必须用feof和ferror才能�
 &lt;p&gt;mmap 将一个文件或者其它对象映射进内存。文件被映射到多个页上，如果文件的大小不是所有页的大小之和，最后一个页不被使用的空间将会清零。mmap 在用户空间映射调用系统中作用很大。&lt;/p&gt;
 &lt;p&gt;mmap 必须以页大小为单位进行映射，而内存也只能以页为单位进行映射，若要映射非 PAGE_SIZE 整数倍的地址范围，要先进行内存对齐，强行以 PAGE_SIZE 的倍数大小进行映射&lt;/p&gt;
 &lt;p&gt;&lt;s&gt; &lt;code&gt;mmap&lt;/code&gt;  函数，它开辟了一个可执行地址，返回值就是该地址&lt;/s&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2&#34;&gt;#&lt;/a&gt; 2&lt;/h2&gt;
+&lt;p&gt;mmap () 函数的主要用途有三个：&lt;/p&gt;
+&lt;p&gt;1、将一个普通文件映射到内存中，通常在需要对文件进行频繁读写时使用，这样用内存读写取代 I/O 读写，以获得较高的性能；&lt;/p&gt;
+&lt;p&gt;2、将特殊文件进行匿名内存映射，可以为关联进程提供共享内存空间；&lt;/p&gt;
+&lt;p&gt;3、为无关联的进程提供共享内存空间，一般也是将一个普通文件映射到内存中。&lt;/p&gt;
+&lt;h2 id=&#34;补充&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#补充&#34;&gt;#&lt;/a&gt; 补充&lt;/h2&gt;
+&lt;p&gt;【尽管通过 mmap 开辟的空间没有执行权限，但是有读写权限时，仍然可以在这执行 open，read，write 等对应权限的功能】&lt;/p&gt;
+&lt;p&gt;open 打开文件时设置的权限（如读写权限 O_RDWR/O_RDONLY/O_WRONLY）必须要和 mmap 系统调用所需权限相匹配。&lt;/p&gt;
+&lt;p&gt;具体来说，&lt;/p&gt;
+&lt;p&gt;打开时，必须允许读取，即 O_RDONLY 和 O_RDWR 至少指定一个；&lt;br /&gt;
+mmap 调用时，如果 prot 参数中指定了 PROT_WRITE，并且 flags 中指定了 MAP_SHARED，那么打开时，必须指定 O_RDWR。&lt;br /&gt;
+注意：&lt;/p&gt;
+&lt;p&gt;1）open 时，不是所有文件都支持 mmap，如管道文件。&lt;/p&gt;
+&lt;p&gt;2）mmap 完成后，关闭 fd 并不会释放内存映射对应空间，需要专门调用 munmap。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZm9ydHVuZWx5L3AvMTYyMTIwMjcuaHRtbA==&#34;&gt;https://www.cnblogs.com/fortunely/p/16212027.html&lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&#34;参数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#参数&#34;&gt;#&lt;/a&gt; 参数&lt;/h2&gt;
 &lt;p&gt;参数 start&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;指向欲映射的内存起始地址，通常设为 NULL（0），代表让系统自动选定地址，映射成功后返回该地址。
@@ -248,6 +263,131 @@ EAGAIN 文件被锁住，或是有太多内存被锁住。
 ENOMEM 内存不足。
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;需要注意的是内核并不是实时同步映射区与文件的，相反内核很少主动去同步，除非我们调用了函数 msync 或者关闭映射区（关闭映射区的时候，也不是立即同步的）&lt;/p&gt;
+&lt;h1 id=&#34;18putchar函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#18putchar函数&#34;&gt;#&lt;/a&gt; 18.putchar 函数&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;putchar&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;作用：&lt;/p&gt;
+&lt;p&gt;C 库函数 int putchar (int char) 把参数 char 指定的字符（一个无符号字符）写入到标准输出 stdout 中【在屏幕上输出 char 型字符】&lt;/p&gt;
+&lt;p&gt;返回值：&lt;/p&gt;
+&lt;p&gt;该函数以无符号 char 强制转换为 int 的形式返回写入的字符，如果发生错误则返回 EOF。&lt;/p&gt;
+&lt;h1 id=&#34;19memset函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#19memset函数&#34;&gt;#&lt;/a&gt; 19.memset 函数&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;memset&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;str&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; c&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt; n&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;作用：&lt;/p&gt;
+&lt;p&gt;C 库函数 &lt;code&gt;void *memset(void *str, int c, size_t n)&lt;/code&gt;  复制字符 c（一个无符号字符）到参数 str 所指向的字符串的 &lt;code&gt;前 n 个字符&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;参数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;str -- 指向要填充的内存块。&lt;/li&gt;
+&lt;li&gt;c -- 要被设置的值。该值以 int 形式传递，但是函数在填充内存块时是使用该值的无符号字符形式。&lt;/li&gt;
+&lt;li&gt;n -- 要被设置为该值的字符数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;返回值&lt;/p&gt;
+&lt;p&gt;该值返回一个指向存储区 str 的指针。&lt;/p&gt;
+&lt;h1 id=&#34;20bzero函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#20bzero函数&#34;&gt;#&lt;/a&gt; 20.bzero () 函数&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;bzero&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;s&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; n&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;作用：&lt;/p&gt;
+&lt;p&gt;bzero 函数用来将内存块（s）的前 n 个字节清零【由于 bzero 不是标准库函数，所以可移植性不是很好，建议使用 memset 函数代替】&lt;/p&gt;
+&lt;p&gt;返回值：无返回值&lt;/p&gt;
+&lt;h1 id=&#34;21malloc不清空内存值&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#21malloc不清空内存值&#34;&gt;#&lt;/a&gt; 21.malloc (不清空内存值)&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;malloc&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; num_bytes&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;；&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;参数：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;num_byte&lt;/code&gt;  为要申请的空间大小&lt;/p&gt;
+&lt;p&gt;作用：&lt;/p&gt;
+&lt;p&gt;在内存的动态存储区中分配一块长度为 size 字节的 &lt;code&gt;连续&lt;/code&gt; 区域，参数 size 为需要内存空间的长度，返回该区域的首地址（首地址指的是 data 域）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;函数malloc不能初始化所分配的内存空间&lt;/code&gt; ，这意味着我们申请的空间里面的数据仍然保留着（也就是可以通过这种方式泄露里面的数据）&lt;/p&gt;
+&lt;h1 id=&#34;22calloc清空内存值&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#22calloc清空内存值&#34;&gt;#&lt;/a&gt; 22.calloc（清空内存值）&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;calloc&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt; n&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt; size&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;；&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;参数：&lt;/p&gt;
+&lt;p&gt;其比 malloc 函数多一个参数，比如如果他要申请 20 个 int 类型空间： &lt;code&gt;int *p = (int *)calloc(20, sizeof(int)）&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;作用：&lt;/p&gt;
+&lt;p&gt;与 malloc 相似，参数 &lt;code&gt;sizeof(int)&lt;/code&gt;  为申请地址的单位元素长度， &lt;code&gt;size_t n&lt;/code&gt;  为元素个数，即在内存中申请 &lt;code&gt;sizeof(int)*size_t n&lt;/code&gt;  字节大小的连续地址空间&lt;/p&gt;
+&lt;p&gt;malloc 申请后空间的值是原来申请前的，并没有进行初始化，而 calloc 却在申请后，对空间逐一进行 &lt;code&gt;初始化&lt;/code&gt; ，并设置值为 0&lt;/p&gt;
+&lt;h1 id=&#34;23realloc改变已申请的空间的大小&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#23realloc改变已申请的空间的大小&#34;&gt;#&lt;/a&gt; 23.realloc (改变已申请的空间的大小)&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;realloc&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;ptr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt; new_Size&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;参数：&lt;/p&gt;
+&lt;p&gt;ptr 为指向原来空间基址的指针， new_size 为接下来需要重新分配空间的大小&lt;/p&gt;
+&lt;p&gt;作用：&lt;/p&gt;
+&lt;p&gt;给一个已经分配了地址的指针重新分配空间，参数 ptr 为原有的空间地址，new_size 是重新申请的地址长度.&lt;/p&gt;
+&lt;p&gt;用于对动态内存进行扩容 (及已申请的动态空间不够使用，需要进行空间扩容操作&lt;/p&gt;
+&lt;p&gt;进一步分析：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;   如果size较小，原来申请的动态内存后面还有空余内存，系统将直接在原内存空间后面扩容，并返回原动态空间基地址；如果size较大，原来申请的空间后面没有足够大的空间扩容，系统将重新申请一块&amp;quot;原来的空间大小+新申请的空间大小&amp;quot;的内存，并把原来空间的内容拷贝过去，原来空间free;如果size非常大，系统内存申请失败，返回NULL,原来的内存不会释放。注意：如果扩容后的内存空间较原空间小，将会出现数据丢失，如果直接realloc(p, 0);相当于free(p).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;24-brk与sbrk&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#24-brk与sbrk&#34;&gt;#&lt;/a&gt; 24 brk 与 sbrk&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;// 函数原型：&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&amp;lt;unistd.h&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;brk&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;sbrk&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;intptr_t&lt;/span&gt; increment&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;brk () 和 sbrk () 改变 &lt;code&gt;程序间断点&lt;/code&gt; 的位置 (申请内存空间的起始处)。程序间断点就是程序数据段的结尾。（程序间断点是为初始化数据段的起始位置）. 通过增加程序间断点进程可以更有效的申请内存 。当 addr 参数合理、系统有足够的内存并且不超过最大值时 brk () 函数将数据段结尾设置为 addr, 即间断点设置为 addr。sbrk () 将程序数据空间增加 &lt;code&gt;increment字节&lt;/code&gt; 。当 &lt;code&gt;increment&lt;/code&gt;  为 0 时则返回程序间断点的当前位置。&lt;/p&gt;
+&lt;p&gt;也就说通过对间断点的设置来分配空间和回收内存，两个函数都能够改变间断点&lt;/p&gt;
+&lt;p&gt;返回值：&lt;/p&gt;
+&lt;p&gt;brk () 成功返回 0，失败返回 - 1 并且设置 errno 值为 ENOMEM（注：在 mmap 中会提到）。&lt;br /&gt;
+sbrk () 成功返回之前的程序间断点地址。如果间断点值增加，那么这个指针（指的是返回的之前的间断点地址）是指向分配的新的内存的首地址。如果出错失败，就返回一个指针并设置 errno 全局变量的值为 ENOMEM。&lt;/p&gt;
+&lt;p&gt;这两个函数都用来改变 “program break” (程序间断点) 的位置，改变数据段长度（Change data segment size），实现虚拟内存到物理内存的映射。&lt;br /&gt;
+brk () 函数直接修改有效访问范围的末尾地址实现分配与回收。sbrk () 参数函数中：当 increment 为正值时，间断点位置向后移动 increment 字节。同时返回移动之前的位置，相当于分配内存。当 increment 为负值时，位置向前移动 increment 字节，相当与于释放内存，其返回值没有实际意义。当 increment 为 0 时，不移动位置只返回当前位置。参数 increment 的符号决定了是分配还是回收内存&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3QuY3NkbmltZy5jbi9jSUdxWg==&#34;&gt;http://t.csdnimg.cn/cIGqZ&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;25fseek函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#25fseek函数&#34;&gt;#&lt;/a&gt; 25.fseek 函数（）&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;fseek&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;FILE &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;stream&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; offset&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; whence&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;作用：&lt;/p&gt;
+&lt;p&gt;C 库函数 int fseek (FILE *stream, long int offset, int whence) 设置流 stream 的文件位置为给定的偏移 offset，参数 offset 意味着从给定的 whence 位置查找的字节数【就是将指向文件具体位置的指针给修改位置使指向设定的偏移处】&lt;/p&gt;
+&lt;p&gt;参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;stream -- 这是指向 FILE 对象的指针，该 FILE 对象标识了流。&lt;/li&gt;
+&lt;li&gt;offset -- 这是相对 whence 的偏移量，以字节为单位。&lt;/li&gt;
+&lt;li&gt;whence -- 这是表示开始添加偏移 offset 的位置。它一般指定为下列常量之一&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;常量	|    描述&lt;/p&gt;
+&lt;p&gt;SEEK_SET	|  文件的开头&lt;/p&gt;
+&lt;p&gt;SEEK_CUR	|  文件指针的当前位置&lt;/p&gt;
+&lt;p&gt;SEEK_END	|  文件的末尾&lt;/p&gt;
+&lt;p&gt;返回值：&lt;/p&gt;
+&lt;p&gt;如果成功，则该函数返回零，否则返回非零值。&lt;/p&gt;
+&lt;h1 id=&#34;26ftell函数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#26ftell函数&#34;&gt;#&lt;/a&gt; 26.ftell 函数&lt;/h1&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;long&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;ftell&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;FILE &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;stream&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;作用：&lt;/p&gt;
+&lt;p&gt;C 库函数 long int ftell (FILE *stream) 返回给定流 stream 的当前文件位置。【上面的 fseek 修改了位置，这里可以用来返回】&lt;/p&gt;
+&lt;p&gt;参数：&lt;/p&gt;
+&lt;p&gt;stream -- 这是指向 FILE 对象的指针，该 FILE 对象标识了流&lt;/p&gt;
+&lt;p&gt;返回值：&lt;/p&gt;
+&lt;p&gt;该函数返回位置标识符的当前值。如果发生错误，则返回 -1L，全局变量 errno 被设置为一个正值&lt;/p&gt;
+&lt;h1 id=&#34;27空类型void&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#27空类型void&#34;&gt;#&lt;/a&gt; 27. 空类型 (void)&lt;/h1&gt;
+&lt;p&gt;通常用于以下三种情况&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;函数返回空：函数不返回值，或者返回空，例如 void exit (int status);&lt;/li&gt;
+&lt;li&gt;函数参数为空：函数不接受任何参数，不带参数的函数可以接受一个 void。例如 int rand (void);&lt;/li&gt;
+&lt;li&gt;指针指向 void：类型为 void * 的指针代表 &lt;code&gt;对象的地址&lt;/code&gt; ，而 &lt;code&gt;不是类型&lt;/code&gt; 。例如，内存分配函数 void *malloc (size_t size); 返回指向 void 的指针，可以转换为任何数据类型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;28pthread_creat函数创建子线程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#28pthread_creat函数创建子线程&#34;&gt;#&lt;/a&gt; 28.pthread_creat 函数（创建子线程）、&lt;/h1&gt;
+&lt;p&gt;pthread_create () 函数用来创建线程&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;pthread_create&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;pthread_t&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;thread&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                   &lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;pthread_attr_t&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;attr&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                   &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;start_routine&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;                   &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;arg&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;各个参数的含义是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;pthread_t *thread&lt;/code&gt; ：传递一个  &lt;code&gt;pthread_t&lt;/code&gt;  类型的指针变量，也可以直接传递某个  &lt;code&gt;pthread_t&lt;/code&gt;  类型变量的地址。 &lt;code&gt;pthread_t&lt;/code&gt;  是一种用于表示线程的数据类型，每一个  &lt;code&gt;pthread_t&lt;/code&gt;  类型的变量都可以表示一个线程。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;const pthread_attr_t *attr：&lt;/code&gt; 用于手动设置新建线程的属性，例如线程的调用策略、线程所能使用的栈内存的大小等。大部分场景中，我们都不需要手动修改线程的属性，将 attr 参数赋值为 &lt;code&gt; NULL&lt;/code&gt; ， &lt;code&gt;pthread_create()&lt;/code&gt;  函数会采用系统默认的属性值创建线程。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;pthread_attr_t &lt;/code&gt; 类型以结构体的形式定义在 &amp;lt;pthread.h&amp;gt; 头文件中，此类型的变量专门表示线程的属性。&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;void *(*start_routine) (void *)：&lt;/code&gt; 以函数指针的方式指明新建线程需要执行的函数，该函数的参数最多有 1 个（可以省略不写），形参和返回值的类型都必须为 void* 类型。void* 类型又称空指针类型，表明指针所指数据的类型是未知的。使用此类型指针时，我们通常需要先对其进行强制类型转换，然后才能正常访问指针指向的数据。&lt;/p&gt;
+&lt;p&gt;如果该函数有返回值，则线程执行完函数后，函数的返回值可以由 pthread_join () 函数接收。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;void *arg&lt;/code&gt; ：指定传递给  &lt;code&gt;start_routine&lt;/code&gt;  函数的实参，当不需要传递任何数据时，将  &lt;code&gt;arg&lt;/code&gt;  赋值为  &lt;code&gt;NULL&lt;/code&gt;  即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;返回值：&lt;/p&gt;
+&lt;p&gt;如果成功创建线程， &lt;code&gt;pthread_create()&lt;/code&gt;  函数返回数字 0，反之返回非零值。各个非零值都对应着不同的宏，指明创建失败的原因，常见的宏有以下几种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;EAGAIN：系统资源不足，无法提供创建线程所需的资源。&lt;/li&gt;
+&lt;li&gt;EINVAL：传递给  &lt;code&gt;pthread_create(&lt;/code&gt; ) 函数的 attr 参数无效。&lt;/li&gt;
+&lt;li&gt;EPERM：传递给 &lt;code&gt; pthread_create()&lt;/code&gt;  函数的 attr 参数中，某些属性的设置为非法操作，程序没有相关的设置权限&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上这些宏都声明在 &amp;lt;errno.h&amp;gt; 头文件中，如果程序中想使用这些宏，需提前引入此头文件&lt;/p&gt;
+&lt;p&gt;注意：&lt;/p&gt;
+&lt;p&gt;pthread_create () 函数成功创建的线程会自动执行指定的函数，不需要手动开启。为了确保创建的线程能在主线程之前执行完，程序中可以调用 sleep () 函数延缓了主线程的执行速度。否则整个进程会随着主线程执行结束而立即终止：由于主线程执行太快，子线程可能尚未执行完就被强制终止&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9jLmJpYW5jaGVuZy5uZXQvdmlldy84NjA3Lmh0bWw=&#34;&gt;https://c.biancheng.net/view/8607.html&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;29pthread_join函数-等待线程执行结束&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#29pthread_join函数-等待线程执行结束&#34;&gt;#&lt;/a&gt; 29.pthread_join () 函数 【等待线程执行结束】&lt;/h1&gt;
+&lt;p&gt;pthread_join () 函数声明在 &amp;lt; pthread.h&amp;gt; 头文件中，语法格式如下&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;pthread_join&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;pthread_t&lt;/span&gt; thread&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; retval&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;thread 参数用于指定接收哪个线程的返回值；retval 参数表示接收到的返回值，如果 &lt;code&gt; thread&lt;/code&gt;  线程没有返回值，又或者我们不需要接收 &lt;code&gt; thread&lt;/code&gt;  线程的返回值，可以将 &lt;code&gt;retval&lt;/code&gt;  参数置为 NULL。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pthread_join() &lt;/code&gt; 函数会一直阻塞调用它的线程，直至目标线程执行结束（接收到目标线程的返回值），阻塞状态才会解除。如果  &lt;code&gt;pthread_join()&lt;/code&gt;  函数成功等到了目标线程执行结束（成功获取到目标线程的返回值），返回值为数字 0；反之如果执行失败，函数会根据失败原因返回相应的非零值，每个非零值都对应着不同的宏，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;EDEADLK：检测到线程发生了死锁。&lt;/li&gt;
+&lt;li&gt;EINVAL：分为两种情况，要么目标线程本身不允许其它线程获取它的返回值，要么事先就已经有线程调用  &lt;code&gt;pthread_join() &lt;/code&gt; 函数获取到了目标线程的返回值。&lt;/li&gt;
+&lt;li&gt;ESRCH：找不到指定的 thread 线程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;再次强调，一个线程执行结束的返回值只能由一个  &lt;code&gt;pthread_join() &lt;/code&gt; 函数获取，当有多个线程调用 &lt;code&gt;pthread_join()&lt;/code&gt;  函数获取同一个线程的执行结果时，哪个线程最先执行  &lt;code&gt;pthread_join()&lt;/code&gt;  函数，执行结果就由那个线程获得，其它线程的 &lt;code&gt;pthread_join()&lt;/code&gt;  函数都将执行失败。&lt;/p&gt;
+&lt;p&gt;对于一个默认属性的线程 A 来说，线程占用的资源并不会因为 &lt;code&gt;执行结束&lt;/code&gt;  (线程自己执行结束) 而得到释放。而通过在其它线程中执行 &lt;code&gt;pthread_join(A,NULL);&lt;/code&gt;  语句，可以轻松实现 “及时释放线程 A 所占资源” 的目的&lt;/p&gt;
+&lt;h1 id=&#34;30关于指针&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#30关于指针&#34;&gt;#&lt;/a&gt; 30. 关于指针&lt;/h1&gt;
+&lt;p&gt;取值运算（ &lt;code&gt;*p&lt;/code&gt; ）返回保存在 &lt;code&gt;内存地址为&lt;/code&gt;  p 的内存空间中的值【 &lt;code&gt;*p&lt;/code&gt;  时 p 本身会被看作为一个地址】。取地址（&amp;amp;p）运算则返回操作数 p 的内存地址&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLWhhbnMvJUU2JThDJTg3JUU2JUE4JTk5XyglRTklOUIlQkIlRTglODUlQTYlRTclQTclOTElRTUlQUQlQjgp&#34;&gt;https://zh.wikipedia.org/zh-hans/ 指標_(電腦科學)&lt;/span&gt;&lt;/p&gt;
  ]]></description>
         </item>
     </channel>

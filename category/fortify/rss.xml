@@ -8,15 +8,15 @@
         <pubDate>Sat, 07 Oct 2023 14:15:56 +0800</pubDate>
         <lastBuildDate>Sat, 07 Oct 2023 14:15:56 +0800</lastBuildDate>
         <category>Java</category>
-        <category>Linux</category>
-        <category>Apache</category>
         <category>pwn</category>
+        <category>Linux</category>
         <category>二进制</category>
+        <category>Apache</category>
         <category>报错</category>
         <category>C++</category>
-        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
+        <category>C语言</category>
         <category>ret2csu</category>
         <category>how2heap</category>
         <category>fastbin.attack</category>
@@ -28,8 +28,8 @@
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</guid>
             <title>FORTIFY_SOURCE（例题：CTFshow的pwn32）</title>
             <link>https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</link>
-            <category>Linux</category>
             <category>pwn</category>
+            <category>Linux</category>
             <pubDate>Sat, 07 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1简介在编译时进行设置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1简介在编译时进行设置&#34;&gt;#&lt;/a&gt; 1. 简介（在编译时进行设置）：&lt;/h1&gt;
 &lt;p&gt;fority 是轻微的检测，用于检查缓冲区溢出的错误，在程序采用打量的字符串或者内存操作函数适用，例如：memcpy、memset、stpcpy、strcpy、strncpy、strncat、sprintf、snprintf、vsprintf、gets 以及宽字符的变体。&lt;/p&gt;

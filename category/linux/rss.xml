@@ -8,15 +8,15 @@
         <pubDate>Mon, 16 Oct 2023 20:05:56 +0800</pubDate>
         <lastBuildDate>Mon, 16 Oct 2023 20:05:56 +0800</lastBuildDate>
         <category>Java</category>
-        <category>Linux</category>
-        <category>Apache</category>
         <category>pwn</category>
+        <category>Linux</category>
         <category>二进制</category>
+        <category>Apache</category>
         <category>报错</category>
         <category>C++</category>
-        <category>C语言</category>
         <category>windows</category>
         <category>渗透</category>
+        <category>C语言</category>
         <category>ret2csu</category>
         <category>how2heap</category>
         <category>fastbin.attack</category>
@@ -217,14 +217,16 @@ tail -c字节数 [file_name] //显示文件尾部C个字节的内容
 &lt;p&gt;【基于 js 和 html 使用了一些 css3 的效果（利用 css3 判断屏幕）】&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/OM1%28JQCT%60I5W%24ZJ06XGL8MG.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/%5D%7D%60%4017%24WIN5T2D8G34ZLMOT.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;文件：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/%E5%9B%BE%E5%BA%8A/H%29%5DMM0E1P%29%29D%29J%7D%5BMJVGO%25K.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</guid>
             <title>FORTIFY_SOURCE（例题：CTFshow的pwn32）</title>
             <link>https://vvwwvv.cn/2023/10/07/Linux/FORTIFY/</link>
-            <category>Linux</category>
             <category>pwn</category>
+            <category>Linux</category>
             <pubDate>Sat, 07 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1简介在编译时进行设置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1简介在编译时进行设置&#34;&gt;#&lt;/a&gt; 1. 简介（在编译时进行设置）：&lt;/h1&gt;
 &lt;p&gt;fority 是轻微的检测，用于检查缓冲区溢出的错误，在程序采用打量的字符串或者内存操作函数适用，例如：memcpy、memset、stpcpy、strcpy、strncpy、strncat、sprintf、snprintf、vsprintf、gets 以及宽字符的变体。&lt;/p&gt;
@@ -253,8 +255,8 @@ tail -c字节数 [file_name] //显示文件尾部C个字节的内容
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/05/Linux/large_bin_attack/</guid>
             <title>large bin attack（为house利用系列打下基础）</title>
             <link>https://vvwwvv.cn/2023/10/05/Linux/large_bin_attack/</link>
-            <category>Linux</category>
             <category>pwn</category>
+            <category>Linux</category>
             <pubDate>Thu, 05 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1large-bin&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1large-bin&#34;&gt;#&lt;/a&gt; 1.Large bin&lt;/h1&gt;
 &lt;h2 id=&#34;1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1&#34;&gt;#&lt;/a&gt; 1.&lt;/h2&gt;
@@ -311,8 +313,8 @@ bk_nextsize指向了上一组的第一个chunk
             <guid isPermalink="true">https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</guid>
             <title>ASLR与PIE（例题：CTFshow的pwn31）</title>
             <link>https://vvwwvv.cn/2023/10/04/Linux/ASLR%E4%B8%8EPIE/</link>
-            <category>Linux</category>
             <category>pwn</category>
+            <category>Linux</category>
             <pubDate>Wed, 04 Oct 2023 14:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;ASLR&lt;/code&gt;  与 &lt;code&gt;PIE&lt;/code&gt;  是不同的，两者不能认为是同一个机制，但是他们都是对地址进行 &lt;code&gt;随机化&lt;/code&gt; ，只不过作用的 &lt;code&gt;对象&lt;/code&gt; 和作用 &lt;code&gt;时期&lt;/code&gt; 不太一样&lt;/p&gt;
@@ -396,20 +398,11 @@ glibc：2.36-0ubuntu4&lt;br /&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
-            <title>CentOS 7搭建web服务器与个人网页制作（Apache）</title>
-            <link>https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
-            <category>Linux</category>
-            <category>Apache</category>
-            <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
-            <description><![CDATA[  ]]></description>
-        </item>
-        <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</guid>
             <title>Linux(shell)命令和函数</title>
             <link>https://vvwwvv.cn/2023/09/19/Linux/Linux%E5%91%BD%E4%BB%A4%E5%92%8C%E5%87%BD%E6%95%B0/</link>
-            <category>Linux</category>
             <category>pwn</category>
+            <category>Linux</category>
             <category>二进制</category>
             <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;1linux执行多个命令shell命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1linux执行多个命令shell命令&#34;&gt;#&lt;/a&gt; 1.Linux 执行多个命令（shell 命令）&lt;/h1&gt;
@@ -473,11 +466,20 @@ glibc：2.36-0ubuntu4&lt;br /&gt;
  ]]></description>
         </item>
         <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+            <title>CentOS 7搭建web服务器与个人网页制作（Apache）</title>
+            <link>https://vvwwvv.cn/2023/09/19/Linux/Linux%E6%90%AD%E5%BB%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+            <category>Linux</category>
+            <category>Apache</category>
+            <pubDate>Tue, 19 Sep 2023 20:05:56 +0800</pubDate>
+            <description><![CDATA[  ]]></description>
+        </item>
+        <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</guid>
             <title>Linux之系统调用</title>
             <link>https://vvwwvv.cn/2023/08/29/Linux/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</link>
-            <category>Linux</category>
             <category>pwn</category>
+            <category>Linux</category>
             <category>二进制</category>
             <pubDate>Tue, 29 Aug 2023 20:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;一系统调用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一系统调用&#34;&gt;#&lt;/a&gt; 一。系统调用&lt;/h1&gt;
@@ -640,9 +642,11 @@ SCMP_ACT_KILL( 0x00000000U) 白名单外的进程被杀死
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;__int64 &lt;span class=&#34;token function&#34;&gt;sandbox&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;// 两个重要的宏，SCMP_ACT_ALLOW (0x7fff0000U) SCMP_ACT_KILL ( 0x00000000U)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;//seccomp_init 初始化，参数为 0 表示白名单模式，即没有匹配到规则的系统调用都会杀死进程，默认不允许所有的 syscall&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;// 参数为 0x7fff0000U 则为黑名单模式，在名单里的会被杀死&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  v1 &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;seccomp_init&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;v1 &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;    &lt;span class=&#34;token comment&#34;&gt;// 初始化失败，v1&amp;lt;=0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;puts&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;seccomp error&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;//seccomp_rule_add 添加规则&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;//v1 对应上面初始化的返回值&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;// 0x7fff0000 即对应宏 SCMP_ACT_ALLOW（黑名单）&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;// 第三个参数代表对应的系统调用号，0--&gt;read/1--&gt;write/2--&gt;open/60--&gt;exit&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;// 第四个参数表示是否需要对对应系统调用的参数做出限制以及指示做出限制的个数，传 0 不做任何限制&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token function&#34;&gt;seccomp_rule_add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x7FFF0000LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;2LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token function&#34;&gt;seccomp_rule_add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x7FFF0000LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token function&#34;&gt;seccomp_rule_add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x7FFF0000LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token function&#34;&gt;seccomp_rule_add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x7FFF0000LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;60LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token function&#34;&gt;seccomp_rule_add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x7FFF0000LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;231LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0LL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token comment&#34;&gt;// seccomp_load - Load the current seccomp filter into the kernel&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;seccomp_load&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;token comment&#34;&gt;//load 成功则返回 0，这里 load 失败会执行 if 内部函数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;28&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  	&lt;span class=&#34;token comment&#34;&gt;// seccomp_release - Release the seccomp filter state&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;29&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  	&lt;span class=&#34;token comment&#34;&gt;// 但对已经 load 的过滤规则不影响&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;30&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;seccomp_release&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;31&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;puts&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;seccomp error&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;32&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;33&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;34&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;seccomp_release&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;  释放&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;35&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0E5NTE4NjA1NTUvYXJ0aWNsZS9kZXRhaWxzLzExNjczODY3Ng==&#34;&gt;https://blog.csdn.net/A951860555/article/details/116738676&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;这里给出关于 &lt;code&gt;seccomp_load&lt;/code&gt;  的定义：&lt;/p&gt;
 &lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&amp;lt;seccomp.h&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt; scmp_filter_ctx&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;seccomp_load&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;scmp_filter_ctx ctx&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;Link with &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;lseccomp&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;DESCRIPTION：&lt;/p&gt;
-&lt;p&gt;Loads the seccomp filter provided by ctx into the kernel; if the function succeeds the new seccomp filter will be active when the  &lt;code&gt;function returns&lt;/code&gt; .  函数返回时过滤开始运行&lt;/p&gt;
+&lt;p&gt;Loads the seccomp filter provided by ctx into the kernel; if the function succeeds the new seccomp filter will be active when the  &lt;code&gt;function returns&lt;/code&gt; .  函数返回时过滤开始运行【seccomp_load 是应用过滤，seccomp_reset 是解除过滤。】&lt;/p&gt;
 &lt;p&gt;返回值：Returns zero on success or one of the following error codes on failure；成功时返回  &lt;code&gt;0&lt;/code&gt; ，失败返回对应错误代码&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9tYW4uYXJjaGxpbnV4Lm9yZy9tYW4vc2VjY29tcF9sb2FkLjMuZW4jREVTQ1JJUFRJT04=&#34;&gt;https://man.archlinux.org/man/seccomp_load.3.en#DESCRIPTION&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;seccomp_rule_add&lt;/code&gt;  是添加一条规则&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;seccomp_rule_add&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;scmp_filter_ctx ctx&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;             &lt;span class=&#34;token class-name&#34;&gt;uint32_t&lt;/span&gt; action&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; syscall&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;unsigned&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; arg_cnt&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;arg_cnt 表明是否需要对对应系统调用的参数做出限制以及指示做出限制的个数，如果仅仅需要允许或者禁止所有某个系统调用，arg_cnt 直接传入 0 即可，seccomp_rule_add (ctx, SCMP_ACT_KILL, SCMP_SYS (execve), 0) 即禁用 execve，不管其参数如何。&lt;/p&gt;
 &lt;h1 id=&#34;3使用seccomp-tools&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#3使用seccomp-tools&#34;&gt;#&lt;/a&gt; 3. 使用 seccomp-tools&lt;/h1&gt;
 &lt;p&gt;命令：&lt;br /&gt;
 seccomp-tools dump ./pwn&lt;/p&gt;
@@ -661,8 +665,8 @@ seccomp-tools dump ./pwn&lt;/p&gt;
             <guid isPermalink="true">https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/</guid>
             <title>堆</title>
             <link>https://vvwwvv.cn/2023/08/24/pwn/%E5%A0%86/%E5%A0%86/</link>
-            <category>Linux</category>
             <category>pwn</category>
+            <category>Linux</category>
             <category>二进制</category>
             <pubDate>Thu, 24 Aug 2023 20:15:56 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;chunk 的 p 位设为 1 即上一个 chunk 被使用并且上一个 chunk 可以使用 pre_size 的空间  （用来储存前一个物理相邻的 chunk 的数据 ，（两个都空闲才合并）&lt;/p&gt;

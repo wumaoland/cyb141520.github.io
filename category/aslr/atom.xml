@@ -5,15 +5,15 @@
     <link href="https://vvwwvv.cn" />
     <updated>2023-10-04T06:15:56.000Z</updated>
     <category term="Java" />
-    <category term="Linux" />
-    <category term="Apache" />
     <category term="pwn" />
+    <category term="Linux" />
     <category term="二进制" />
+    <category term="Apache" />
     <category term="报错" />
     <category term="C++" />
-    <category term="C语言" />
     <category term="windows" />
     <category term="渗透" />
+    <category term="C语言" />
     <category term="ret2csu" />
     <category term="how2heap" />
     <category term="fastbin.attack" />
@@ -66,8 +66,8 @@ show disable-randomization
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS9kdWFsbGF5LzE4NzY4NDE=&#34;&gt;https://blog.51cto.com/duallay/1876841&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubXJza3llLmNuL2FyY2hpdmVzLzkwNThkZmZjLyMlRTUlQkMlODAlRTUlOTAlQUYtUElF&#34;&gt;https://www.mrskye.cn/archives/9058dffc/# 开启 - PIE&lt;/span&gt;&lt;/p&gt;
 </content>
-        <category term="Linux" />
         <category term="pwn" />
+        <category term="Linux" />
         <updated>2023-10-04T06:15:56.000Z</updated>
     </entry>
 </feed>

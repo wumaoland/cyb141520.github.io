@@ -5,15 +5,15 @@
     <link href="https://vvwwvv.cn" />
     <updated>2023-09-22T09:08:15.000Z</updated>
     <category term="Java" />
-    <category term="Linux" />
-    <category term="Apache" />
     <category term="pwn" />
+    <category term="Linux" />
     <category term="二进制" />
+    <category term="Apache" />
     <category term="报错" />
     <category term="C++" />
-    <category term="C语言" />
     <category term="windows" />
     <category term="渗透" />
+    <category term="C语言" />
     <category term="ret2csu" />
     <category term="how2heap" />
     <category term="fastbin.attack" />
@@ -57,7 +57,7 @@ xor    edx,edx
 mov  eax, 0x5
 int     0x80
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这里解释为什么先要 &lt;code&gt;push 0x0&lt;/code&gt; &lt;br /&gt;
+&lt;p&gt;这里解释为什么先要 &lt;code&gt;push 0x0&lt;/code&gt; 【后来发现，这里写错了，先 push 的 0，在栈上应该是高地址，flag 应该在低处，所以这里并没有起到作为终止符的作用，这里最应该是 &lt;code&gt;0flag&lt;/code&gt; 】&lt;br /&gt;
 &lt;img data-src=&#34;https://z1.ax1x.com/2023/09/23/pPTl3y6.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;2. 调用 read 读取 flag&lt;/p&gt;
 &lt;p&gt;调用函数为 &lt;code&gt;read(0x3,esp,0x100)&lt;/code&gt; (0x3 为文件描述符 0,1,2，写入到 esp，这一部分 esp 没有进行调用不会被影响)&lt;/p&gt;
