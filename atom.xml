@@ -11,9 +11,9 @@
     <category term="Apache" />
     <category term="报错" />
     <category term="C++" />
+    <category term="C语言" />
     <category term="windows" />
     <category term="渗透" />
-    <category term="C语言" />
     <category term="ret2csu" />
     <category term="how2heap" />
     <category term="fastbin.attack" />
@@ -1601,8 +1601,7 @@ NX:       NX enabled
 PIE:      No PIE (0x8048000)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;源码为 c++ 编写的，有一大堆模板类&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;
-int sub_8049059()
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;int sub_8049059()
 &amp;#123;
   int v0; // eax
   int v1; // eax
