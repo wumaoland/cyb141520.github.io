@@ -5,8 +5,8 @@
         <link>https://vvwwvv.cn</link>
         <description></description>
         <language>zh-CN</language>
-        <pubDate>Sat, 30 Sep 2023 19:23:15 +0800</pubDate>
-        <lastBuildDate>Sat, 30 Sep 2023 19:23:15 +0800</lastBuildDate>
+        <pubDate>Mon, 06 Nov 2023 19:23:15 +0800</pubDate>
+        <lastBuildDate>Mon, 06 Nov 2023 19:23:15 +0800</lastBuildDate>
         <category>Java</category>
         <category>pwn</category>
         <category>Linux</category>
@@ -24,6 +24,75 @@
         <category>系统调用</category>
         <category>rop</category>
         <category>nc</category>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/11/06/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+            <title>IOT漏洞环境搭建</title>
+            <link>https://vvwwvv.cn/2023/11/06/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+            <category>二进制</category>
+            <pubDate>Mon, 06 Nov 2023 19:23:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
+&lt;p&gt;最近想开始尝试物联网设备的漏洞，所以就先搭建一个环境，在自己 pwn (ubuntu22.04) 的环境下搭建的&lt;/p&gt;
+&lt;h1 id=&#34;1binwalk固件解包工具&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1binwalk固件解包工具&#34;&gt;#&lt;/a&gt; 1.binwalk (固件解包工具)&lt;/h1&gt;
+&lt;p&gt;binwalk 是一个固件解包的工具，当我们用编程器 dump 出一个固件用，需要用 binwalk 来解压&lt;/p&gt;
+&lt;p&gt;这工具一般 kali 上会自带，可以自行编译：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1JlRmlybUxhYnMvYmlud2Fsaw==&#34;&gt;https://github.com/ReFirmLabs/binwalk&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;用下面的这个把我 pwndbg 给干没了。。。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; binwalk&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;改换这样安装：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; update&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; build-essential autoconf &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone https://github.com/devttys0/binwalk&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ &lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; binwalk&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; python setup.py &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 如果安装的是 python 2.x，还需要安装 python-lzma 模块&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;$ &lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; python-lzma&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;安装ida插件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装ida插件&#34;&gt;#&lt;/a&gt; 安装 IDA 插件&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;binwalk&lt;/code&gt;  还可以安装  &lt;code&gt;binwalk IDA&lt;/code&gt;  插件，这个功能对于做固件逆向的功能是非常方便的。安装：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;python3 setup.py idainstall --idadir = / home / user / ida&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;参考：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9jbG91ZC50ZW5jZW50LmNvbS9kZXZlbG9wZXIvYXJ0aWNsZS8xNTE1Mjg1&#34;&gt;https://cloud.tencent.com/developer/article/1515285&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;发现squashfs-root文件为空时&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#发现squashfs-root文件为空时&#34;&gt;#&lt;/a&gt; 发现 &lt;code&gt;squashfs-root&lt;/code&gt;  文件为空时&lt;/h2&gt;
+&lt;p&gt;缺少了 &lt;code&gt;sasquatch&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;下载:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL2RldnR0eXMwL3Nhc3F1YXRjaA==&#34;&gt;https://github.com/devttys0/sasquatch&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;./build.sh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;报错就下：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL3RocmVhZGV4aW8vc2FzcXVhdGNo&#34;&gt;https://github.com/threadexio/sasquatch&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;2firmadyne安装未成功&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2firmadyne安装未成功&#34;&gt;#&lt;/a&gt; 2.firmadyne 安装（未成功）&lt;/h1&gt;
+&lt;p&gt;FIRMADYNE 是一个自动化且可扩展的系统，用于对基于 Linux 的嵌入式固件进行仿真和动态分析&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL2Zpcm1hZHluZS9maXJtYWR5bmUjaW50cm9kdWN0aW9u&#34;&gt;https://github.com/firmadyne/firmadyne#introduction&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;密码 &lt;code&gt;firmadyne&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;passwd: &lt;code&gt;postgres&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;。。。&lt;/p&gt;
+&lt;h1 id=&#34;2qume安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2qume安装&#34;&gt;#&lt;/a&gt; 2.qume 安装&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;QEMU是一套由法布里斯·贝拉(Fabrice Bellard)所编写的以GPL许可证分发源码的模拟处理器，在GNU/Linux平台上使用广泛(用来模拟对应iot设备的运行)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install qemu-user qemu-system&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install qemu-user-static&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://download.qemu.org/qemu-4.1.0.tar.xz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;https://download.qemu.org/qemu-3.1.1.tar.xz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; xvJf qemu-4.1.0.tar.xz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; qemu-4.1.0&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;./configure&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#报错&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libpixman-1-dev&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/DVRF%E5%AD%A6%E4%B9%A0/</guid>
+            <title>利用DVRF学习固件分析</title>
+            <link>https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/DVRF%E5%AD%A6%E4%B9%A0/</link>
+            <category>二进制</category>
+            <pubDate>Sat, 30 Sep 2023 19:23:15 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;1下载dvrf与安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1下载dvrf与安装&#34;&gt;#&lt;/a&gt; 1. 下载 DVRF 与安装&lt;/h1&gt;
+&lt;p&gt;下载压缩包：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL3ByYWV0b3JpYW4taW5jL0RWUkY=&#34;&gt;https://github.com/praetorian-inc/DVRF&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;下载后解压：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;unzip DVRF-master.zip&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安装 buildroot（2016.05 版本）【搭建交叉编译环境，这里我的 ubuntu 是 22.04】&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; buildroot&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; buildroot&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://buildroot.org/downloads/buildroot-2016.05.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;https://buildroot.org/downloads/buildroot-2018.08.4.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;https://buildroot.org/downloads/buildroot-2022.02.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;https://buildroot.org/downloads/buildroot-2020.02.5.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; zxf buildroot-2016.05.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; buildroot-2016.05&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; ncurses-dev&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; menuconfig&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;上面的 buildroot 版本有的不行，这里查找最符合的版本：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9idWlsZHJvb3Qub3JnL2Rvd25sb2Fkcy8=&#34;&gt;https://buildroot.org/downloads/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/E0UTUAXFYI_5TGVEZ4JDJVL.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/394%253O9EOUI%7DLPHZ19B%24RAY.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/2%5D%7BL%24C20%24Y0PAL_%60_7%28%5D%40%28N.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;选择完成后退出，然后进入 &lt;code&gt;Toolchain&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/J_%28S%7BN8KJL7MK%24%24R%7DF%285Z%25T.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;设置远程 gdb 调试：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/AHKQMP00R2IE3Q%25%7E%7B1GS%5BKG.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;最后输入 &lt;code&gt;make&lt;/code&gt;  等待下载（）&lt;/p&gt;
+&lt;p&gt;这里报错：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/%40%25MJA00GBQDRERR%408GDHWGQ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/N7BND%25Y%7D4L%29U3T%25DV416M1H.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;2使用binwalk进行固件提取&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2使用binwalk进行固件提取&#34;&gt;#&lt;/a&gt; 2. 使用 binwalk 进行固件提取&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;binwalk -Me *.bin&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;这里参数M是进行递归提取（和 -e 或 -dd 配合）
+参数 -e 是按照预定的配置文件中的提取方法从固件中提取探测到的文件系统
+
+d参数用来限制递归提取的深度，默认深度为 8（仅有 -M时 有效） 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其他参数：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d4aDAwMDBtbS9hcnRpY2xlL2RldGFpbHMvODU2ODM2NjE=&#34;&gt;https://blog.csdn.net/wxh0000mm/article/details/85683661&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/D-Link/D-Link%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</guid>
             <title>D-Link路由器漏洞复现</title>

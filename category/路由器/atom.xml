@@ -22,6 +22,40 @@
     <category term="rop" />
     <category term="nc" />
     <entry>
+        <id>https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/DVRF%E5%AD%A6%E4%B9%A0/</id>
+        <title>利用DVRF学习固件分析</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/DVRF%E5%AD%A6%E4%B9%A0/"/>
+        <content type="html">&lt;h1 id=&#34;1下载dvrf与安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1下载dvrf与安装&#34;&gt;#&lt;/a&gt; 1. 下载 DVRF 与安装&lt;/h1&gt;
+&lt;p&gt;下载压缩包：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL3ByYWV0b3JpYW4taW5jL0RWUkY=&#34;&gt;https://github.com/praetorian-inc/DVRF&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;下载后解压：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;unzip DVRF-master.zip&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安装 buildroot（2016.05 版本）【搭建交叉编译环境，这里我的 ubuntu 是 22.04】&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; buildroot&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; buildroot&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt; https://buildroot.org/downloads/buildroot-2016.05.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;https://buildroot.org/downloads/buildroot-2018.08.4.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;https://buildroot.org/downloads/buildroot-2022.02.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;https://buildroot.org/downloads/buildroot-2020.02.5.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;tar&lt;/span&gt; zxf buildroot-2016.05.tar.gz&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; buildroot-2016.05&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; ncurses-dev&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; menuconfig&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;上面的 buildroot 版本有的不行，这里查找最符合的版本：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9idWlsZHJvb3Qub3JnL2Rvd25sb2Fkcy8=&#34;&gt;https://buildroot.org/downloads/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/E0UTUAXFYI_5TGVEZ4JDJVL.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/394%253O9EOUI%7DLPHZ19B%24RAY.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/2%5D%7BL%24C20%24Y0PAL_%60_7%28%5D%40%28N.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;选择完成后退出，然后进入 &lt;code&gt;Toolchain&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/J_%28S%7BN8KJL7MK%24%24R%7DF%285Z%25T.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;设置远程 gdb 调试：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/AHKQMP00R2IE3Q%25%7E%7B1GS%5BKG.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;最后输入 &lt;code&gt;make&lt;/code&gt;  等待下载（）&lt;/p&gt;
+&lt;p&gt;这里报错：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/%40%25MJA00GBQDRERR%408GDHWGQ.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/iot/N7BND%25Y%7D4L%29U3T%25DV416M1H.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;2使用binwalk进行固件提取&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2使用binwalk进行固件提取&#34;&gt;#&lt;/a&gt; 2. 使用 binwalk 进行固件提取&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;binwalk -Me *.bin&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;这里参数M是进行递归提取（和 -e 或 -dd 配合）
+参数 -e 是按照预定的配置文件中的提取方法从固件中提取探测到的文件系统
+
+d参数用来限制递归提取的深度，默认深度为 8（仅有 -M时 有效） 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其他参数：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d4aDAwMDBtbS9hcnRpY2xlL2RldGFpbHMvODU2ODM2NjE=&#34;&gt;https://blog.csdn.net/wxh0000mm/article/details/85683661&lt;/span&gt;&lt;/p&gt;
+</content>
+        <category term="二进制" />
+        <updated>2023-09-30T11:23:15.000Z</updated>
+    </entry>
+    <entry>
         <id>https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/D-Link/D-Link%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</id>
         <title>D-Link路由器漏洞复现</title>
         <link rel="alternate" href="https://vvwwvv.cn/2023/09/30/pwn/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E/D-Link/D-Link%E8%B7%AF%E7%94%B1%E5%99%A8%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>

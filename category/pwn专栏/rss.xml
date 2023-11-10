@@ -1651,7 +1651,7 @@ string：要在其中搜索匹配的字符串。&lt;br /&gt;
 &lt;p&gt;常用的命令：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ldmlscGFuLmNvbS8yMDIwLzA5LzEzL2dkYi10aXBzLw==&#34;&gt;https://evilpan.com/2020/09/13/gdb-tips/&lt;/span&gt;&lt;/p&gt;
 &lt;h3 id=&#34;53ropgadget-binary-pwn79-only-jmpcall&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#53ropgadget-binary-pwn79-only-jmpcall&#34;&gt;#&lt;/a&gt; 53. &lt;code&gt;ROPgadget --binary pwn79  --only &amp;quot;jmp|call&amp;quot;&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;利用这个可以帮助我们在用 &lt;code&gt;ret2reg&lt;/code&gt;  时跳转到保存目标地址的寄存器&lt;/p&gt;
-&lt;h3 id=&#34;54re2regpwn79&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#54re2regpwn79&#34;&gt;#&lt;/a&gt; 54.re2reg（pwn79）&lt;/h3&gt;
+&lt;h3 id=&#34;54ret2regpwn79&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#54ret2regpwn79&#34;&gt;#&lt;/a&gt; 54.ret2reg（pwn79）&lt;/h3&gt;
 &lt;p&gt;ret2reg 原理：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;查看溢出函返回时哪个寄存值指向 &lt;code&gt;执行目标&lt;/code&gt; 的地址空间&lt;/li&gt;
