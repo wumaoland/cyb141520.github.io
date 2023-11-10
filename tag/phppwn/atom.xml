@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://vvwwvv.cn</id>
+    <title>0110 0011 0111 1001 0110 0010 • Posts by &#34;phppwn&#34; tag</title>
+    <link href="https://vvwwvv.cn" />
+    <updated>2023-05-04T11:33:55.000Z</updated>
+    <category term="Java" />
+    <category term="pwn" />
+    <category term="Linux" />
+    <category term="二进制" />
+    <category term="Apache" />
+    <category term="报错" />
+    <category term="C++" />
+    <category term="C语言" />
+    <category term="windows" />
+    <category term="渗透" />
+    <category term="ret2csu" />
+    <category term="phppwn" />
+    <category term="ctf" />
+    <category term="how2heap" />
+    <category term="fastbin.attack" />
+    <category term="系统调用" />
+    <category term="rop" />
+    <category term="nc" />
+    <entry>
+        <id>https://vvwwvv.cn/2023/05/04/pwn/webpwn/phppwn/</id>
+        <title>webpwn初学习（php篇）</title>
+        <link rel="alternate" href="https://vvwwvv.cn/2023/05/04/pwn/webpwn/phppwn/"/>
+        <content type="html">&lt;h1 id=&#34;1前置知识&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1前置知识&#34;&gt;#&lt;/a&gt; 1. 前置知识&lt;/h1&gt;
+&lt;h1 id=&#34;2环境搭建&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2环境搭建&#34;&gt;#&lt;/a&gt; 2. 环境搭建&lt;/h1&gt;
+&lt;h2 id=&#34;1php拓展安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#1php拓展安装&#34;&gt;#&lt;/a&gt; 1.PHP 拓展安装&lt;/h2&gt;
+&lt;p&gt;下面是是 PHP 拓展模块的安装流程，我这个是在 ubuntu22.04 下安装的&lt;/p&gt;
+&lt;p&gt;首先是安装 php，以及 php 开发包&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; php php-dev&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;安装完后利用 &lt;code&gt;php --version&lt;/code&gt;  查看当前 php 版本&lt;/p&gt;
+&lt;p&gt;我这里是 &lt;code&gt;PHP 8.1.12-1ubuntu4.3 (cli)&lt;/code&gt; , 所以从下面的链接找到 8.1.12 的源码下载下来，然后解压&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL3BocC9waHAtc3JjL3JlbGVhc2Vz&#34;&gt;https://github.com/php/php-src/releases&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;源代码目录结构如下所示 (这里是 php7.2.24 的，新版本可能会有所出入)：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;php-7.2.24
+  |____build    --和编译有关的目录，里面包括wk，awk和sh脚本用于编译处理，其中m4文件是linux下编译程序自动生成的文件，可以使用buildconf命令操作具体的配置文件。
+  |____ext      --扩展库代码，例如Mysql，gd，zlib，xml，iconv 等我们熟悉的扩展库，ext_skel是linux下扩展生成脚本，windows下使用ext_skel_win32.php。
+  |____main     --主目录，包含PHP的主要宏定义文件，php.h包含绝大部分PHP宏及PHP API定义。
+  |____netware  --网络目录，只有sendmail_nw.h和start.c，分别定义SOCK通信所需要的头文件和具体实现。
+  |____pear     --扩展包目录，PHP Extension and Application Repository。
+  |____sapi     --各种服务器的接口调用，如Apache，IIS等。
+  |____scripts  --linux下的脚本目录。
+  |____tests    --测试脚本目录，主要是phpt脚本，由--TEST--，--POST--，--FILE--，--EXPECT--组成，需要初始化可添加--INI--部分。
+  |____TSRM     --线程安全资源管理器，Thread Safe Resource Manager保证在单线程和多线程模型下的线程安全和代码一致性。
+  |____win32    --Windows下编译PHP 有关的脚本。
+  |____Zend     --包含Zend引擎的所有文件，包括PHP的生命周期，内存管理，变量定义和赋值以及函数宏定义等等。
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;拓展模块的开发&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#拓展模块的开发&#34;&gt;#&lt;/a&gt; 拓展模块的开发&lt;/h3&gt;
+&lt;p&gt;首先进入源代码目录 &lt;code&gt;ext&lt;/code&gt;  文件夹，使用如下目录生成拓展模块的工程项目。该程序会直接为我们生成一个模板 (这里在看别人教程的时候发现是用的 &lt;code&gt;./ext_skel --extname=easy_phppwn&lt;/code&gt; ，这应该是老版本，新版本下会有个 &lt;code&gt;ext_skel.php&lt;/code&gt;  文件)&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;./ext_skel.php &lt;span class=&#34;token parameter variable&#34;&gt;--ext&lt;/span&gt; easy_phppwn&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/phppwn/JFISXR%603U%28%28E4LG75SQFD%25T.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;执行完后就会在 &lt;code&gt;ext&lt;/code&gt;  文件夹里产生一个  &lt;code&gt;easy_phppwn&lt;/code&gt;  文件夹&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;easy_phppwn&lt;/code&gt;  文件夹内查看 &lt;code&gt;easy_phppwn.c&lt;/code&gt; ，初始代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+/* easy_phppwn extension for PHP */
+
+#ifdef HAVE_CONFIG_H
+# include &amp;quot;config.h&amp;quot;
+#endif
+
+#include &amp;quot;php.h&amp;quot;
+#include &amp;quot;ext/standard/info.h&amp;quot;
+#include &amp;quot;php_easy_phppwn.h&amp;quot;
+#include &amp;quot;easy_phppwn_arginfo.h&amp;quot;
+
+/* For compatibility with older PHP versions */
+#ifndef ZEND_PARSE_PARAMETERS_NONE
+#define ZEND_PARSE_PARAMETERS_NONE() \
+	ZEND_PARSE_PARAMETERS_START(0, 0) \
+	ZEND_PARSE_PARAMETERS_END()
+#endif
+
+/* &amp;#123;&amp;#123;&amp;#123; void test1() */
+PHP_FUNCTION(test1)
+&amp;#123;
+	ZEND_PARSE_PARAMETERS_NONE();
+
+	php_printf(&#34;The extension %s is loaded and working!\r\n&#34;, &#34;easy_phppwn&#34;);
+&amp;#125;
+/* &amp;#125;&amp;#125;&amp;#125; */
+
+/* &amp;#123;&amp;#123;&amp;#123; string test2( [ string $var ] ) */
+PHP_FUNCTION(test2)
+&amp;#123;
+	char *var = &#34;World&#34;;
+	size_t var_len = sizeof(&#34;World&#34;) - 1;
+	zend_string *retval;
+
+	ZEND_PARSE_PARAMETERS_START(0, 1)
+		Z_PARAM_OPTIONAL
+		Z_PARAM_STRING(var, var_len)
+	ZEND_PARSE_PARAMETERS_END();
+
+	retval = strpprintf(0, &#34;Hello %s&#34;, var);
+
+	RETURN_STR(retval);
+&amp;#125;
+/* &amp;#125;&amp;#125;&amp;#125;*/
+
+/* &amp;#123;&amp;#123;&amp;#123; PHP_RINIT_FUNCTION */
+PHP_RINIT_FUNCTION(easy_phppwn)
+&amp;#123;
+#if defined(ZTS) &amp;&amp; defined(COMPILE_DL_EASY_PHPPWN)
+	ZEND_TSRMLS_CACHE_UPDATE();
+#endif
+
+	return SUCCESS;
+&amp;#125;
+/* &amp;#125;&amp;#125;&amp;#125; */
+
+/* &amp;#123;&amp;#123;&amp;#123; PHP_MINFO_FUNCTION */
+PHP_MINFO_FUNCTION(easy_phppwn)
+&amp;#123;
+	php_info_print_table_start();
+	php_info_print_table_header(2, &#34;easy_phppwn support&#34;, &#34;enabled&#34;);
+	php_info_print_table_end();
+&amp;#125;
+/* &amp;#125;&amp;#125;&amp;#125; */
+
+/* &amp;#123;&amp;#123;&amp;#123; easy_phppwn_module_entry */
+zend_module_entry easy_phppwn_module_entry = &amp;#123;
+	STANDARD_MODULE_HEADER,
+	&#34;easy_phppwn&#34;,					/* Extension name */
+	ext_functions,					/* zend_function_entry */
+	NULL,							/* PHP_MINIT - Module initialization */
+	NULL,							/* PHP_MSHUTDOWN - Module shutdown */
+	PHP_RINIT(easy_phppwn),			/* PHP_RINIT - Request initialization */
+	NULL,							/* PHP_RSHUTDOWN - Request shutdown */
+	PHP_MINFO(easy_phppwn),			/* PHP_MINFO - Module info */
+	PHP_EASY_PHPPWN_VERSION,		/* Version */
+	STANDARD_MODULE_PROPERTIES
+&amp;#125;;
+/* &amp;#125;&amp;#125;&amp;#125; */
+
+#ifdef COMPILE_DL_EASY_PHPPWN
+# ifdef ZTS
+ZEND_TSRMLS_CACHE_DEFINE()
+# endif
+ZEND_GET_MODULE(easy_phppwn)
+#endif
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们只需要在该模板代码中，加上属于我们自己的函数，以及为函数进行注册，即可完成编写一个拓展模块；添加自己的函数 (在生成的模板函数中，添加一个如下所示的拓展函数，其含有一个简单的栈溢出漏洞)：&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;PHP_FUNCTION&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;easy_phppwn&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token keyword&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;arg &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token constant&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token class-name&#34;&gt;size_t&lt;/span&gt; arg_len&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; len&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;char&lt;/span&gt; buf&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;zend_parse_parameters&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token function&#34;&gt;ZEND_NUM_ARGS&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;s&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;arg&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;arg_len&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;==&lt;/span&gt; FAILURE&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;memcpy&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;buf&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; arg&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; arg_len&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;php_printf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;The baby phppwn.\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; SUCCESS&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;其中 &lt;code&gt; PHP_FUNCTION&lt;/code&gt;  修饰的函数表示该函数可以直接在 &lt;code&gt;php&lt;/code&gt;  中进行调用。而 &lt;code&gt; zend_parse_parameters&lt;/code&gt;  函数是获取用户输入的参数。 &lt;code&gt;arg&lt;/code&gt;  代表参数字符， &lt;code&gt;arg_len&lt;/code&gt;  代表参数长度&lt;/p&gt;
+&lt;p&gt;然后，需要在 &lt;code&gt;zend_function_entry easy_phppwn_functions&lt;/code&gt;  中对该函数进行注册，(也就是配置该拓展函数，将需要在 php 中调用的函数指针写到一个统一的数组中)&lt;/p&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;span&gt;c&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;const&lt;/span&gt; zend_function_entry easy_phppwn_functions&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token comment&#34;&gt;// 这个没有注释这一行就出错了 PHP_FE (confirm_easy_phppwn_compiled,	NULL)		/* For testing, remove later. */&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	&lt;span class=&#34;token function&#34;&gt;PHP_FE&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;easy_phppwn&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token constant&#34;&gt;NULL&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;   &lt;span class=&#34;token comment&#34;&gt;// 在这里进行注册，然后注册个刚刚写的函数&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	PHP_FE_END	&lt;span class=&#34;token comment&#34;&gt;/* Must be the last line in webpwn_functions[] */&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;接着配置编译&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;/usr/bin/phpize&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;./configure --with-php-config&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/usr/bin/php-config&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;然后在生成的 Makefile 文件中，在如下位置设置编译参数，记得取消 &lt;code&gt;-O2&lt;/code&gt;  优化，否则会加上 &lt;code&gt;FORTIFY&lt;/code&gt;  保护，导致 &lt;code&gt;memcpy&lt;/code&gt;  函数加上长度检查变为 &lt;code&gt;__memcpy_chk&lt;/code&gt;  函数&lt;/p&gt;
+&lt;p&gt;在第 25 行：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CFLAGS = -g -O2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;去掉这个  &lt;code&gt;-O2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;可以使用  &lt;code&gt;make&lt;/code&gt;  指令编译生成拓展模块，新生成的拓展模块会被放在同目录下  &lt;code&gt;./modules&lt;/code&gt;  中&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/phppwn/NU%24%5BN6A4L1%24CWU73JS%7EQT5L.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;然后将新生成的拓展模块放置到 本地 php 所在的拓展库路径下，使用如下命令，查找本地 php 拓展库路径：&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;php &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-i&lt;/span&gt; extension_dir&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/phppwn/NW%28W5X18%7B%5BW%25SN%28Z0RZ%7D%40FV.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
+&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/phppwn/8%7B%7D7SYQ%7BQ%25O8WYIYYSN9%29XI.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;将新生成的 拓展模块放置在系统  &lt;code&gt;php&lt;/code&gt;  的 拓展模块路径内&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;figcaption data-lang=&#34;bash&#34;&gt;&lt;span&gt;h&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; easy_phppwn.so /usr/lib/php/20210902/&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/phppwn/EQ_AY2FGXDFN3%7DZ%293B%60SYZ1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;随后找到系统  &lt;code&gt;php.ini&lt;/code&gt;  路径 &lt;code&gt;php -i | grep -i php.ini&lt;/code&gt;  :&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/phppwn/DAM_Y%5D8V%7B%60I%60%25D%29%40_%7ETF_CS.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;在 php.ini 文件里添加自行编写的拓展库名称即可，直接在文件末尾添加如下代码:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;extension=easy_phppwn.so
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;完成之后，可以尝试写一个 test.php 文件，在其中调用 phpinfo () 函数，然后可以看到 easy_phppwn 已经被加载到系统中&lt;/p&gt;
+&lt;figure class=&#34;highlight php&#34;&gt;&lt;figcaption data-lang=&#34;PHP&#34;&gt;&lt;span&gt;p&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token php language-php&#34;&gt;&lt;span class=&#34;token delimiter important&#34;&gt;&amp;lt;?php&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;phpinfo&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token delimiter important&#34;&gt;?&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;执行 &lt;code&gt;php test.php | grep easy_phppwn&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://vvwwv.oss-cn-nanjing.aliyuncs.com/phppwn/BYU7E0%5DXP%24GWU%5DHG%5BSBGC%286.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</content>
+        <category term="phppwn" />
+        <category term="ctf" />
+        <updated>2023-05-04T11:33:55.000Z</updated>
+    </entry>
+</feed>
