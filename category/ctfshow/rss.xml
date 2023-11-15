@@ -7,12 +7,14 @@
         <language>zh-CN</language>
         <pubDate>Thu, 26 Oct 2023 11:01:15 +0800</pubDate>
         <lastBuildDate>Thu, 26 Oct 2023 11:01:15 +0800</lastBuildDate>
-        <category>Java</category>
         <category>pwn</category>
         <category>Linux</category>
-        <category>二进制</category>
+        <category>Java</category>
         <category>Apache</category>
+        <category>二进制</category>
         <category>报错</category>
+        <category>xss</category>
+        <category>sql</category>
         <category>C++</category>
         <category>C语言</category>
         <category>windows</category>
